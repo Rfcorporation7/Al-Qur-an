@@ -4,8 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aplikasi Al-Qur'an Digital (UI Modern)</title>
-    <meta name="description" content="Aplikasi Al-Qur'an dengan Juz, Pencarian, Jadwal Sholat, dan fitur lengkap lainnya.">
+    <meta name="description" content="Aplikasi Al-Qur'an dengan Juz, Pencarian, Jadwal Sholat, dan fitur lengkap lainnya">
     <meta name="theme-color" content="#0a5e36">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIkFsLVF1cidhbiBEaWdpdGFsIiwKICAic2hvcnRfbmFtZSI6ICJRdXJhbiBBcHAiLAogICJkZXNjcmlwdGlvbiI6ICJBcGxpa2FzaSBBbC1RdXInYW4gZGVuZ2FuIEp1eiwgUGVuY2FyaWFuLCBKYWR3YWwgU2hvbGF0LCBkYW4gZml0dXIgbGVuZ2thcCBsYWlubnkiLAogICJzdGFydF91cmwiOiAiLyIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgIm9yaWVudGF0aW9uIjogInBvcnRyYWl0IiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjZjhjYTdmIiwKICAidGhlbWVfY29sb3IiOiAiIzBhNWUzNiIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImljb25zL2ljb24tNzJ4NzIucG5nIiwKICAgICAgInNpemVzIjogIjcyeDcyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJpY29ucy9pY29uLTk2eDk2LnBuZyIsCiAgICAgICJzaXplcyI6ICI5Nng5NiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiaWNvbnMvaWNvbi0xMjh4MTI4LnBuZyIsCiAgICAgICJzaXplcyI6ICIxMjh4MTI4IiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJpY29ucy9pY29uLTE0NHgxNDQucG5nIiwKICAgICAgInNpemVzIjogIjE0NHgxNDQiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9LAogICAgewogICAgICAic3JjIjogImljb25zL2ljb24tMTUyeDE1Mi5wbmciLAogICAgICAic2l6ZXMiOiAiMTUyeDE1MiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiaWNvbnMvaWNvbi0xOTJ4MTkyLnBuZyIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJpY29ucy9pY29uLTM4NHgzODQucG5nIiwKICAgICAgInNpemVzIjogIjM4NHgzODQiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9LAogICAgewogICAgICAic3JjIjogImljb25zL2ljb24tNTEyeDUxMi5wbmciLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgIH0KICBdCn0=">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Scheherazade+New:wght@400;700&family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
@@ -15,8 +21,8 @@
             --accent-color: #d4af37; --card-bg: #ffffff; --border-color: #e9ecef; --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             --header-height: 90px;
             --bottom-nav-height: 65px;
-            --transition-speed: 0.4s; /* Durasi transisi diperhalus */
-            --transition-curve: cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Kurva transisi profesional */
+            --transition-speed: 0.4s;
+            --transition-curve: cubic-bezier(0.25, 0.46, 0.45, 0.94);
             --bg-color-rgb: 248, 249, 250;
             --text-color-rgb: 33, 37, 41;
             --primary-color-rgb: 10, 94, 54;
@@ -32,13 +38,13 @@
         html, body { 
             height: 100%; 
             overflow: hidden; 
-            overflow-x: hidden; /* Kunci: Mencegah scroll horizontal secara paksa */
+            overflow-x: hidden;
             width: 100%;
         }
         body { font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" opacity="0.05"><path fill="%230a5e36" d="M50 0 L100 50 L50 100 L0 50 Z"/></svg>'); color: var(--text-color); transition: background-color 0.3s, color 0.3s; line-height: 1.7; }
-        p { overflow-wrap: break-word; } /* Mencegah teks panjang merusak layout */
+        p { overflow-wrap: break-word; }
         
-        header { position: fixed; top: 0; left: 0; right: 0; background: linear-gradient(190deg, #0a5e36 100%, #1e8a5a 100%); color: white; padding: 10px 15px; text-align: center; z-index: 1000; box-shadow: var(--shadow); border-bottom: 3px solid var(--accent-color); display: flex; align-items: center; justify-content: center; }
+        header { position: fixed; top: 0; left: 0; right: 0; background: linear-gradient(135deg, #0a5e36 0%, #1e8a5a 100%); color: white; padding: 10px 15px; text-align: center; z-index: 1000; box-shadow: var(--shadow); border-bottom: 3px solid var(--accent-color); display: flex; align-items: center; justify-content: center; }
         .header-content { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 1200px; }
         .header-row { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 5px; }
         .header-title { font-size: 1.2rem; font-weight: 600; text-align: left; align-items flex-grow: 1; }
@@ -47,7 +53,7 @@
         .hijri-date { font-size: 0.8rem; opacity: 0.9; margin-top: 3px; }
         .mode-toggle { background: transparent; border: none; color: white; cursor: pointer; font-size: 1.4rem; padding: 5px; }
         main { padding-top: var(--header-height); padding-bottom: var(--bottom-nav-height); height: 100%; width: 100%; max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; position: relative; }
-        .page-container { position: relative; width: 100%; flex-grow: 1; overflow: hidden; } /* Tambahkan overflow hidden */
+        .page-container { position: relative; width: 100%; flex-grow: 1; overflow: hidden; }
         
         /* EFEK TRANSISI HALAMAN BARU YANG LEBIH HALUS */
         .page { 
@@ -410,6 +416,72 @@
         .notification-settings-section {
             position: relative;
         }
+
+        /* PWA Install Prompt */
+        .install-prompt {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 9999;
+            max-width: 250px;
+            border: 1px solid var(--border-color);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .install-prompt p {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .install-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .dismiss-btn {
+            background: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        /* Offline Toast */
+        .offline-toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            z-index: 9999;
+            animation: fadeInOut 3s ease-in-out;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; }
+        }
     </style>
 </head>
 <body>
@@ -697,7 +769,8 @@
                     { icon: '📖', text: 'Selamat Membaca', message: 'Semoga mendapatkan ilmu yang bermanfaat' },
                     { icon: '🕌', text: 'Selamat Beribadah', message: 'Semoga ibadah Anda diterima' }
                 ],
-                notificationsMuted: false
+                notificationsMuted: false,
+                deferredPrompt: null
             },
             juzData: [ { juz: 1, start: { surah: 1, ayat: 1 }, end: { surah: 2, ayat: 141 }, name: "Alif Lam Mim" }, { juz: 2, start: { surah: 2, ayat: 142 }, end: { surah: 2, ayat: 252 }, name: "Sayaqulu" }, { juz: 3, start: { surah: 2, ayat: 253 }, end: { surah: 3, ayat: 92 }, name: "Tilka Ar-Rusul" }, { juz: 4, start: { surah: 3, ayat: 93 }, end: { surah: 4, ayat: 23 }, name: "Lan Tana Loo" }, { juz: 5, start: { surah: 4, ayat: 24 }, end: { surah: 4, ayat: 147 }, name: "Wal-Muhsanat" }, { juz: 6, start: { surah: 4, ayat: 148 }, end: { surah: 5, ayat: 81 }, name: "La Yuhibbullah" }, { juz: 7, start: { surah: 5, ayat: 82 }, end: { surah: 6, ayat: 110 }, name: "Wa Iza Sami'u" }, { juz: 8, start: { surah: 6, ayat: 111 }, end: { surah: 7, ayat: 87 }, name: "Wa Law Annana" }, { juz: 9, start: { surah: 7, ayat: 88 }, end: { surah: 8, ayat: 40 }, name: "Qalal-Mala'u" }, { juz: 10, start: { surah: 8, ayat: 41 }, end: { surah: 9, ayat: 92 }, name: "Wa'lamu" }, { juz: 11, start: { surah: 9, ayat: 93 }, end: { surah: 11, ayat: 5 }, name: "Yatazirun" }, { juz: 12, start: { surah: 11, ayat: 6 }, end: { surah: 12, ayat: 52 }, name: "Wa Mamin Dabba" }, { juz: 13, start: { surah: 12, ayat: 53 }, end: { surah: 14, ayat: 52 }, name: "Wa Ma Ubri'u" }, { juz: 14, start: { surah: 15, ayat: 1 }, end: { surah: 16, ayat: 128 }, name: "Rubama" }, { juz: 15, start: { surah: 17, ayat: 1 }, end: { surah: 18, ayat: 74 }, name: "Subhanallazi" }, { juz: 16, start: { surah: 18, ayat: 75 }, end: { surah: 20, ayat: 135 }, name: "Qal Alam" }, { juz: 17, start: { surah: 21, ayat: 1 }, end: { surah: 22, ayat: 78 }, name: "Iqtaraba linnas" }, { juz: 18, start: { surah: 23, ayat: 1 }, end: { surah: 25, ayat: 20 }, name: "Qadd Aflaha" }, { juz: 19, start: { surah: 25, ayat: 21 }, end: { surah: 27, ayat: 55 }, name: "Wa Qalallazina" }, { juz: 20, start: { surah: 27, ayat: 56 }, end: { surah: 29, ayat: 45 }, name: "A'man Khalaq" }, { juz: 21, start: { surah: 29, ayat: 46 }, end: { surah: 33, ayat: 30 }, name: "Utlu Ma Oohi" }, { juz: 22, start: { surah: 33, ayat: 31 }, end: { surah: 36, ayat: 27 }, name: "Wa Man Yaqnut" }, { juz: 23, start: { surah: 36, ayat: 28 }, end: { surah: 39, ayat: 31 }, name: "Wa Mali" }, { juz: 24, start: { surah: 39, ayat: 32 }, end: { surah: 41, ayat: 46 }, name: "Faman Azlam" }, { juz: 25, start: { surah: 41, ayat: 47 }, end: { surah: 45, ayat: 37 }, name: "Ilayhi Yurad" }, { juz: 26, start: { surah: 46, ayat: 1 }, end: { surah: 51, ayat: 30 }, name: "Ha'a Meem" }, { juz: 27, start: { surah: 51, ayat: 31 }, end: { surah: 57, ayat: 29 }, name: "Qala Fama" }, { juz: 28, start: { surah: 58, ayat: 1 }, end: { surah: 66, ayat: 12 }, name: "Qadd Sami Allah" }, { juz: 29, start: { surah: 67, ayat: 1 }, end: { surah: 77, ayat: 50 }, name: "Tabarakallazi" }, { juz: 30, start: { surah: 78, ayat: 1 }, end: { surah: 114, ayat: 6 }, name: "Amma" } ],
             contentData: { 
@@ -706,7 +779,7 @@
                 'wirid_bada_sholat': { title: 'Wirid Ba\'da Sholat', icon: '📿', content: `<h1>وِرِد بَعْدَ الصَّلاَة</h1><h2>1. Istighfar (3x)</h2><p>أَسْتَغْفِرُ اللهَ الْعَظِيْمَ الَّذِي لَا إِلَهَ إِلَّا هُوَ الْحَيَّ الْقَيُّومَ وَأَتُوبُ إِلَيْهِ</p><p class="latin">Astaghfirullahal 'adziim alladzii laa ilaaha illaa huwal hayyul qoyyuum wa atuubu ilaih.</p><h2>2. Tahlil</h2><p>لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ يُحْyِي وَيُمِيتُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ</p><h2>3. Doa Selamat</h2><p>اللَّهُمَّ أَنْتَ السَّلَامُ وَمِنْكَ السَّلَامُ وَإِلَيْكَ يَعُودُ السَّلَamمُ فَحَيِّنَا رَبَّنَا بِالسَّلَامِ وَأَدْخِلْنَا الْجَنَّةَ دَارَ السَّلَامِ تَبَارَكْتَ رَبَّنَا وَتَعَالَيْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ</p><h2>4. Tasbih (33x)</h2><p>سُبْحَانَ اللهِ</p><p class="latin">Subhanallah</p><h2>5. Tahmid (33x)</h2><p>الْحَمْدُ لِلهِ</p><p class="latin">Alhamdulillah</p><h2>6. Takbir (33x)</h2><p>اللهُ أَكْبَرُ</p><p class="latin">Allahu Akbar</p>` },
                 'wirid_pagi': { title: 'Wirid Pagi', icon: '📿', content: `<h1>Wirid Pagi</h1><p>Konten untuk wirid pagi akan ditambahkan di sini...</p>`},
                 'wirid_petang': { title: 'Wirid Petang', icon: '📿', content: `<h1>Wirid Petang</h1><p>Konten untuk wirid petang akan ditambahkan di sini...</p>`},
-                'fasholatan_nariyah': { title: 'Shalawat Nariyah', icon: '🕌', content: `<h1>صَلَاةٌ نَارِيَةٌ</h1><h2>Shalawat Nariyah</h2><p>اَللّٰهُمَّ صَلِّ صَلَاةً كَامِلَةً وَسَلِّمْ سَلَامًا تَامًّا عَلَى سَيِّدِنَا مُحَمَّدٍ الَّذِيْ تَنْحَلُّ بِهِ الْعُقَدُ وَتَنْفَرِجُ بِهِ الْكُرَبُ وَتُقْضٰى بِهِ الْحَوَائِجُ وَتُنَالُ بِهِ الرَّغَائِبُ وَحُسْنُ الْخَوَاتِمِ وَيُسْتَسْقَى الْغَمَامُ بِوَجْهِهِ الْكَرِيْمِ وَعَلٰى آلِهِ وَصَحْبِهِ فِيْ كُلِّ لَمْحَةٍ وَنَفَسٍ بِعَدَدِ كُلِّ مَعْلُوْمٍ لَكَ</p><p class="latin">Allahumma sholli sholaatan kaamilatan wasallim salaaman taamman ‘ala sayyidinaa Muhammadinil ladzii tanhallu bihil ‘uqodu wa tanfariju bihil kurobu wa tuqdhoo bihil hawaa-iju wa tunaalu bihir-roghoo-ibu wa husnul khowaatimi wa yustasqol ghomaamu bi wajhihil kariimi wa’alaa aalihii wa shohbihii fii kulli lamhatin wa nafasin bi’adadi kulli ma’luumin laka.</p><h2>Artinya</h2><p class="translation" style="text-align: left; font-size: 1rem;">“Ya Allah, limpahkanlah shalawat yang sempurna dan curahkanlah salam kesejahteraan yang penuh kepada junjungan kami Nabi Muhammad, yang dengan sebab beliau semua kesulitan dapat terpecahkan, semua kesusahan dapat dilenyapkan, semua keperluan dapat terpenuhi, dan semua yang didambakan serta husnul khatimah dapat diraih, dan berkat dirinya yang mulia hujanpun turun, dan semoga terlimpahkan kepada keluarganya serta para sahabatnya, di setiap detik dan hembusan nafas sebanyak bilangan semua yang diketahui oleh Engkau.”</p>` },
+                'fasholatan_nariyah': { title: 'Shalawat Nariyah', icon: '🕌', content: `<h1>صَلَاةٌ نَارِيَةٌ</h1><h2>Shalawat Nariyah</h2><p>اَللّٰهُمَّ صَلِّ صَلَاةً كَامِلَةً وَسَلِّمْ سَلَامًا تَامًّا عَلَى سَيِّدِنَا مُحَمَّدٍ الَّذِيْ تَنْحَلُّ بِهِ الْعُقَدُ وَتَنْفَرِجُ بِهِ الْكُرَبُ وَتُقْضٰى بِهِ الْحَوَائِجُ وَتُنَالُ بِهِ الرَّغَائِبُ وَحُسْنُ الْخَوَاتِمِ وَيُسْتَسْقَى الْغَمَامُ بِوَجْهِهِ الْكَرِيْمِ وَعَلٰى آلِهِ وَصَحْبِهِ فِيْ كُلِّ لَمْحَةٍ وَنَفَسٍ بِعَدَدِ كُلِّ مَعْلُوْمٍ لَكَ</p><p class="latin">Allahumma sholli sholaatan kaamilatan wasallim salaaman taamman 'ala sayyidinaa Muhammadinil ladzii tanhallu bihil 'uqodu wa tanfariju bihil kurobu wa tuqdhoo bihil hawaa-iju wa tunaalu bihir-roghoo-ibu wa husnul khowaatimi wa yustasqol ghomaamu bi wajhihil kariimi wa'alaa aalihii wa shohbihii fii kulli lamhatin wa nafasin bi'adadi kulli ma'luumin laka.</p><h2>Artinya</h2><p class="translation" style="text-align: left; font-size: 1rem;">"Ya Allah, limpahkanlah shalawat yang sempurna dan curahkanlah salam kesejahteraan yang penuh kepada junjungan kami Nabi Muhammad, yang dengan sebab beliau semua kesulitan dapat terpecahkan, semua kesusahan dapat dilenyapkan, semua keperluan dapat terpenuhi, dan semua yang didambakan serta husnul khatimah dapat diraih, dan berkat dirinya yang mulia hujanpun turun, dan semoga terlimpahkan kepada keluarganya serta para sahabatnya, di setiap detik dan hembusan nafas sebanyak bilangan semua yang diketahui oleh Engkau."</p>` },
                 'fasholatan_thibbil_qulub': { title: 'Shalawat Thibbil Qulub', icon: '🕌', content: `<h1>صَلَاةٌ طِبِّ الْقُلُوْبِ</h1><p>اللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ طِبِّ الْقُلُوبِ وَدَوَائِهَا، وَعَافِيَةِ الْأَبْدَانِ وَشِفَائِهَا، وَنُورِ الْأَبْصَارِ وَضِيَائِهَا، وَعَلَى آلِهِ وَصَحْبِهِ وَسَلِّمْ</p><p class="latin">Allahumma sholli 'ala Sayyidina Muhammadin thibbil qulubi wa dawa-iha, wa 'afiyatil abdani wa syifa-iha, wa nuril abshori wa dliya-iha, wa 'ala alihi wa shohbihi wa sallim.</p>` }
              },
             
@@ -726,6 +799,105 @@
                 setTimeout(() => this.updateNavIndicator('homePage'), 100); 
                 this.elements.homePrayerTimes.style.display = 'block'; 
                 this.initGreetingScroller();
+                this.registerServiceWorker();
+                this.setupInstallPrompt();
+                this.checkConnectivity();
+            },
+            
+            registerServiceWorker() {
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker.register('sw.js').then(registration => {
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    }).catch(err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+                }
+            },
+            
+            setupInstallPrompt() {
+                window.addEventListener('beforeinstallprompt', (e) => {
+                    e.preventDefault();
+                    this.state.deferredPrompt = e;
+                    this.showInstallPrompt();
+                });
+                
+                window.addEventListener('appinstalled', () => {
+                    console.log('PWA was installed');
+                    this.hideInstallPrompt();
+                });
+            },
+            
+            showInstallPrompt() {
+                // Only show if not already shown
+                if (document.querySelector('.install-prompt')) return;
+                
+                const promptHTML = `
+                    <div class="install-prompt">
+                        <p>Install aplikasi untuk pengalaman lebih baik</p>
+                        <div style="display: flex; gap: 10px;">
+                            <button class="install-btn">Install</button>
+                            <button class="dismiss-btn">Nanti</button>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.insertAdjacentHTML('beforeend', promptHTML);
+                
+                document.querySelector('.install-btn').addEventListener('click', () => {
+                    this.state.deferredPrompt.prompt();
+                    this.state.deferredPrompt.userChoice.then(choiceResult => {
+                        if (choiceResult.outcome === 'accepted') {
+                            console.log('User accepted the install prompt');
+                        } else {
+                            console.log('User dismissed the install prompt');
+                        }
+                        this.hideInstallPrompt();
+                    });
+                });
+                
+                document.querySelector('.dismiss-btn').addEventListener('click', () => {
+                    this.hideInstallPrompt();
+                });
+            },
+            
+            hideInstallPrompt() {
+                const prompt = document.querySelector('.install-prompt');
+                if (prompt) {
+                    prompt.style.animation = 'fadeOut 0.3s ease-out';
+                    setTimeout(() => prompt.remove(), 300);
+                }
+            },
+            
+            checkConnectivity() {
+                window.addEventListener('online', () => {
+                    this.showToast('Anda kembali online');
+                    // Refresh data if needed
+                    if (this.state.activePageId === 'quranPage' && !this.state.surahListCache.length) {
+                        this.loadQuranData();
+                    }
+                    if (this.state.activePageId === 'prayerPage') {
+                        this.determineAndFetchPrayerTimes();
+                    }
+                });
+                
+                window.addEventListener('offline', () => {
+                    this.showToast('Anda sedang offline');
+                });
+                
+                if (!navigator.onLine) {
+                    this.showToast('Anda sedang offline');
+                }
+            },
+            
+            showToast(message) {
+                const toast = document.createElement('div');
+                toast.className = 'offline-toast';
+                toast.textContent = message;
+                document.body.appendChild(toast);
+                
+                setTimeout(() => {
+                    toast.remove();
+                }, 3000);
             },
             
             updateTimeBasedGreeting() {
@@ -850,7 +1022,7 @@
                 this.elements.surahSearchInput.addEventListener('input', (e) => this.handleSurahSearch(e.target.value));
                 this.elements.pageContainer.addEventListener('touchstart', (e) => { this.state.touchStartX = e.changedTouches[0].screenX; this.state.touchStartY = e.changedTouches[0].screenY; }, { passive: true });
                 this.elements.pageContainer.addEventListener('touchend', (e) => { this.state.touchEndX = e.changedTouches[0].screenX; this.state.touchEndY = e.changedTouches[0].screenY; this.handleSwipe(); }, false);
-                this.elements.quranNavTabs.forEach(tab => { tab.addEventListener('click', () => this.handleQuranNav(tab.dataset.view)); });
+                this.elements.quranNavTabs.forEach(tab => { tab.addEventListener('click', () => this.handleQuranNav(tab.dataset.view); });
                 
                 this.elements.readerBackButton.addEventListener('click', () => this.closeReader());
                 
@@ -1179,6 +1351,82 @@
 
         app.init();
     });
+    </script>
+    <script>
+    // Inline Service Worker
+    if ('serviceWorker' in navigator) {
+        const swUrl = URL.createObjectURL(new Blob([`
+            const CACHE_NAME = 'quran-app-v1';
+            const urlsToCache = [
+                '/',
+                '/index.html',
+                'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Scheherazade+New:wght@400;700&family=Inconsolata:wght@400;700&display=swap',
+                'https://ik.imagekit.io/t4ciyzzqg/hitam%20putih%20modern%20huruf%20M%20logo%20(500%20x%20500%20piksel)_20250616_231218_0000.png',
+                'https://ik.imagekit.io/t4ciyzzqg/hitam%20putih%20modern%20huruf%20M%20logo_20250616_225251_0000.png'
+            ];
+
+            self.addEventListener('install', event => {
+                event.waitUntil(
+                    caches.open(CACHE_NAME)
+                        .then(cache => {
+                            console.log('Opened cache');
+                            return cache.addAll(urlsToCache);
+                        })
+                );
+            });
+
+            self.addEventListener('fetch', event => {
+                event.respondWith(
+                    caches.match(event.request)
+                        .then(response => {
+                            if (response) {
+                                return response;
+                            }
+                            
+                            return fetch(event.request).then(response => {
+                                if(!response || response.status !== 200 || response.type !== 'basic') {
+                                    return response;
+                                }
+                                
+                                const responseToCache = response.clone();
+                                
+                                caches.open(CACHE_NAME)
+                                    .then(cache => {
+                                        cache.put(event.request, responseToCache);
+                                    });
+                                    
+                                return response;
+                            });
+                        })
+                );
+            });
+
+            self.addEventListener('activate', event => {
+                const cacheWhitelist = [CACHE_NAME];
+                event.waitUntil(
+                    caches.keys().then(cacheNames => {
+                        return Promise.all(
+                            cacheNames.map(cacheName => {
+                                if (cacheWhitelist.indexOf(cacheName) === -1) {
+                                    return caches.delete(cacheName);
+                                }
+                            })
+                        );
+                    })
+                );
+            });
+        `], { type: 'application/javascript' }));
+
+        navigator.serviceWorker.register(swUrl)
+            .then(registration => {
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                URL.revokeObjectURL(swUrl);
+            })
+            .catch(err => {
+                console.log('ServiceWorker registration failed: ', err);
+                URL.revokeObjectURL(swUrl);
+            });
+    }
     </script>
 </body>
 </html>
