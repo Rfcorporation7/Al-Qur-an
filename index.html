@@ -38,7 +38,7 @@
         body { font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" opacity="0.05"><path fill="%230a5e36" d="M50 0 L100 50 L50 100 L0 50 Z"/></svg>'); color: var(--text-color); transition: background-color 0.3s, color 0.3s; line-height: 1.7; }
         p { overflow-wrap: break-word; } /* Mencegah teks panjang merusak layout */
         
-        header { position: fixed; top: 0; left: 0; right: 0; background: linear-gradient(190deg, #0a5e36 100%, #1e8a5a 100%); color: white; padding: 10px 15px; text-align: center; z-index: 1000; box-shadow: var(--shadow); border-bottom: 3px solid var(--accent-color); display: flex; align-items: center; justify-content: center; }
+        header { position: fixed; top: 0; left: 0; right: 0; background: linear-gradient(130deg, #0a5e36 100%, #1e8a5a 100%); color: white; padding: 10px 15px; text-align: center; z-index: 1000; box-shadow: var(--shadow); border-bottom: 3px solid var(--accent-color); display: flex; align-items: center; justify-content: center; }
         .header-content { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 1200px; }
         .header-row { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 5px; }
         .header-title { font-size: 1.2rem; font-weight: 600; text-align: left; align-items flex-grow: 1; }
@@ -434,7 +434,6 @@
             <div class="page active" id="homePage">
 
                 <h2 id="dynamicGreeting">Assalamu'alaikum</h2>
-                <p>Assalamu'alaikum</p>
                 <p>Selamat datang di aplikasi Al-Qur'an digital.</p>
                 <h3>Menu Utama</h3>
                 <div class="content-menu">
@@ -558,7 +557,7 @@
             <div class="page" id="aboutPage">
                 <h2 style="text-align:center;">Tentang Aplikasi </h2>
                 <div class="app-logo-container">
-                    <img src="https://ik.imagekit.io/t4ciyzzqg/hitam%20putih%20modern%20huruf%20M%20logo%20(500%20x%20500%20piksel)_20250616_235027_0000.jpg?updatedAt=1750125010457" alt="Logo Aplikasi" style="height: 70px; border-radius: 20px; ">
+                    <img src="https://ik.imagekit.io/t4ciyzzqg/hitam%20putih%20modern%20huruf%20M%20logo%20(500%20x%20500%20piksel)_20250616_231218_0000.png?updatedAt=1750090361550" alt="Logo Aplikasi" style="height: 70px; ">
                 </div>
                 <div class="card">
                      <p><strong>Versi:</strong> 1.0.0 (UI Halus & Stabil)</p>
@@ -597,8 +596,7 @@
     </div>
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-        
-        // --- AWAL BAGIAN YANG DIUBAH ---
+      
         document.getElementById('appHeader').innerHTML = `
             <div class="header-content">
                 <div class="header-row">
@@ -611,7 +609,6 @@
                     </div>
                 </div>
             </div>`;
-        // --- AKHIR BAGIAN YANG DIUBAH ---
         
         const app = {
             audioSources: { 
@@ -702,7 +699,7 @@
             },
             juzData: [ { juz: 1, start: { surah: 1, ayat: 1 }, end: { surah: 2, ayat: 141 }, name: "Alif Lam Mim" }, { juz: 2, start: { surah: 2, ayat: 142 }, end: { surah: 2, ayat: 252 }, name: "Sayaqulu" }, { juz: 3, start: { surah: 2, ayat: 253 }, end: { surah: 3, ayat: 92 }, name: "Tilka Ar-Rusul" }, { juz: 4, start: { surah: 3, ayat: 93 }, end: { surah: 4, ayat: 23 }, name: "Lan Tana Loo" }, { juz: 5, start: { surah: 4, ayat: 24 }, end: { surah: 4, ayat: 147 }, name: "Wal-Muhsanat" }, { juz: 6, start: { surah: 4, ayat: 148 }, end: { surah: 5, ayat: 81 }, name: "La Yuhibbullah" }, { juz: 7, start: { surah: 5, ayat: 82 }, end: { surah: 6, ayat: 110 }, name: "Wa Iza Sami'u" }, { juz: 8, start: { surah: 6, ayat: 111 }, end: { surah: 7, ayat: 87 }, name: "Wa Law Annana" }, { juz: 9, start: { surah: 7, ayat: 88 }, end: { surah: 8, ayat: 40 }, name: "Qalal-Mala'u" }, { juz: 10, start: { surah: 8, ayat: 41 }, end: { surah: 9, ayat: 92 }, name: "Wa'lamu" }, { juz: 11, start: { surah: 9, ayat: 93 }, end: { surah: 11, ayat: 5 }, name: "Yatazirun" }, { juz: 12, start: { surah: 11, ayat: 6 }, end: { surah: 12, ayat: 52 }, name: "Wa Mamin Dabba" }, { juz: 13, start: { surah: 12, ayat: 53 }, end: { surah: 14, ayat: 52 }, name: "Wa Ma Ubri'u" }, { juz: 14, start: { surah: 15, ayat: 1 }, end: { surah: 16, ayat: 128 }, name: "Rubama" }, { juz: 15, start: { surah: 17, ayat: 1 }, end: { surah: 18, ayat: 74 }, name: "Subhanallazi" }, { juz: 16, start: { surah: 18, ayat: 75 }, end: { surah: 20, ayat: 135 }, name: "Qal Alam" }, { juz: 17, start: { surah: 21, ayat: 1 }, end: { surah: 22, ayat: 78 }, name: "Iqtaraba linnas" }, { juz: 18, start: { surah: 23, ayat: 1 }, end: { surah: 25, ayat: 20 }, name: "Qadd Aflaha" }, { juz: 19, start: { surah: 25, ayat: 21 }, end: { surah: 27, ayat: 55 }, name: "Wa Qalallazina" }, { juz: 20, start: { surah: 27, ayat: 56 }, end: { surah: 29, ayat: 45 }, name: "A'man Khalaq" }, { juz: 21, start: { surah: 29, ayat: 46 }, end: { surah: 33, ayat: 30 }, name: "Utlu Ma Oohi" }, { juz: 22, start: { surah: 33, ayat: 31 }, end: { surah: 36, ayat: 27 }, name: "Wa Man Yaqnut" }, { juz: 23, start: { surah: 36, ayat: 28 }, end: { surah: 39, ayat: 31 }, name: "Wa Mali" }, { juz: 24, start: { surah: 39, ayat: 32 }, end: { surah: 41, ayat: 46 }, name: "Faman Azlam" }, { juz: 25, start: { surah: 41, ayat: 47 }, end: { surah: 45, ayat: 37 }, name: "Ilayhi Yurad" }, { juz: 26, start: { surah: 46, ayat: 1 }, end: { surah: 51, ayat: 30 }, name: "Ha'a Meem" }, { juz: 27, start: { surah: 51, ayat: 31 }, end: { surah: 57, ayat: 29 }, name: "Qala Fama" }, { juz: 28, start: { surah: 58, ayat: 1 }, end: { surah: 66, ayat: 12 }, name: "Qadd Sami Allah" }, { juz: 29, start: { surah: 67, ayat: 1 }, end: { surah: 77, ayat: 50 }, name: "Tabarakallazi" }, { juz: 30, start: { surah: 78, ayat: 1 }, end: { surah: 114, ayat: 6 }, name: "Amma" } ],
             contentData: { 
-                'tahlil': { title: 'Bacaan Tahlil', icon: '📖', content: `<h1>بَاعَة تَحْلِيْل</h1><h2>1. Pengantar Al-Fatihah</h2><p>إِلَى حَضْرَةِ النَّبِيِّ الْمُصْطَفَى مُحَمَّدٍ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ وَآلِهِ وَصَحْبِهِ شَيْءٌ لِلّهِ لَهُمُ الْفَاتِحَةُ</p><p class="latin">(Ilaa hadrotin nabiyyil musthofaa muhammadin shollallohu 'alaihi wa sallam, wa aalihii wa shohbihii syai'un lillaahi lahumul faatihah)</p><h2>2. Al-Fatihah</h2><p>بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ. اَلْحَمْدُ لِلهِ رَبِّ الْعَالَمِيْنَ. اَلرَّحْمَنِ الرَّحِيْمِ. مَالِكِ يَوْمِ الدِّيْنِ. اِيَّاكَ نَعْبُدُ وَاِيَّاكَ نَسْتَعِيْنُ. اِهْدِنَا الصِّرَاطَ الَّمُسْتَقِيْمَ. صِرَاطَ الَّذِيْنَ اَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوْبِ عَلَيْهِمْ وَلَا الضَّالِّيْنَ. اَمِينْ</p><h2>3. Surat Al-Ikhlas (3x)</h2><p>بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ. قُلْ هُوَ اللهُ اَحَدٌ. اَللهُ الصَّمَدُ. لَمْ يَلِدْ وَلَمْ يُوْلَدْ. وَلَمْ يَكُنْ لَهُ كُفُوًا اَحَدٌ</p><h2>4. Tahlil & Takbir</h2><p>لاَ اِلَهَ اِلاَّ اللهُ وَاللهُ اَكْبَرُ</p><h2>5. Surat Al-Falaq</h2><p>بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ. قُلْ اَعُوْذُ بِرَبِّ الْفَلَقِ. مِنْ شَرِّ مَا خَلَقَ. وَمِنْ شَرِّ غَاسِقٍ اِذَا وَقَبَ. وَمِنْ شَرِّ النَّفَّاثَاتِ فِى الْعُقَدِ. وَمِنْ شَرِّ حَاسِدٍ اِذَا حَسَدَ</p><h2>6. Tahlil & Takbir</h2><p>لاَ اِلَهَ اِلاَّ اللهُ وَاللهُ اَكْبَرُ</p><h2>7. Surat An-Nas</h2><p>بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ. قُلْ اَعُوْذُ بِرَبِّ النَّاسِ. مَلِكِ النَّاسِ. اِلَهِ النَّاسِ. مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ. الَّذِى يُوَسْوِسُ فِى صُدُوْرِ النَّاسِ. مِنَ الْجِنَّةِ وَالنَّاسِ</p><h2>8. Tahlil, Takbir & Tahmid</h2><p>لاَ اِلَهَ اِلاَّ اللهُ وَاللهُ اَكْبَرُ وَلِلهِ الْحَمْدُ</p><h2>9. Tahlil</h2><p>لاَ اِلَهَ اِلاَّ اللهُ</p><p class="latin">(dibaca 33x atau 100x)</p><h2>10. Penutup</h2><p>اللهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ وَعَلَى آلِ سَيِّدِنَا مُحَمَّدٍ</p>` }, 
+                'tahlil': { title: 'Bacaan Tahlil', icon: '📖', content: `<h1>بَاعَة تَحْلِيْل</h1><h2>1. Pengantar Al-Fatihah</h2><p>إِلَى حَضْرَةِ النَّبِيِّ الْمُصْطَفَى مُحَمَّدٍ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ وَآلِهِ وَصَحْبِهِ شَيْءٌ لِلّهِ لَهُمُ الْفَاتِحَةُ</p><p class="latin">(Ilaa hadrotin nabiyyil musthofaa muhammadin shollallohu 'alaihi wa sallam, wa aalihii wa shohbihii syai'un lillaahi lahumul faatihah)</p><h2>2. Al-Fatihah</h2><p>بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ. اَلْحَمْدُ لِلهِ رَبِّ الْعَالَمِيْنَ. اَلرَّحْمَنِ الرَّحِيْمِ. مَالِكِ يَوْمِ الدِّيْنِ. اِيَّاكَ نَعْبُدُ وَاِيَّاكَ نَسْتَعِيْنُ. اِهْدِنَا الصِّرَاطَ الَّمُسْتَقِيْمَ. صِرَاطَ الَّذِيْنَ اَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوْبِ عَلَيْهِمْ وَلَا الضَّالِّيْنَ. اَمِينْ</p><h2>3. Surat Al-Ikhlas (3x)</h2><p>بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ. قُلْ هُوَ اللهُ اَحَدٌ. اَللهُ الصَّمَدُ. لَمْ يَلِدْ وَلَمْ يُوْلَدْ. وَلَمْ يَكُنْ لَهُ كُفُوًا اَحَدٌ</p><h2>4. Tahlil & Takbir</h2><p>لاَ اِلَهَ اِلاَّ اللهُ وَاللهُ اَكْبَرُ</p><h2>5. Surat Al-Falaq</h2><p>بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ. قُلْ اَعُوْذُ بِرَبِّ الْفَلَقِ. مِنْ شَرِّ مَا خَلَقَ. وَمِنْ شَرِّ غَاسِقٍ اِذَا وَقَبَ. وَمِنْ شَرِّ النَّفَّاثَاتِ فِى الْعُقَدِ. وَمِنْ شَرِّ حَاسِدٍ اِذَا حَسَدَ</p><h2>6. Tahlil & Takbir</h2><p>لاَ اِلَهَ اِلاَّ اللهُ وَاللهُ اَكْبَرُ</p><h2>7. Surat An-Nas</h2><p>بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ. قُلْ اَعُوْذُ بِرَبِّ النَّاسِ. مَلِكِ النَّاسِ. اِلَهِ النَّاسِ. مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ. الَّذِى يُوَسْوِسُ فِى صُدُوْرِ النَّاسِ. مِنَ الْجِنَّةِ وَالنَّاسِ</p><h2>8. Tahlil, Takbir & Tahmid</h2><p>لاَ اِلَهَ اِلاَّ اللهُ وَاللهُ اَكْبَرُ وَلِلهِ الْحَمْدُ</p><h2>9. Tahlil</h2><p>لاَ اِلَهَ اِلاَّ اللهُ</p><p class="latin">(dibaca 33x atau 100x)</p><h2>10. Penutup</h2><p>اللهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ وَعَلَى آلِ سَيِّدِنَا مُحَمَّdٍ</p>` }, 
                 'barzanji': { title: 'Al-Barzanji (Rawi 1)', icon: '🌙', content: `<h1>اَلْبَرْزَنْجِي</h1><h2>Rawi Pertama</h2><p>أَبْتَدِئُ الْإِمْلَاءَ بِاسْمِ الذَّاتِ الْعَلِيَّةِ * مُسْتَدِرًّا فَيْضَ الْبَرَكَاتِ عَلَى مَا أَنَالَهُ وَأَوْلَاهُ</p><p class="latin">Abtadi-ul imlaa-a bismidz dzaatil 'aliyyati * Mustadirron faidlol barokaati 'alaa maa anaalahu wa auwlaahu.</p><p>وَأُثَنِّي بِحَمْدٍ مَوَارِدُهُ سَائِغَةٌ هَنِيَّةٌ * مُمْتَطِيًا مِنَ الشُّكْرِ الْجَمِيلِ مَطَايَاهُ</p><p class="latin">Wa utsannii bihamdin mawaariduhu saa-ighotun haniyyatun * Mumtathiyan minasy syukril jamiili mathooyaahu.</p><p>وَأُصَلِّي وَأُسَلِّمُ عَلَى النُّورِ الْمَوْصُوفِ بِالتَّقَدُّمِ وَالْأَوَّلِيَّةِ * الْقَائِمِ بِنِهَايَاتِ الْكَمَالِ مُنْتَهَاهُ</p><p class="latin">Wa usholli wa usallimu 'alan nuuril maushuufi bittaqodumi wal awwaliyyati * Al qoo-imi binihaayaatil kamaali muntahaahu.</p>` },
                 'wirid_bada_sholat': { title: 'Wirid Ba\'da Sholat', icon: '📿', content: `<h1>وِرِد بَعْدَ الصَّلاَة</h1><h2>1. Istighfar (3x)</h2><p>أَسْتَغْفِرُ اللهَ الْعَظِيْمَ الَّذِي لَا إِلَهَ إِلَّا هُوَ الْحَيَّ الْقَيُّومَ وَأَتُوبُ إِلَيْهِ</p><p class="latin">Astaghfirullahal 'adziim alladzii laa ilaaha illaa huwal hayyul qoyyuum wa atuubu ilaih.</p><h2>2. Tahlil</h2><p>لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ يُحْyِي وَيُمِيتُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ</p><h2>3. Doa Selamat</h2><p>اللَّهُمَّ أَنْتَ السَّلَامُ وَمِنْكَ السَّلَامُ وَإِلَيْكَ يَعُودُ السَّلَamمُ فَحَيِّنَا رَبَّنَا بِالسَّلَامِ وَأَدْخِلْنَا الْجَنَّةَ دَارَ السَّلَامِ تَبَارَكْتَ رَبَّنَا وَتَعَالَيْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ</p><h2>4. Tasbih (33x)</h2><p>سُبْحَانَ اللهِ</p><p class="latin">Subhanallah</p><h2>5. Tahmid (33x)</h2><p>الْحَمْدُ لِلهِ</p><p class="latin">Alhamdulillah</p><h2>6. Takbir (33x)</h2><p>اللهُ أَكْبَرُ</p><p class="latin">Allahu Akbar</p>` },
                 'wirid_pagi': { title: 'Wirid Pagi', icon: '📿', content: `<h1>Wirid Pagi</h1><p>Konten untuk wirid pagi akan ditambahkan di sini...</p>`},
@@ -748,7 +745,6 @@
             },
             
             initGreetingScroller() {
-                // Render all greeting items
                 this.elements.greetingScroller.innerHTML = this.state.greetings.map(g => `
                     <div class="greeting-item">
                         <span class="greeting-icon">${g.icon}</span>
@@ -757,10 +753,8 @@
                     </div>
                 `).join('');
                 
-                // Set initial position
                 this.updateGreetingPosition();
                 
-                // Start auto-scroll
                 this.state.greetingInterval = setInterval(() => {
                     this.state.currentGreetingIndex = 
                         (this.state.currentGreetingIndex + 1) % this.state.greetings.length;
@@ -773,7 +767,6 @@
                 const scrollWidth = this.elements.greetingScroller.scrollWidth;
                 const itemWidth = scrollWidth / this.state.greetings.length;
                 
-                // Calculate position to center the current greeting
                 const scrollPosition = this.state.currentGreetingIndex * itemWidth - (containerWidth - itemWidth) / 2;
                 
                 this.elements.greetingScroller.style.transform = `translateX(-${scrollPosition}px)`;
@@ -869,7 +862,6 @@
                     btn.addEventListener('click', () => this.handleTestAudio(btn.dataset.audioType));
                 });
 
-                // Event listener untuk tombol mute notifikasi
                 this.elements.muteNotificationBtn.addEventListener('click', () => {
                     this.state.notificationsMuted = !this.state.notificationsMuted;
                     this.updateMuteButtonState();
@@ -893,7 +885,6 @@
                 this.state.isImsakEnabled = localStorage.getItem('isImsakEnabled') !== 'false';
                 this.elements.toggleImsak.checked = this.state.isImsakEnabled;
 
-                // Load mute state
                 this.state.notificationsMuted = localStorage.getItem('notificationsMuted') === 'true';
                 this.updateMuteButtonState();
 
@@ -954,10 +945,14 @@
                 }, 400); 
             },
             
+            // --- KODE YANG DIPERBAIKI ---
             handleSwipe() { 
                 const currentPageId = this.state.activePageId;
-                if (currentPageId === 'ayatContainer' || ['wiridMenuPage', 'fasholatanMenuPage'].includes(currentPageId)) {
-                    return;
+
+                // Nonaktifkan geser navigasi saat membaca Al-Qur'an (tampilan ayat) atau di halaman menu tertentu.
+                if ((currentPageId === 'quranPage' && this.elements.ayatContainer.style.display !== 'none') ||
+                    ['wiridMenuPage', 'fasholatanMenuPage'].includes(currentPageId)) {
+                    return; // Hentikan fungsi agar tidak menggeser halaman saat membaca.
                 }
 
                 if (this.state.isNavigating) return; 
@@ -969,13 +964,14 @@
                     const currentIndex = navOrder.indexOf(currentPageId);
                     if (currentIndex === -1) return;
 
-                    if (deltaX < 0) {
+                    if (deltaX < 0) { // Geser ke kiri
                         if(currentIndex < navOrder.length - 1) this.navigateToPage(navOrder[currentIndex + 1]);
-                    } else {
+                    } else { // Geser ke kanan
                         if(currentIndex > 0) this.navigateToPage(navOrder[currentIndex - 1]);
                     }
                 } 
             },
+            // --- AKHIR KODE YANG DIPERBAIKI ---
 
             updateNavIndicator(targetPageId) { 
                 const activeItem = document.querySelector(`.nav-item[data-page="${targetPageId}"]`);
@@ -1070,7 +1066,6 @@
                     const countdownText = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`; 
                     const fullText = `Menuju Waktu <strong>${prayerNames[nextPrayerName]}</strong> dalam <strong>${countdownText}</strong>`; 
                     
-                    // Update countdown display
                     this.elements.nextPrayerName.textContent = prayerNames[nextPrayerName];
                     this.elements.nextPrayerTime.textContent = countdownText;
                     
