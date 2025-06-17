@@ -597,6 +597,16 @@
     </div>
     <script>
     document.addEventListener('DOMContentLoaded', () => {
+        // Auto-refresh mechanism
+const lastLoadTime = localStorage.getItem('lastLoadTime');
+const currentTime = new Date().getTime();
+
+if (!lastLoadTime || (currentTime - lastLoadTime > 5000)) { // 5 detik threshold
+    localStorage.setItem('lastLoadTime', currentTime);
+    location.reload();
+} else {
+    localStorage.removeItem('lastLoadTime');
+}
         // --- AWAL BAGIAN YANG DIUBAH ---
         document.getElementById('appHeader').innerHTML = `
             <div class="header-content">
