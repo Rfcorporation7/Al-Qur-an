@@ -595,8 +595,21 @@
         <div id="readerContent"></div>
     </div>
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => { 
       
+  let lastHidden = null;
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden") {
+      lastHidden = Date.now();
+    }
+    if (document.visibilityState === "visible") {
+      const now = Date.now();
+      if (lastHidden && now - lastHidden > 3000) { // 3 detik atau lebih
+        location.reload();
+      }
+    }
+  });
+
         document.getElementById('appHeader').innerHTML = `
             <div class="header-content">
                 <div class="header-row">
