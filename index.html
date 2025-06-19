@@ -6,6 +6,14 @@
     <title>Aplikasi Al-Qur'an Digital (UI Modern)</title>
     <meta name="description" content="Aplikasi Al-Qur'an dengan Juz, Pencarian, Jadwal Sholat, dan fitur lengkap lainnya.">
     <meta name="theme-color" content="#0a5e36">
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-XXXXXXXXXXXXXXXX",
+        enable_page_level_ads: true
+      });
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Scheherazade+New:wght@400;700&family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
@@ -38,7 +46,7 @@
         body { font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" opacity="0.05"><path fill="%230a5e36" d="M50 0 L100 50 L50 100 L0 50 Z"/></svg>'); color: var(--text-color); transition: background-color 0.3s, color 0.3s; line-height: 1.7; }
         p { overflow-wrap: break-word; } /* Mencegah teks panjang merusak layout */
         
-        header { position: fixed; top: 0; left: 0; right: 0; background: linear-gradient( #0a5e36 50%, #1e8a5a 100%); color: white; padding: 10px 15px; text-align: center; z-index: 1000; box-shadow: var(--shadow); border-bottom: 3px solid var(--accent-color); display: flex; align-items: center; justify-content: center; }
+        header { position: fixed; top: 0; left: 0; right: 0; background: linear-gradient(135deg, #0a5e36 0%, #1e8a5a 100%); color: white; padding: 10px 15px; text-align: center; z-index: 1000; box-shadow: var(--shadow); border-bottom: 3px solid var(--accent-color); display: flex; align-items: center; justify-content: center; }
         .header-content { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 1200px; }
         .header-row { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 5px; }
         .header-title { font-size: 1.2rem; font-weight: 600; text-align: left; align-items flex-grow: 1; }
@@ -71,7 +79,7 @@
         
         #homePage { position: relative; }
         #homePage.active { display: flex; flex-direction: column; justify-content: flex-start; text-align: center; overflow-y: auto; } /* Ganti ke flex-start dan overflow-y: auto */
-        #homePage h3 { margin-top: 25px; margin-bottom: 10px; font-weight: 500; }
+        #homePage h3 { margin-top: 25px; margin-bottom: 10px; font-weight: 600; }
         .card { background-color: var(--card-bg); border-radius: 12px; padding: 15px; margin-bottom: 15px; box-shadow: var(--shadow); border: 1px solid var(--border-color); }
         .setting-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border-color); }
         .setting-item:last-child { border-bottom: none; }
@@ -558,6 +566,63 @@
             margin-top: 10px;
             font-style: italic;
         }
+        
+        /* Iklan Styles */
+        .ad-container {
+            width: 100%;
+            margin: 15px 0;
+            display: flex;
+            justify-content: center;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .ad-label {
+            font-size: 0.7rem;
+            text-align: center;
+            color: var(--text-color);
+            opacity: 0.7;
+            margin-bottom: 5px;
+        }
+        
+        .ad-banner {
+            width: 100%;
+            max-width: 728px;
+            height: 90px;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .ad-banner.small {
+            max-width: 320px;
+            height: 50px;
+        }
+        
+        .ad-banner.large {
+            max-width: 970px;
+            height: 250px;
+        }
+        
+        .ad-banner.rectangle {
+            max-width: 300px;
+            height: 250px;
+        }
+        
+        .ad-banner.leaderboard {
+            max-width: 728px;
+            height: 90px;
+        }
+        
+        .ad-banner.mobile {
+            max-width: 320px;
+            height: 50px;
+        }
     </style>
 </head>
 <body>
@@ -590,15 +655,83 @@
                     <button class="menu-item" data-action="reader" data-content="barzanji"><span class="menu-icon">🌙</span><span class="menu-text">Al-Barzanji</span></button>
                     <button class="menu-item" data-action="navigate" data-page="fasholatanMenuPage"><span class="menu-icon">🕌</span><span class="menu-text">Fasholatan</span></button>
                 </div>
-                
+                                <!-- Iklan Banner Bawah -->
+                <div class="ad-container">
+                    <div>
+                        <div class="ad-label">Iklan</div>
+                        <div class="ad-banner mobile">
+                            <!-- Google AdSense Mobile Banner -->
+                            <ins class="adsbygoogle"
+                                 style="display:inline-block;width:320px;height:50px"
+                                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                                 data-ad-slot="XXXXXXXXXX"></ins>
+                            <script>
+                                 (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        </div>
+                    </div>
+                </div>
+
                 <h3 style="margin-top: 20px;">Hadits Harian</h3>
                 <div id="dailyHadithContainer" class="loading">Memuat hadits harian...</div>
+                
+
             </div>
 
-            <div class="page" id="wiridMenuPage"></div>
-            <div class="page" id="fasholatanMenuPage"></div>
+            <div class="page" id="wiridMenuPage">
+                <!-- Iklan di halaman Wirid -->
+                <div class="ad-container">
+                    <div>
+                        <div class="ad-label">Iklan</div>
+                        <div class="ad-banner">
+                            <ins class="adsbygoogle"
+                                 style="display:inline-block;width:728px;height:90px"
+                                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                                 data-ad-slot="XXXXXXXXXX"></ins>
+                            <script>
+                                 (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="page" id="fasholatanMenuPage">
+                <!-- Iklan di halaman Fasholatan -->
+                <div class="ad-container">
+                    <div>
+                        <div class="ad-label">Iklan</div>
+                        <div class="ad-banner">
+                            <ins class="adsbygoogle"
+                                 style="display:inline-block;width:728px;height:90px"
+                                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                                 data-ad-slot="XXXXXXXXXX"></ins>
+                            <script>
+                                 (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="page" id="quranPage">
+<!-- Iklan Banner Bawah -->
+                <div class="ad-container">
+                    <div>
+                        <div class="ad-label">Iklan</div>
+                        <div class="ad-banner mobile">
+                            <!-- Google AdSense Mobile Banner -->
+                            <ins class="adsbygoogle"
+                                 style="display:inline-block;width:320px;height:50px"
+                                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                                 data-ad-slot="XXXXXXXXXX"></ins>
+                            <script>
+                                 (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="quran-nav-tabs">
                     <button class="tab-link active" data-view="surah">Surah</button>
                     <button class="tab-link" data-view="juz">Juz</button>
@@ -619,9 +752,27 @@
                     <h2 id="ayatTitle" style="text-align: center;"></h2>
                     <p id="ayatSubtitle"></p>
                     <div id="ayatList"></div>
+                    
+                    <!-- Iklan di antara ayat -->
+                    <div class="ad-container">
+                        <div>
+                            <div class="ad-label">Iklan</div>
+                            <div class="ad-banner small">
+                                <ins class="adsbygoogle"
+                                     style="display:inline-block;width:320px;height:50px"
+                                     data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                                     data-ad-slot="XXXXXXXXXX"></ins>
+                                <script>
+                                     (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            
             <div class="page" id="prayerPage">
+
                 <h2>Jadwal Sholat</h2>
                 <div class="location-form card">
                     <input type="text" id="cityInput" class="modern-input" placeholder="Cari kota atau gunakan GPS">
@@ -647,6 +798,22 @@
                 </div>
                 <div id="prayerTimesContainer" style="margin-top: 20px;">
                     <div class="loading" id="prayerLoading">Memeriksa jadwal tersimpan...</div>
+                </div>
+                
+                <!-- Iklan di tengah halaman Sholat -->
+                <div class="ad-container">
+                    <div>
+                        <div class="ad-label">Iklan</div>
+                        <div class="ad-banner rectangle">
+                            <ins class="adsbygoogle"
+                                 style="display:inline-block;width:300px;height:250px"
+                                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                                 data-ad-slot="XXXXXXXXXX"></ins>
+                            <script>
+                                 (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="card notification-settings-section">
@@ -706,18 +873,35 @@
             </div>
 
             <div class="page" id="aboutPage">
+
                 <h2 style="text-align:center;">Tentang Aplikasi </h2>
                 <div class="app-logo-container">
                     <img src="https://ik.imagekit.io/t4ciyzzqg/hitam%20putih%20modern%20huruf%20M%20logo%20(500%20x%20500%20piksel)_20250616_231218_0000.png?updatedAt=1750090361550" alt="Logo Aplikasi" style="height: 70px; ">
                 </div>
                 <div class="card">
-                     <p><strong>Versi:</strong> 1.0.0 (UI Halus & Stabil)</p>
-                     <p>Aplikasi Al-Qur'an Digital ini dirancang untuk kemudahan membaca, mempelajari Al-Qur'an, serta mengetahui jadwal sholat secara akurat.</p>
+                     <p><strong>Versi:</strong> 1.0.1 (UI Halus & Stabil)</p>
+                     <p>Aplikasi Al-Qur'an Digital ini dirancang untuk kemudahan membaca, m mempelajari Al-Qur'an, serta mengetahui jadwal sholat secara akurat.</p>
                 </div>
                 <div class="card developer-info">
                     <h4 style="margin-bottom: 10px;">Pengembang</h4>
                     <p>Aplikasi ini dikembangkan oleh:</p>
                     <p><strong>[ARF]</strong></p>
+                </div>
+                
+                <!-- Iklan di bagian bawah halaman Tentang -->
+                <div class="ad-container">
+                    <div>
+                        <div class="ad-label">Iklan</div>
+                        <div class="ad-banner mobile">
+                            <ins class="adsbygoogle"
+                                 style="display:inline-block;width:320px;height:50px"
+                                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                                 data-ad-slot="XXXXXXXXXX"></ins>
+                            <script>
+                                 (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -759,14 +943,6 @@
     </div>
     
     <script>
-        document.addEventListener("visibilitychange", function () {
-    if (document.visibilityState === "visible") {
-      // Saat app dibuka kembali, selalu arahkan ke halaman utama
-      window.location.href = "/";
-    }
-  });
-
-        
     document.addEventListener('DOMContentLoaded', () => {
       
         document.getElementById('appHeader').innerHTML = `
@@ -957,6 +1133,22 @@
                 setTimeout(() => this.updateNavIndicator('homePage'), 100); 
                 this.elements.homePrayerTimes.style.display = 'block'; 
                 this.initGreetingScroller();
+                
+                // Load ads after page is fully loaded
+                setTimeout(() => {
+                    this.loadAds();
+                }, 2000);
+            },
+            
+            loadAds() {
+                // Reload ads when navigating between pages
+                if (typeof adsbygoogle !== 'undefined') {
+                    try {
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    } catch (e) {
+                        console.error('Error loading ads:', e);
+                    }
+                }
             },
             
             updateTimeBasedGreeting() {
@@ -1182,6 +1374,9 @@
                     currentPage.classList.remove('exiting'); 
                     nextPage.scrollTo(0, 0); 
                     this.state.isNavigating = false; 
+                    
+                    // Reload ads when page changes
+                    this.loadAds();
                 }, 400); 
             },
             
@@ -1446,7 +1641,7 @@
                 } 
             },
             async loadQuranData() { try { const response = await fetch(app.api.surahList); const json = await response.json(); if (!json.data) throw new Error(`Struktur API tidak sesuai.`); this.state.surahListCache = json.data; this.displaySurahList(json.data); this.displayJuzList(); } catch (error) { this.elements.surahList.innerHTML = '<div class="error-message">Gagal memuat daftar surah.</div>'; this.elements.juzList.innerHTML = '<div class="error-message">Gagal memuat daftar juz.</div>'; } },
-            displaySurahList(surahs) { this.elements.surahList.innerHTML = surahs.map(surah => `<div class="card surah-card" data-nomor="${surah.nomor}"><h3>${surah.nomor}. ${surah.namaLatin} (${surah.nama})</h3><p style="opacity:0.8">${surah.arti}</p><div style="display: flex; justify-content: space-between; font-size: 0.85rem; opacity: 0.7; margin-top: 10px;"><span>${surah.jumlahAyat} ayat</span><span>${surah.tempatTurun}</span></div></div>`).join(''); this.elements.surahList.querySelectorAll('.surah-card').forEach(card => card.addEventListener('click', () => this.loadSurahDetail(card.dataset.nomor))); },
+            displaySurahList(surahs) { this.elements.surahList.innerHTML = surahs.map(surah => `<div class=" surah-card" data-nomor="${surah.nomor}"><h3>${surah.nomor}. ${surah.namaLatin} (${surah.nama})</h3><p style="opacity:0.8">${surah.arti}</p><div style="display: flex; justify-content: space-between; font-size: 0.85rem; opacity: 0.7; margin-top: 10px;"><span>${surah.jumlahAyat} ayat</span><span>${surah.tempatTurun}</span></div></div>`).join(''); this.elements.surahList.querySelectorAll('.surah-card').forEach(card => card.addEventListener('click', () => this.loadSurahDetail(card.dataset.nomor))); },
             displayJuzList() { if(!this.state.surahListCache.length) return; this.elements.juzList.innerHTML = this.juzData.map(juz => { const startSurah = this.state.surahListCache.find(s => s.nomor === juz.start.surah); if (!startSurah) return ''; return `<div class="card juz-card" data-juz-number="${juz.juz}"><h3>Juz ${juz.juz} <span style="font-size: 1rem; opacity: 0.8;">(${juz.name})</span></h3><p style="opacity:0.8; margin-top: 5px;">Mulai dari Surah ${startSurah.namaLatin} Ayat ${juz.start.ayat}</p></div>`; }).join(''); this.elements.juzList.querySelectorAll('.juz-card').forEach(card => card.addEventListener('click', () => this.loadJuzContent(card.dataset.juzNumber))); },
             handleSurahSearch(query) { const q = query.toLowerCase().trim(); this.elements.surahList.querySelectorAll('.surah-card').forEach(card => { card.style.display = card.textContent.toLowerCase().includes(q) ? 'block' : 'none'; }); },
             async loadJuzContent(juzNumber) { this.stopAutoScroll(); const juzInfo = this.juzData.find(j => j.juz == juzNumber); if (!juzInfo) return; this.showAyatView(`Juz ${juzNumber}`); let allAyat = []; try { for (let surahNum = juzInfo.start.surah; surahNum <= juzInfo.end.surah; surahNum++) { this.elements.ayatList.innerHTML = `<div class="loading">Memuat Surah ke-${surahNum}...</div>`; const response = await fetch(app.api.surahDetail(surahNum)); const json = await response.json(); const data = json.data; const start = (surahNum === juzInfo.start.surah) ? juzInfo.start.ayat : 1; const end = (surahNum === juzInfo.end.surah) ? juzInfo.end.ayat : data.jumlahAyat; const ayatInSurah = data.ayat.filter(a => a.nomorAyat >= start && a.nomorAyat <= end); ayatInSurah.forEach(a => a.surah = { nomor: data.nomor, namaLatin: data.namaLatin, nama: data.nama }); allAyat.push(...ayatInSurah); } this.displayAyat(allAyat, true); } catch (e) { this.elements.ayatList.innerHTML = '<div class="error-message">Gagal memuat data Juz.</div>'; } },
