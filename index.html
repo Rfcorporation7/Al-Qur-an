@@ -944,6 +944,14 @@
     </div>
     
     <script>
+        document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "visible") {
+      // Saat app dibuka kembali, selalu arahkan ke halaman utama
+      window.location.href = "/";
+    }
+  });
+
+        
     document.addEventListener('DOMContentLoaded', () => {
       
         document.getElementById('appHeader').innerHTML = `
