@@ -6,7 +6,6 @@
     <title>Aplikasi Al-Qur'an Digital (UI Modern)</title>
     <meta name="description" content="Aplikasi Al-Qur'an dengan Juz, Pencarian, Jadwal Sholat, dan fitur lengkap lainnya.">
     <meta name="theme-color" content="#0a5e36">
-    <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6507628165565005"
      crossorigin="anonymous"></script>
     <script>
@@ -24,8 +23,8 @@
             --accent-color: #d4af37; --card-bg: #ffffff; --border-color: #e9ecef; --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             --header-height: 90px;
             --bottom-nav-height: 65px;
-            --transition-speed: 0.4s; /* Durasi transisi diperhalus */
-            --transition-curve: cubic-bezier(0.25, 0.1, 0.25, 1); /* Kurva transisi profesional */
+            --transition-speed: 0.4s;
+            --transition-curve: cubic-bezier(0.25, 0.1, 0.25, 1);
             --bg-color-rgb: 248, 249, 250;
             --text-color-rgb: 33, 37, 41;
             --primary-color-rgb: 10, 94, 54;
@@ -41,12 +40,164 @@
         html, body { 
             height: 100%; 
             overflow: hidden; 
-            overflow-x: hidden; /* Kunci: Mencegah scroll horizontal secara paksa */
+            overflow-x: hidden;
             width: 100%;
         }
-        body { font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" opacity="0.05"><path fill="%230a5e36" d="M50 0 L100 50 L50 100 L0 50 Z"/></svg>'); color: var(--text-color); transition: background-color 0.3s, color 0.3s; line-height: 1.7; }
-        p { overflow-wrap: break-word; } /* Mencegah teks panjang merusak layout */
+        body { 
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: var(--bg-color); 
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" opacity="0.05"><path fill="%230a5e36" d="M50 0 L100 50 L50 100 L0 50 Z"/></svg>'); 
+            color: var(--text-color); 
+            transition: background-color 0.3s, color 0.3s; 
+            line-height: 1.7; 
+        }
+        p { overflow-wrap: break-word; }
         
+        /* Surah List Modern */
+        .surah-list-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .surah-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .surah-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .surah-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+        }
+
+        .surah-card:hover::before {
+            width: 8px;
+        }
+
+        .surah-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .surah-card h3 span {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .surah-card p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 8px;
+        }
+
+        .surah-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            opacity: 0.7;
+            margin-top: auto;
+        }
+
+        /* Juz List Modern */
+        .juz-list-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .juz-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+            cursor: pointer;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            display: flex; /* Added for flexbox alignment */
+            flex-direction: column; /* Added for flexbox alignment */
+            align-items: flex-start; /* Aligned content to start */
+        }
+
+        .juz-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: var(--primary-color);
+            transition: height 0.3s ease;
+        }
+
+        .juz-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+        }
+
+        .juz-card:hover::after {
+            height: 8px;
+        }
+
+        .juz-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+            color: var(--primary-color);
+            text-align: left; /* Ensure title is left-aligned */
+            width: 100%; /* Ensure title takes full width */
+        }
+
+        .juz-card .juz-number {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 0 8px 0; /* Changed margin to left-align */
+            font-weight: bold;
+            align-self: flex-start; /* Align number to the start of the flex container */
+        }
+
+        .juz-card p {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            text-align: left; /* Ensure description is left-aligned */
+            width: 100%; /* Ensure description takes full width */
+        }
+
+        /* Sisanya tetap sama seperti kode sebelumnya */
         header { position: fixed; top: 0; left: 0; right: 0; background: linear-gradient( #0a5e36 50%, #1e8a5a 100%); color: white; padding: 10px 15px; text-align: center; z-index: 1000; box-shadow: var(--shadow); border-bottom: 3px solid var(--accent-color); display: flex; align-items: center; justify-content: center; }
         .header-content { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 1200px; }
         .header-row { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 5px; }
@@ -56,9 +207,8 @@
         .hijri-date { font-size: 0.8rem; opacity: 0.9; margin-top: 3px; }
         .mode-toggle { background: transparent; border: none; color: white; cursor: pointer; font-size: 1.4rem; padding: 5px; }
         main { padding-top: var(--header-height); padding-bottom: var(--bottom-nav-height); height: 100%; width: 100%; max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; position: relative; }
-        .page-container { position: relative; width: 100%; flex-grow: 1; overflow: hidden; } /* Tambahkan overflow hidden */
+        .page-container { position: relative; width: 100%; flex-grow: 1; overflow: hidden; }
         
-        /* EFEK TRANSISI HALAMAN BARU YANG LEBIH HALUS */
         .page { 
             padding: 20px 15px; width: 100%; height: 100%; position: absolute; top: 0; left: 0; overflow-y: auto; overflow-x: hidden; 
             visibility: hidden;
@@ -79,14 +229,12 @@
         }
         
         #homePage { position: relative; }
-        #homePage.active { display: flex; flex-direction: column; justify-content: flex-start; text-align: center; overflow-y: auto; } /* Ganti ke flex-start dan overflow-y: auto */
+        #homePage.active { display: flex; flex-direction: column; justify-content: flex-start; text-align: center; overflow-y: auto; }
         #homePage h3 { margin-top: 25px; margin-bottom: 10px; font-weight: 600; }
         .card { background-color: var(--card-bg); border-radius: 12px; padding: 15px; margin-bottom: 15px; box-shadow: var(--shadow); border: 1px solid var(--border-color); }
         .setting-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border-color); }
         .setting-item:last-child { border-bottom: none; }
         .setting-item label:first-child { margin-right: 15px; flex-grow: 1; text-align: left; }
-        .surah-card, .juz-card { cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
-        .surah-card:hover, .juz-card:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
         
         #quranControls { position: absolute; top: var(--header-height); left: 0; right: 0; z-index: 999; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to bottom, rgba(var(--bg-color-rgb), 0.9), rgba(var(--bg-color-rgb), 0.75)); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-color); pointer-events: none; }
         #quranControls > * { pointer-events: all; }
@@ -522,16 +670,15 @@
 
         /* Hadits Harian */
         .daily-hadith-card {
-          
             background-color: var(--card-bg);
             border-radius: 12px;
             padding: 10px;
             margin-bottom: 18px;
             box-shadow: var(--shadow);
             border: 1px solid var(--border-color);
-            cursor: pointe; /* Bisa dihapus jika tidak ada aksi klik */
+            cursor: pointer;
             transition: transform 0.2s;
-            text-align: left; /* Sesuaikan agar teks terjemahan tidak rata kanan */
+            text-align: left;
         }
 
         .daily-hadith-card:hover {
@@ -557,7 +704,7 @@
             font-style: italic;
             opacity: 0.9;
             font-size: 0.9rem;
-            text-align: left; /* Penting untuk terjemahan */
+            text-align: left;
         }
         
         .daily-hadith-source {
@@ -624,6 +771,58 @@
             max-width: 320px;
             height: 50px;
         }
+        
+        /* Adzan Notification */
+        .adhan-notification {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 1100;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideUp 0.3s ease-out;
+            max-width: 90%;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translate(-50%, 100%); opacity: 0; }
+            to { transform: translate(-50%, 0); opacity: 1; }
+        }
+        
+        .adhan-notification.hide {
+            animation: slideDown 0.3s ease-in forwards; /* Added forwards to keep final state */
+            /* transform: translate(-50%, 100%); opacity: 0; Removed as animation handles it */
+        }
+        
+        @keyframes slideDown {
+            from { transform: translate(-50%, 0); opacity: 1; }
+            to { transform: translate(-50%, 100%); opacity: 0; }
+        }
+        
+        .adhan-notification-icon {
+            font-size: 1.5rem;
+        }
+        
+        .adhan-notification-text {
+            font-weight: 500;
+        }
+        
+        .adhan-notification-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-left: 10px;
+            padding: 0;
+        }
     </style>
 </head>
 <body>
@@ -646,7 +845,6 @@
         </div>
         <div class="page-container">
             <div class="page active" id="homePage">
-
                 <h2 id="dynamicGreeting"></h2><p>Assalamu'alaikum</p>
                 <p>Selamat datang di aplikasi Al-Qur'an digital.</p>
                 <h3>Menu Utama</h3>
@@ -656,12 +854,11 @@
                     <button class="menu-item" data-action="reader" data-content="barzanji"><span class="menu-icon">🌙</span><span class="menu-text">Al-Barzanji</span></button>
                     <button class="menu-item" data-action="navigate" data-page="fasholatanMenuPage"><span class="menu-icon">🕌</span><span class="menu-text">Fasholatan</span></button>
                 </div>
-                                <!-- Iklan Banner Bawah -->
+                
                 <div class="ad-container">
                     <div>
                         <div class="ad-label">Iklan</div>
                         <div class="ad-banner mobile">
-                            <!-- Google AdSense Mobile Banner -->
                             <ins class="adsbygoogle"
                                  style="display:inline-block;width:320px;height:50px"
                                  data-ad-client="ca-pub-6507628165565005"
@@ -675,12 +872,9 @@
 
                 <h3 style="margin-top: 20px;">Hadits Harian</h3>
                 <div id="dailyHadithContainer" class="loading">Memuat hadits harian...</div>
-                
-
             </div>
 
             <div class="page" id="wiridMenuPage">
-                <!-- Iklan di halaman Wirid -->
                 <div class="ad-container">
                     <div>
                         <div class="ad-label">Iklan</div>
@@ -698,7 +892,6 @@
             </div>
             
             <div class="page" id="fasholatanMenuPage">
-                <!-- Iklan di halaman Fasholatan -->
                 <div class="ad-container">
                     <div>
                         <div class="ad-label">Iklan</div>
@@ -716,12 +909,10 @@
             </div>
 
             <div class="page" id="quranPage">
-<!-- Iklan Banner Bawah -->
                 <div class="ad-container">
                     <div>
                         <div class="ad-label">Iklan</div>
                         <div class="ad-banner mobile">
-                            <!-- Google AdSense Mobile Banner -->
                             <ins class="adsbygoogle"
                                  style="display:inline-block;width:320px;height:50px"
                                  data-ad-client="ca-pub-6507628165565005"
@@ -743,10 +934,14 @@
                         <div class="search-container">
                             <input type="search" id="surahSearchInput" class="modern-input" placeholder="Cari nama surah...">
                         </div>
-                        <div id="surahList"><div class="loading">Memuat daftar surah...</div></div>
+                        <div class="surah-list-container" id="surahListContainer">
+                            <div id="surahList"><div class="loading">Memuat daftar surah...</div></div>
+                        </div>
                     </div>
                     <div id="juzView" class="quran-view">
-                        <div id="juzList"><div class="loading">Memuat daftar juz...</div></div>
+                        <div class="juz-list-container" id="juzListContainer">
+                            <div id="juzList"><div class="loading">Memuat daftar juz...</div></div>
+                        </div>
                     </div>
                 </div>
                 <div id="ayatContainer" style="display: none;">
@@ -754,7 +949,6 @@
                     <p id="ayatSubtitle"></p>
                     <div id="ayatList"></div>
                     
-                    <!-- Iklan di antara ayat -->
                     <div class="ad-container">
                         <div>
                             <div class="ad-label">Iklan</div>
@@ -765,7 +959,7 @@
                                      data-ad-slot="4642246103"></ins>
                                 <script>
                                      (adsbygoogle = window.adsbygoogle || []).push({});
-                                </script>
+                                ></script>
                             </div>
                         </div>
                     </div>
@@ -773,7 +967,6 @@
             </div>
             
             <div class="page" id="prayerPage">
-
                 <h2>Jadwal Sholat</h2>
                 <div class="location-form card">
                     <input type="text" id="cityInput" class="modern-input" placeholder="Cari kota atau gunakan GPS">
@@ -801,7 +994,6 @@
                     <div class="loading" id="prayerLoading">Memeriksa jadwal tersimpan...</div>
                 </div>
                 
-                <!-- Iklan di tengah halaman Sholat -->
                 <div class="ad-container">
                     <div>
                         <div class="ad-label">Iklan</div>
@@ -874,7 +1066,6 @@
             </div>
 
             <div class="page" id="aboutPage">
-
                 <h2 style="text-align:center;">Tentang Aplikasi </h2>
                 <div class="app-logo-container">
                     <img src="https://ik.imagekit.io/t4ciyzzqg/hitam%20putih%20modern%20huruf%20M%20logo%20(500%20x%20500%20piksel)_20250616_231218_0000.png?updatedAt=1750090361550" alt="Logo Aplikasi" style="height: 70px; ">
@@ -889,7 +1080,6 @@
                     <p><strong>[Media Assunniyyah]</strong></p>
                 </div>
                 
-                <!-- Iklan di bagian bawah halaman Tentang -->
                 <div class="ad-container">
                     <div>
                         <div class="ad-label">Iklan</div>
@@ -943,792 +1133,964 @@
         </div>
     </div>
     
+    <div id="adhanNotification" class="adhan-notification" style="display: none;">
+        <span class="adhan-notification-icon">🕌</span>
+        <span class="adhan-notification-text" id="adhanNotificationText"></span>
+        <button class="adhan-notification-close" id="adhanNotificationClose">&times;</button>
+    </div>
+    
     <script>
         document.addEventListener("visibilitychange", function () {
-    if (document.visibilityState === "visible") {
-      // Saat app dibuka kembali, selalu arahkan ke halaman utama
-      window.location.href = "/";
-    }
-  });
+            if (document.visibilityState === "visible") {
+                // Saat app dibuka kembali, selalu arahkan ke halaman utama
+                window.location.href = "/";
+            }
+        });
 
-        
-    document.addEventListener('DOMContentLoaded', () => {
-      
-        document.getElementById('appHeader').innerHTML = `
-            <div class="header-content">
-                <div class="header-row">
-                    <div class="header-title">
-                        <img src="https://ik.imagekit.io/t4ciyzzqg/hitam%20putih%20modern%20huruf%20M%20logo_20250616_225251_0000.png?updatedAt=1750089188812" alt="Logo Aplikasi" style="height: 50px; display: block;">
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('appHeader').innerHTML = `
+                <div class="header-content">
+                    <div class="header-row">
+                        <div class="header-title">
+                            <img src="https://ik.imagekit.io/t4ciyzzqg/hitam%20putih%20modern%20huruf%20M%20logo_20250616_225251_0000.png?updatedAt=1750089188812" alt="Logo Aplikasi" style="height: 50px; display: block;">
+                        </div>
+                        <div class="header-controls">
+                            <div class="clock" id="digitalClock">00:00:00</div>
+                            <button class="mode-toggle" id="modeToggle">🌙</button>
+                        </div>
                     </div>
-                    <div class="header-controls">
-                        <div class="clock" id="digitalClock">00:00:00</div>
-                        <button class="mode-toggle" id="modeToggle">🌙</button>
-                    </div>
-                </div>
-            </div>`;
-        
-        const app = {
-            audioSources: { 
-                adhan: 'https://ia800704.us.archive.org/19/items/Sirine/Adzan%20Maghrib.mp3',
-                adhanSubuh: 'https://ia800704.us.archive.org/19/items/Sirine/Adzan%20Subuh.mp3',
-                imsakTarhim: 'https://ia600704.us.archive.org/19/items/Sirine/Sholawat%20Tarhim.mp3' 
-            },
-            api: { 
-                surahList: 'https://equran.id/api/v2/surat', 
-                surahDetail: (n) => `https://equran.id/api/v2/surat/${n}`, 
-                tafsir: (n) => `https://equran.id/api/v2/tafsir/${n}`,
-                // Removed dailyDua as we're now using local hadiths
-                reverseGeocode: (lat, lon) => `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&accept-language=id&zoom=14`, 
-                prayerTimeTune: '2,2,2,2,2,2,2,2,2',
-                prayerTimesByCity: (city) => `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=Indonesia&method=20&tune=${app.api.prayerTimeTune}`,
-                prayerTimesByCoords: (lat, lon) => `https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=20&tune=${app.api.prayerTimeTune}`
-            },
-            elements: { 
-                pageContainer: document.querySelector('.page-container'), 
-                quranControls: document.getElementById('quranControls'), 
-                surahSearchInput: document.getElementById('surahSearchInput'), 
-                digitalClock: document.getElementById('digitalClock'), 
-                hijriDate: document.getElementById('hijriDate'), 
-                hijriDateCountdown: document.getElementById('hijriDateCountdown'),
-                modeToggle: document.getElementById('modeToggle'), 
-                navItems: document.querySelectorAll('.nav-item'), 
-                pages: document.querySelectorAll('.page'), 
-                quranNavTabsContainer: document.querySelector('.quran-nav-tabs'), 
-                quranNavTabs: document.querySelectorAll('.tab-link'), 
-                quranViews: document.querySelectorAll('.quran-view'), 
-                surahList: document.getElementById('surahList'), 
-                juzList: document.getElementById('juzList'), 
-                ayatContainer: document.getElementById('ayatContainer'), 
-                quranContent: document.getElementById('quranContent'), 
-                backToQuranListBtn: document.getElementById('backToQuranList'), 
-                ayatTitle: document.getElementById('ayatTitle'), 
-                ayatSubtitle: document.getElementById('ayatSubtitle'), 
-                ayatList: document.getElementById('ayatList'), 
-                toggleTranslationBtn: document.getElementById('toggleTranslationBtn'), 
-                cityInput: document.getElementById('cityInput'), 
-                getPrayerTimesBtn: document.getElementById('getPrayerTimesBtn'), 
-                prayerTimesContainer: document.getElementById('prayerTimesContainer'), 
-                homePrayerTimes: document.getElementById('homePrayerTimes'), 
-                homeCountdown: document.getElementById('homeCountdown'), 
-                prayerCountdownDisplay: document.getElementById('prayerCountdownDisplay'), 
-                nextPrayerName: document.getElementById('nextPrayerName'),
-                nextPrayerTime: document.getElementById('nextPrayerTime'),
-                contentMenuItems: document.querySelectorAll('.menu-item'), 
-                fullscreenReader: document.getElementById('fullscreenReader'), 
-                readerHeader: document.getElementById('readerHeader'), 
-                readerContent: document.getElementById('readerContent'), 
-                readerBackButton: document.getElementById('readerBackButton'), 
-                navIndicator: document.getElementById('nav-indicator'), 
-                toggleAdhan: document.getElementById('toggleAdhan'), 
-                toggleAdhanSubuh: document.getElementById('toggleAdhanSubuh'), 
-                toggleImsak: document.getElementById('toggleImsak'), 
-                refreshGpsBtn: document.getElementById('refreshGpsBtn'), 
-                autoScrollBtn: document.getElementById('autoScrollBtn'), 
-                testAdhanBtn: document.getElementById('testAdhanBtn'), 
-                testImsakBtn: document.getElementById('testImsakBtn'), 
-                testAdhanSubuhBtn: document.getElementById('testAdhanSubuhBtn'),
-                greetingContainer: document.getElementById('greetingContainer'),
-                greetingScroller: document.getElementById('greetingScroller'),
-                dynamicGreeting: document.getElementById('dynamicGreeting'),
-                muteNotificationBtn: document.getElementById('muteNotificationBtn'),
-                tafsirPopup: document.getElementById('tafsirPopup'),
-                tafsirContent: document.getElementById('tafsirContent'),
-                closeTafsirBtn: document.getElementById('closeTafsirBtn'),
-                dailyHadithContainer: document.getElementById('dailyHadithContainer') // Tambahkan ini
-            },
-            state: { 
-                surahListCache: [], 
-                activePageId: 'homePage', 
-                prayerCountdownInterval: null, 
-                touchStartX: 0, touchEndX: 0, touchStartY: 0, touchEndY: 0, 
-                isNavigating: false, 
-                isAdhanEnabled: true, isAdhanSubuhEnabled: true, isImsakEnabled: true, 
-                prayerTimesToday: {}, 
-                currentDateString: null, 
-                isAutoScrolling: false, autoScrollInterval: null, 
-                activeTestAudio: null, activeTestAudioType: null,
-                manualMode: false,
-                greetingInterval: null,
-                currentGreetingIndex: 0,
-                greetings: [
-                    { icon: '🌅', text: 'Selamat Pagi', message: 'Semoga hari Anda penuh berkah' },
-                    { icon: '☀️', text: 'Selamat Siang', message: 'Semoga aktivitas Anda lancar' },
-                    { icon: '🌇', text: 'Selamat Petang', message: 'Semoga istirahat Anda nyaman' },
-                    { icon: '🌙', text: 'Selamat Malam', message: 'Semoga tidur Anda nyenyak' },
-                    { icon: '📖', text: 'Selamat Membaca', message: 'Semoga mendapatkan ilmu yang bermanfaat' },
-                    { icon: '🕌', text: 'Selamat Beribadah', message: 'Semoga ibadah Anda diterima' }
-                ],
-                notificationsMuted: false,
-                currentSurahNumber: null,
-                dailyHadiths: [
-                    {
-                        arabic: "مَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ",
-                        translation: "Barangsiapa yang beriman kepada Allah dan hari akhir, maka hendaklah dia berkata baik atau diam.",
-                        source: "HR. Bukhari dan Muslim"
-                    },
-                    {
-                        arabic: "الرَّاحِمُونَ يَرْحَمُهُمُ الرَّحْمَنُ، ارْحَمُوا مَنْ فِي الأَرْضِ يَرْحَمْكُمْ مَنْ فِي السَّمَاءِ",
-                        translation: "Orang-orang yang penyayang akan disayangi oleh Yang Maha Penyayang. Sayangilah yang ada di bumi, niscaya yang di langit akan menyayangi kalian.",
-                        source: "HR. At-Tirmidzi"
-                    },
-                    {
-                        arabic: "لاَ تَحَاسَدُوا، وَلاَ تَنَاجَشُوا، وَلاَ تَبَاغَضُوا، وَلاَ تَدَابَرُوا، وَلاَ يَبِعْ بَعْضُكُمْ عَلَى بَيْعِ بَعْضٍ، وَكُونُوا عِبَادَ اللَّهِ إِخْوَانًا",
-                        translation: "Janganlah kalian saling hasad, jangan saling menipu dalam jual beli, jangan saling membenci, jangan saling membelakangi, dan jangan sebagian kalian menjual di atas penjualan sebagian yang lain. Jadilah kalian hamba-hamba Allah yang bersaudara.",
-                        source: "HR. Muslim"
-                    },
-                    {
-                        arabic: "الكَلِمَةُ الطَّيِّبَةُ صَدَقَةٌ",
-                        translation: "Ucapan yang baik adalah sedekah.",
-                        source: "HR. Bukhari dan Muslim"
-                    },
-                    {
-                        arabic: "إِنَّ اللَّهَ لاَ يَنْظُرُ إِلَى صُوَرِكُمْ وَأَمْوَالِكُمْ، وَلَكِنْ يَنْظُرُ إِلَى قُلُوبِكُمْ وَأَعْمَالِكُمْ",
-                        translation: "Sesungguhnya Allah tidak melihat pada rupa dan harta kalian, tetapi Dia melihat pada hati dan amal kalian.",
-                        source: "HR. Muslim"
-                    },
-                    {
-                        arabic: "مَا نَقَصَتْ صَدَقَةٌ مِنْ مَالٍ، وَمَا زَادَ اللَّهُ عَبْدًا بِعَفْوٍ إِلاَّ عِزًّا، وَمَا تَوَاضَعَ أَحَدٌ لِلَّهِ إِلاَّ رَفَعَهُ اللَّهُ",
-                        translation: "Sedekah tidak akan mengurangi harta. Tidaklah Allah menambahkan kepada seorang hamba sifat pemaaf melainkan kemuliaan. Dan tidaklah seseorang merendahkan diri karena Allah melainkan Allah akan mengangkat derajatnya.",
-                        source: "HR. Muslim"
-                    },
-                    {
-                        arabic: "مَنْ سَلَكَ طَرِيقًا يَلْتَمِسُ فِيهِ عِلْمًا سَهَّلَ اللَّهُ لَهُ بِهِ طَرِيقًا إِلَى الْجَنَّةِ",
-                        translation: "Barangsiapa menempuh suatu jalan untuk mencari ilmu, maka Allah akan memudahkan baginya jalan menuju surga.",
-                        source: "HR. Muslim"
-                    },
-                    {
-                        arabic: "إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى",
-                        translation: "Sesungguhnya amal itu tergantung niatnya, dan sesungguhnya setiap orang akan mendapatkan sesuai apa yang dia niatkan.",
-                        source: "HR. Bukhari dan Muslim"
-                    },
-                    {
-                        arabic: "مَا مِنْ مُسْلِمٍ يَغْرِسُ غَرْسًا أَوْ يَزْرَعُ زَرْعًا فَيَأْكُلُ مِنْهُ طَيْرٌ أَوْ إِنْسَانٌ أَوْ بَهِيمَةٌ إِلاَّ كَانَ لَهُ بِهِ صَدَقَةٌ",
-                        translation: "Tidaklah seorang muslim menanam tanaman atau menabur benih, lalu dimakan oleh burung, manusia atau hewan melainkan itu menjadi sedekah baginya.",
-                        source: "HR. Bukhari"
-                    },
-                    {
-                        arabic: "مَنْ كَانَ فِي حَاجَةِ أَخِيهِ كَانَ اللَّهُ فِي حَاجَتِهِ",
-                        translation: "Barangsiapa membantu kebutuhan saudaranya, maka Allah akan membantu kebutuhannya.",
-                        source: "HR. Bukhari"
-                    }
-                ]
-            },
-            juzData: [ { juz: 1, start: { surah: 1, ayat: 1 }, end: { surah: 2, ayat: 141 }, name: "Alif Lam Mim" }, { juz: 2, start: { surah: 2, ayat: 142 }, end: { surah: 2, ayat: 252 }, name: "Sayaqulu" }, { juz: 3, start: { surah: 2, ayat: 253 }, end: { surah: 3, ayat: 92 }, name: "Tilka Ar-Rusul" }, { juz: 4, start: { surah: 3, ayat: 93 }, end: { surah: 4, ayat: 23 }, name: "Lan Tana Loo" }, { juz: 5, start: { surah: 4, ayat: 24 }, end: { surah: 4, ayat: 147 }, name: "Wal-Muhsanat" }, { juz: 6, start: { surah: 4, ayat: 148 }, end: { surah: 5, ayat: 81 }, name: "La Yuhibbullah" }, { juz: 7, start: { surah: 5, ayat: 82 }, end: { surah: 6, ayat: 110 }, name: "Wa Iza Sami'u" }, { juz: 8, start: { surah: 6, ayat: 111 }, end: { surah: 7, ayat: 87 }, name: "Wa Law Annana" }, { juz: 9, start: { surah: 7, ayat: 88 }, end: { surah: 8, ayat: 40 }, name: "Qalal-Mala'u" }, { juz: 10, start: { surah: 8, ayat: 41 }, end: { surah: 9, ayat: 92 }, name: "Wa'lamu" }, { juz: 11, start: { surah: 9, ayat: 93 }, end: { surah: 11, ayat: 5 }, name: "Yatazirun" }, { juz: 12, start: { surah: 11, ayat: 6 }, end: { surah: 12, ayat: 52 }, name: "Wa Mamin Dabba" }, { juz: 13, start: { surah: 12, ayat: 53 }, end: { surah: 14, ayat: 52 }, name: "Wa Ma Ubri'u" }, { juz: 14, start: { surah: 15, ayat: 1 }, end: { surah: 16, ayat: 128 }, name: "Rubama" }, { juz: 15, start: { surah: 17, ayat: 1 }, end: { surah: 18, ayat: 74 }, name: "Subhanallazi" }, { juz: 16, start: { surah: 18, ayat: 75 }, end: { surah: 20, ayat: 135 }, name: "Qal Alam" }, { juz: 17, start: { surah: 21, ayat: 1 }, end: { surah: 22, ayat: 78 }, name: "Iqtaraba linnas" }, { juz: 18, start: { surah: 23, ayat: 1 }, end: { surah: 25, ayat: 20 }, name: "Qadd Aflaha" }, { juz: 19, start: { surah: 25, ayat: 21 }, end: { surah: 27, ayat: 55 }, name: "Wa Qalallazina" }, { juz: 20, start: { surah: 27, ayat: 56 }, end: { surah: 29, ayat: 45 }, name: "A'man Khalaq" }, { juz: 21, start: { surah: 29, ayat: 46 }, end: { surah: 33, ayat: 30 }, name: "Utlu Ma Oohi" }, { juz: 22, start: { surah: 33, ayat: 31 }, end: { surah: 36, ayat: 27 }, name: "Wa Man Yaqnut" }, { juz: 23, start: { surah: 36, ayat: 28 }, end: { surah: 39, ayat: 31 }, name: "Wa Mali" }, { juz: 24, start: { surah: 39, ayat: 32 }, end: { surah: 41, ayat: 46 }, name: "Faman Azlam" }, { juz: 25, start: { surah: 41, ayat: 47 }, end: { surah: 45, ayat: 37 }, name: "Ilayhi Yurad" }, { juz: 26, start: { surah: 46, ayat: 1 }, end: { surah: 51, ayat: 30 }, name: "Ha'a Meem" }, { juz: 27, start: { surah: 51, ayat: 31 }, end: { surah: 57, ayat: 29 }, name: "Qala Fama" }, { juz: 28, start: { surah: 58, ayat: 1 }, end: { surah: 66, ayat: 12 }, name: "Qadd Sami Allah" }, { juz: 29, start: { surah: 67, ayat: 1 }, end: { surah: 77, ayat: 50 }, name: "Tabarakallazi" }, { juz: 30, start: { surah: 78, ayat: 1 }, end: { surah: 114, ayat: 6 }, name: "Amma" } ],
-            contentData: { 
-                'tahlil': { title: 'Bacaan Tahlil', icon: '📖', content: `<h1>بَاعَة تَحْلِيْل</h1><h2>1. Pengantar Al-Fatihah</h2><p>إِلَى حَضْرَةِ النَّبِيِّ الْمُصْطَفَى مُحَمَّدٍ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ وَآلِهِ وَصَحْبِهِ شَيْءٌ لِلّهِ لَهُمُ الْفَاتِحَةُ</p><p class="latin">(Ilaa hadrotin nabiyyil musthofaa muhammadin shollallohu 'alaihi wa sallam, wa aalihii wa shohbihii syai'un lillaahi lahumul faatihah)</p><h2>2. Al-Fatihah</h2><p>بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ. اَلْحَمْدُ لِلهِ رَبِّ الْعَالَمِيْنَ. اَلرَّحْمَنِ الرَّحِيْمِ. مَالِكِ يَوْمِ الدِّيْنِ. اِيَّاكَ نَعْبُدُ وَاِيَّاكَ نَسْتَعِيْنُ. اِهْدِنَا الصِّرَاطَ الَّمُسْتَقِيْمَ. صِرَاطَ الَّذِيْنَ اَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوْبِ عَلَيْهِمْ وَلَا الضَّالِّيْنَ. اَمِينْ</p><h2>3. Surat Al-Ikhlas (3x)</h2><p>بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ. قُلْ هُوَ اللهُ اَحَدٌ. اَللهُ الصَّمَدُ. لَمْ يَلِدْ وَلَمْ يُوْلَدْ. وَلَمْ يَكُنْ لَهُ كُفُوًا اَحَدٌ</p><h2>4. Tahlil & Takbir</h2><p>لاَ اِلَهَ اِلاَّ اللهُ وَاللهُ اَكْبَرُ</p><h2>5. Surat Al-Falaq</h2><p>بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ. قُلْ اَعُوْذُ بِرَبِّ الْفَلَقِ. مِنْ شَرِّ مَا خَلَقَ. وَمِنْ شَرِّ غَاسِقٍ اِذَا وَقَبَ. وَمِنْ شَرِّ النَّفَّاثَاتِ فِى الْعُقَدِ. وَمِنْ شَرِّ حَاسِدٍ اِذَا حَسَدَ</p><h2>6. Tahlil & Takbir</h2><p>لاَ اِلَهَ اِلاَّ اللهُ وَاللهُ اَكْبَرُ</p><h2>7. Surat An-Nas</h2><p>بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ. قُلْ اَعُوْذُ بِرَبِّ النَّاسِ. مَلِكِ النَّاسِ. اِلَهِ النَّاسِ. مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ. الَّذِى يُوَسْوِسُ فِى صُدُوْرِ النَّاسِ. مِنَ الْجِنَّةِ وَالنَّاسِ</p><h2>8. Tahlil, Takbir & Tahmid</h2><p>لاَ اِلَهَ اِلاَّ اللهُ وَاللهُ اَكْبَرُ وَلِلهِ الْحَمْدُ</p><h2>9. Tahlil</h2><p>لاَ اِلَهَ اِلاَّ اللهُ</p><p class="latin">(dibaca 33x atau 100x)</p><h2>10. Penutup</h2><p>اللهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ وَعَلَى آلِ سَيِّدِنَا مُحَمَّdٍ</p>` }, 
-                'barzanji': { title: 'Al-Barzanji (Rawi 1)', icon: '🌙', content: `<h1>اَلْبَرْزَنْجِي</h1><h2>Rawi Pertama</h2><p>أَبْتَدِئُ الْإِمْلَاءَ بِاسْمِ الذَّاتِ الْعَلِيَّةِ * مُسْتَدِرًّا فَيْضَ الْبَرَكَاتِ عَلَى مَا أَنَالَهُ وَأَوْلَاهُ</p><p class="latin">Abtadi-ul imlaa-a bismidz dzaatil 'aliyyati * Mustadirron faidlol barokaati 'alaa maa anaalahu wa auwlaahu.</p><p>وَأُثَنِّي بِحَمْدٍ مَوَارِدُهُ سَائِغَةٌ هَنِيَّةٌ * مُمْتَطِيًا مِنَ الشُّكْرِ الْجَمِيلِ مَطَايَاهُ</p><p class="latin">Wa utsannii bihamdin mawaariduhu saa-ighotun haniyyatun * Mumtathiyan minasy syukril jamiili mathooyaahu.</p><p>وَأُصَلِّي وَأُسَلِّمُ عَلَى النُّورِ الْمَوْصُوفِ بِالتَّقَدُّمِ وَالْأَوَّلِيَّةِ * الْقَائِمِ بِنِهَايَاتِ الْكَمَالِ مُنْتَهَاهُ</p><p class="latin">Wa usholli wa usallimu 'alan nuuril maushuufi bittaqodumi wal awwaliyyati * Al qoo-imi binihaayaatil kamaali muntahaahu.</p>` },
-                'wirid_bada_sholat': { title: 'Wirid Ba\'da Sholat', icon: '📿', content: `<h1>وِرِد بَعْدَ الصَّلاَة</h1><h2>1. Istighfar (3x)</h2><p>أَسْتَغْفِرُ اللهَ الْعَظِيْمَ الَّذِي لَا إِلَهَ إِلَّا هُوَ الْحَيَّ الْقَيُّومَ وَأَتُوبُ إِلَيْهِ</p><p class="latin">Astaghfirullahal 'adziim alladzii laa ilaaha illaa huwal hayyul qoyyuum wa atuubu ilaih.</p><h2>2. Tahlil</h2><p>لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ يُحْيِي وَيُمِيتُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ</p><h2>3. Doa Selamat</h2><p>اللَّهُمَّ أَنْتَ السَّلَامُ وَمِنْكَ السَّلَامُ وَإِلَيْكَ يَعُودُ السَّلَامُ فَحَيِّنَا رَبَّنَا بِالسَّلَامِ وَأَدْخِلْنَا الْجَنَّةَ دَارَ السَّلَامِ تَبَارَكْتَ رَبَّنَا وَتَعَالَيْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ</p><h2>4. Tasbih (33x)</h2><p>سُبْحَانَ اللهِ</p><p class="latin">Subhanallah</p><h2>5. Tahmid (33x)</h2><p>الْحَمْدُ لِلهِ</p><p class="latin">Alhamdulillah</p><h2>6. Takbir (33x)</h2><p>اللهُ أَكْبَرُ</p><p class="latin">Allahu Akbar</p>` },
-                'wirid_pagi': { title: 'Wirid Pagi', icon: '📿', content: `<h1>Wirid Pagi</h1><p>Konten untuk wirid pagi akan ditambahkan di sini...</p>`},
-                'wirid_petang': { title: 'Wirid Petang', icon: '📿', content: `<h1>Wirid Petang</h1><p>Konten untuk wirid petang akan ditambahkan di sini...</p>`},
-                'fasholatan_nariyah': { title: 'Shalawat Nariyah', icon: '🕌', content: `<h1>صَلَاةٌ نَارِيَةٌ</h1><h2>Shalawat Nariyah</h2><p>اَللّٰهُمَّ صَلِّ صَلَاةً كَامِلَةً وَسَلِّمْ سَلَامًا تَامًّا عَلَى سَيِّدِنَا مُحَمَّدٍ الَّذِيْ تَنْحَلُّ بِهِ الْعُقَدُ وَتَنْفَرِجُ بِهِ الْكُرَبُ وَتُقْضٰى بِهِ الْحَوَائِجُ وَتُنَالُ بِهِ الرَّغَائِبُ وَحُسْنُ الْخَوَاتِمِ وَيُسْتَسْقَى الْغَمَامُ بِوَجْهِهِ الْكَرِيْمِ وَعَلٰى آلِهِ وَصَحْبِهِ فِيْ كُلِّ لَمْحَةٍ وَنَفَسٍ بِعَدَدِ كُلِّ مَعْلُوْمٍ لَكَ</p><p class="latin">Allahumma sholli sholaatan kaamilatan wasallim salaaman taamman 'ala sayyidinaa Muhammadinil ladzii tanhallu bihil 'uqodu wa tanfariju bihil kurobu wa tuqdhoo bihil hawaa-iju wa tunaalu bihir-roghoo-ibu wa husnul khowaatimi wa yustasqol ghomaamu bi wajhihil kariimi wa'alaa aalihii wa shohbihii fii kulli lamhatin wa nafasin bi'adadi kulli ma'luumin laka.</p><h2>Artinya</h2><p class="translation" style="text-align: left; font-size: 1rem;">"Ya Allah, limpahkanlah shalawat yang sempurna dan curahkanlah salam kesejahteraan yang penuh kepada junjungan kami Nabi Muhammad, yang dengan sebab beliau semua kesulitan dapat terpecahkan, semua kesusahan dapat dilenyapkan, semua keperluan dapat terpenuhi, dan semua yang didambakan serta husnul khatimah dapat diraih, dan berkat dirinya yang mulia hujanpun turun, dan semoga terlimpahkan kepada keluarganya serta para sahabatnya, di setiap detik dan hembusan nafas sebanyak bilangan semua yang diketahui oleh Engkau."</p>` },
-                'fasholatan_thibbil_qulub': { title: 'Shalawat Thibbil Qulub', icon: '🕌', content: `<h1>صَلَاةٌ طِبِّ الْقُلُوْبِ</h1><p>اللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ طِبِّ الْقُلُوبِ وَدَوَائِهَا، وَعَافِيَةِ الْأَبْدَانِ وَشِفَائِهَا، وَنُورِ الْأَبْصَارِ وَضِيَائِهَا، وَعَلٰى آلِهِ وَصَحْبِهِ وَسَلِّمْ</p><p class="latin">Allahumma sholli 'ala Sayyidina Muhammadin thibbil qulubi wa dawa-iha, wa 'afiyatil abdani wa syifa-iha, wa nuril abshori wa dliya-iha, wa 'ala alihi wa shohbihi wa sallim.</p>` }
-             },
+                </div>`;
             
-            init() { 
-                this.state.currentDateString = new Date().toISOString().split('T')[0];
-                this.buildMenuPages();
-                this.setupEventListeners(); 
-                this.loadInitialSettings(); 
-                this.updateHeaderHeight(); 
-                this.updateTimeBasedGreeting();
-                // Panggil loadDailyHadith di sini untuk pertama kali
-                this.loadDailyHadith(); 
-                setInterval(() => {
-                    this.updateClock();
-                    this.updateTimeBasedGreeting();
-                }, 1000); 
-                this.loadQuranData(); 
-                window.addEventListener('resize', () => { this.updateHeaderHeight(); this.updateNavIndicator(this.state.activePageId); }); 
-                setTimeout(() => this.updateNavIndicator('homePage'), 100); 
-                this.elements.homePrayerTimes.style.display = 'block'; 
-                this.initGreetingScroller();
-                
-                // Load ads after page is fully loaded
-                setTimeout(() => {
-                    this.loadAds();
-                }, 2000);
-            },
-            
-            loadAds() {
-                // Reload ads when navigating between pages
-                if (typeof adsbygoogle !== 'undefined') {
-                    try {
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    } catch (e) {
-                        console.error('Error loading ads:', e);
-                    }
-                }
-            },
-            
-            updateTimeBasedGreeting() {
-                const now = new Date();
-                const hours = now.getHours();
-                let greeting = "Assalamu'alaikum";
-                
-                if (hours >= 5 && hours < 11) {
-                    greeting = "Selamat Pagi";
-                } else if (hours >= 11 && hours < 15) {
-                    greeting = "Selamat Siang";
-                } else if (hours >= 15 && hours < 18) {
-                    greeting = "Selamat Sore";
-                } else if (hours >= 18 || hours < 5) {
-                    greeting = "Selamat Malam";
-                }
-                
-                this.elements.dynamicGreeting.textContent = greeting;
-            },
-            
-            initGreetingScroller() {
-                this.elements.greetingScroller.innerHTML = this.state.greetings.map(g => `
-                    <div class="greeting-item">
-                        <span class="greeting-icon">${g.icon}</span>
-                        <span class="greeting-text">${g.text}</span>
-                        <span class="greeting-message">${g.message}</span>
-                    </div>
-                `).join('');
-                
-                this.updateGreetingPosition();
-                
-                this.state.greetingInterval = setInterval(() => {
-                    this.state.currentGreetingIndex = 
-                        (this.state.currentGreetingIndex + 1) % this.state.greetings.length;
-                    this.updateGreetingPosition();
-                }, 5000);
-            },
-            
-            updateGreetingPosition() {
-                const containerWidth = this.elements.greetingContainer.offsetWidth;
-                const scrollWidth = this.elements.greetingScroller.scrollWidth;
-                const itemWidth = scrollWidth / this.state.greetings.length;
-                
-                // Calculate position to center the current item
-                const scrollPosition = this.state.currentGreetingIndex * itemWidth - (containerWidth - itemWidth) / 2;
-                
-                this.elements.greetingScroller.style.transform = `translateX(-${scrollPosition}px)`;
-            },
-            
-            buildMenuPages() {
-                const backButtonSvg = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>`;
-                const backButton = `<button class="page-back-btn" onclick="app.navigateToPage('homePage')">${backButtonSvg}</button>`;
-                
-                const wiridMenuPage = document.getElementById('wiridMenuPage');
-                wiridMenuPage.innerHTML = `
-                    <div class="page-header">
-                        <h2 class="page-title">Pilih Wirid</h2>
-                        ${backButton}
-                    </div>
-                    <div class="content-menu">
-                        <button class="menu-item" onclick="app.openReader('wirid_bada_sholat')"><span class="menu-icon">📿</span><span class="menu-text">Ba'da Sholat</span></button>
-                        <button class="menu-item" onclick="app.openReader('wirid_pagi')"><span class="menu-icon">☀️</span><span class="menu-text">Pagi</span></button>
-                        <button class="menu-item" onclick="app.openReader('wirid_petang')"><span class="menu-icon">🌇</span><span class="menu-text">Petang</span></button>
-                    </div>`;
-
-                const fasholatanMenuPage = document.getElementById('fasholatanMenuPage');
-                fasholatanMenuPage.innerHTML = `
-                    <div class="page-header">
-                        <h2 class="page-title">Pilih Fasholatan</h2>
-                        ${backButton}
-                    </div>
-                    <div class="content-menu">
-                        <button class="menu-item" onclick="app.openReader('fasholatan_nariyah')"><span class="menu-icon">🔥</span><span class="menu-text">Nariyah</span></button>
-                        <button class="menu-item" onclick="app.openReader('fasholatan_thibbil_qulub')"><span class="menu-icon">❤️</span><span class="menu-text">Thibbil Qulub</span></button>
-                    </div>`;
-            },
-            
-            setupEventListeners() { 
-                this.elements.modeToggle.addEventListener('click', () => {
-                    this.state.manualMode = true; 
-                    this.toggleDarkMode();
-                });
-                
-                this.elements.navItems.forEach(item => { 
-                    item.addEventListener('click', (e) => { 
-                        e.preventDefault(); 
-                        this.navigateToPage(item.dataset.page); 
-                    }); 
-                });
-                
-                this.elements.contentMenuItems.forEach(item => {
-                    item.addEventListener('click', () => {
-                        const action = item.dataset.action;
-                        if (action === 'navigate') {
-                            this.navigateToPage(item.dataset.page);
-                        } else if (action === 'reader') {
-                            this.openReader(item.dataset.content);
+            const app = {
+                audioSources: { 
+                    adhan: 'https://dn720303.ca.archive.org/0/items/adhans_sunnah/adhan_mishari.mp3',
+                    adhanSubuh: 'https://dn720303.ca.archive.org/0/items/adhans_sunnah/adhan_morning_mishari.mp3',
+                    imsakTarhim: 'https://ia802200.us.archive.org/17/items/lantunan-tarhim-kakek-dari-kartasura/Sholawat%20Tarhim%20-%20Hirzi%20Fakhrin%20Ghamdan.mp3' 
+                },
+                api: { 
+                    surahList: 'https://equran.id/api/v2/surat', 
+                    surahDetail: (n) => `https://equran.id/api/v2/surat/${n}`, 
+                    tafsir: (n) => `https://equran.id/api/v2/tafsir/${n}`,
+                    reverseGeocode: (lat, lon) => `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&accept-language=id&zoom=14`, 
+                    prayerTimeTune: '2,2,2,2,2,2,2,2,2',
+                    prayerTimesByCity: (city) => `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=Indonesia&method=20&tune=${app.api.prayerTimeTune}`,
+                    prayerTimesByCoords: (lat, lon) => `https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=20&tune=${app.api.prayerTimeTune}`
+                },
+                elements: { 
+                    pageContainer: document.querySelector('.page-container'), 
+                    quranControls: document.getElementById('quranControls'), 
+                    surahSearchInput: document.getElementById('surahSearchInput'), 
+                    digitalClock: document.getElementById('digitalClock'), 
+                    hijriDate: document.getElementById('hijriDate'), 
+                    hijriDateCountdown: document.getElementById('hijriDateCountdown'),
+                    modeToggle: document.getElementById('modeToggle'), 
+                    navItems: document.querySelectorAll('.nav-item'), 
+                    pages: document.querySelectorAll('.page'), 
+                    quranNavTabsContainer: document.querySelector('.quran-nav-tabs'), 
+                    quranNavTabs: document.querySelectorAll('.tab-link'), 
+                    quranViews: document.querySelectorAll('.quran-view'), 
+                    surahList: document.getElementById('surahList'), 
+                    surahListContainer: document.getElementById('surahListContainer'),
+                    juzList: document.getElementById('juzList'), 
+                    juzListContainer: document.getElementById('juzListContainer'),
+                    ayatContainer: document.getElementById('ayatContainer'), 
+                    quranContent: document.getElementById('quranContent'), 
+                    backToQuranListBtn: document.getElementById('backToQuranList'), 
+                    ayatTitle: document.getElementById('ayatTitle'), 
+                    ayatSubtitle: document.getElementById('ayatSubtitle'), 
+                    ayatList: document.getElementById('ayatList'), 
+                    toggleTranslationBtn: document.getElementById('toggleTranslationBtn'), 
+                    cityInput: document.getElementById('cityInput'), 
+                    getPrayerTimesBtn: document.getElementById('getPrayerTimesBtn'), 
+                    prayerTimesContainer: document.getElementById('prayerTimesContainer'), 
+                    homePrayerTimes: document.getElementById('homePrayerTimes'), 
+                    homeCountdown: document.getElementById('homeCountdown'), 
+                    prayerCountdownDisplay: document.getElementById('prayerCountdownDisplay'), 
+                    nextPrayerName: document.getElementById('nextPrayerName'),
+                    nextPrayerTime: document.getElementById('nextPrayerTime'),
+                    contentMenuItems: document.querySelectorAll('.menu-item'), 
+                    fullscreenReader: document.getElementById('fullscreenReader'), 
+                    readerHeader: document.getElementById('readerHeader'), 
+                    readerContent: document.getElementById('readerContent'), 
+                    readerBackButton: document.getElementById('readerBackButton'), 
+                    navIndicator: document.getElementById('nav-indicator'), 
+                    toggleAdhan: document.getElementById('toggleAdhan'), 
+                    toggleAdhanSubuh: document.getElementById('toggleAdhanSubuh'), 
+                    toggleImsak: document.getElementById('toggleImsak'), 
+                    refreshGpsBtn: document.getElementById('refreshGpsBtn'), 
+                    autoScrollBtn: document.getElementById('autoScrollBtn'), 
+                    testAdhanBtn: document.getElementById('testAdhanBtn'), 
+                    testImsakBtn: document.getElementById('testImsakBtn'), 
+                    testAdhanSubuhBtn: document.getElementById('testAdhanSubuhBtn'),
+                    greetingContainer: document.getElementById('greetingContainer'),
+                    greetingScroller: document.getElementById('greetingScroller'),
+                    dynamicGreeting: document.getElementById('dynamicGreeting'),
+                    muteNotificationBtn: document.getElementById('muteNotificationBtn'),
+                    tafsirPopup: document.getElementById('tafsirPopup'),
+                    tafsirContent: document.getElementById('tafsirContent'),
+                    closeTafsirBtn: document.getElementById('closeTafsirBtn'),
+                    dailyHadithContainer: document.getElementById('dailyHadithContainer'),
+                    adhanNotification: document.getElementById('adhanNotification'),
+                    adhanNotificationText: document.getElementById('adhanNotificationText'),
+                    adhanNotificationClose: document.getElementById('adhanNotificationClose')
+                },
+                state: { 
+                    surahListCache: [], 
+                    activePageId: 'homePage', 
+                    prayerCountdownInterval: null, 
+                    touchStartX: 0, touchEndX: 0, touchStartY: 0, touchEndY: 0, 
+                    isNavigating: false, 
+                    isAdhanEnabled: true, isAdhanSubuhEnabled: true, isImsakEnabled: true, 
+                    prayerTimesToday: {}, 
+                    currentDateString: null, 
+                    isAutoScrolling: false, autoScrollInterval: null, 
+                    activeTestAudio: null, activeTestAudioType: null,
+                    manualMode: false,
+                    greetingInterval: null,
+                    currentGreetingIndex: 0,
+                    greetings: [
+                        { icon: '🌅', text: 'Selamat Pagi', message: 'Semoga hari Anda penuh berkah' },
+                        { icon: '☀️', text: 'Selamat Siang', message: 'Semoga aktivitas Anda lancar' },
+                        { icon: '🌇', text: 'Selamat Petang', message: 'Semoga istirahat Anda nyaman' },
+                        { icon: '🌙', text: 'Selamat Malam', message: 'Semoga tidur Anda nyenyak' },
+                        { icon: '📖', text: 'Selamat Membaca', message: 'Semoga mendapatkan ilmu yang bermanfaat' },
+                        { icon: '🕌', text: 'Selamat Beribadah', message: 'Semoga ibadah Anda diterima' }
+                    ],
+                    notificationsMuted: false,
+                    currentSurahNumber: null,
+                    dailyHadiths: [
+                        {
+                            arabic: "مَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ",
+                            translation: "Barangsiapa yang beriman kepada Allah dan hari akhir, maka hendaklah dia berkata baik atau diam.",
+                            source: "HR. Bukhari dan Muslim"
+                        },
+                        {
+                            arabic: "الرَّاحِمُونَ يَرْحَمُهُمُ الرَّحْمَنُ، ارْحَمُوا مَنْ فِي الأَرْضِ يَرْحَمْكُمْ مَنْ فِي السَّمَاءِ",
+                            translation: "Orang-orang yang penyayang akan disayangi oleh Yang Maha Penyayang. Sayangilah yang ada di bumi, niscaya yang di langit akan menyayangi kalian.",
+                            source: "HR. At-Tirmidzi"
+                        },
+                        {
+                            arabic: "لاَ تَحَاسَدُوا، وَلاَ تَنَاجَشُوا، وَلاَ تَبَاغَضُوا، وَلاَ تَدَابَرُوا، وَلاَ يَبِعْ بَعْضُكُمْ عَلَى بَيْعِ بَعْضٍ، وَكُونُوا عِبَادَ اللَّهِ إِخْوَانًا",
+                            translation: "Janganlah kalian saling hasad, jangan saling menipu dalam jual beli, jangan saling membenci, jangan saling membelakangi, dan jangan sebagian kalian menjual di atas penjualan sebagian yang lain. Jadilah kalian hamba-hamba Allah yang bersaudara.",
+                            source: "HR. Muslim"
+                        },
+                        {
+                            arabic: "الكَلِمَةُ الطَّيِّبَةُ صَدَقَةٌ",
+                            translation: "Ucapan yang baik adalah sedekah.",
+                            source: "HR. Bukhari dan Muslim"
+                        },
+                        {
+                            arabic: "إِنَّ اللَّهَ لاَ يَنْظُرُ إِلَى صُوَرِكُمْ وَأَمْوَالِكُمْ، وَلَكِنْ يَنْظُرُ إِلَى قُلُوبِكُمْ وَأَعْمَالِكُمْ",
+                            translation: "Sesungguhnya Allah tidak melihat pada rupa dan harta kalian, tetapi Dia melihat pada hati dan amal kalian.",
+                            source: "HR. Muslim"
+                        },
+                        {
+                            arabic: "مَا نَقَصَتْ صَدَقَةٌ مِنْ مَالٍ، وَمَا زَادَ اللَّهُ عَبْدًا بِعَفْوٍ إِلاَّ عِزًّا، وَمَا تَوَاضَعَ أَحَدٌ لِلَّهِ إِلاَّ رَفَعَهُ اللَّهُ",
+                            translation: "Sedekah tidak akan mengurangi harta. Tidaklah Allah menambahkan kepada seorang hamba sifat pemaaf melainkan kemuliaan. Dan tidaklah seseorang merendahkan diri karena Allah melainkan Allah akan mengangkat derajatnya.",
+                            source: "HR. Muslim"
+                        },
+                        {
+                            arabic: "مَنْ سَلَكَ طَرِيقًا يَلْتَمِسُ فِيهِ عِلْمًا سَهَّلَ اللَّهُ لَهُ بِهِ طَرِيقًا إِلَى الْجَنَّةِ",
+                            translation: "Barangsiapa menempuh suatu jalan untuk mencari ilmu, maka Allah akan memudahkan baginya jalan menuju surga.",
+                            source: "HR. Muslim"
+                        },
+                        {
+                            arabic: "إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى",
+                            translation: "Sesungguhnya amal itu tergantung niatnya, dan sesungguhnya setiap orang akan mendapatkan sesuai apa yang dia niatkan.",
+                            source: "HR. Bukhari dan Muslim"
+                        },
+                        {
+                            arabic: "مَا مِنْ مُسْلِمٍ يَغْرِسُ غَرْسًا أَوْ يَزْرَعُ زَرْعًا فَيَأْكُلُ مِنْهُ طَيْرٌ أَوْ إِنْسَانٌ أَوْ بَهِيمَةٌ إِلاَّ كَانَ لَهُ بِهِ صَدَقَةٌ",
+                            translation: "Tidaklah seorang muslim menanam tanaman atau menabur benih, lalu dimakan oleh burung, manusia atau hewan melainkan itu menjadi sedekah baginya.",
+                            source: "HR. Bukhari"
+                        },
+                        {
+                            arabic: "مَنْ كَانَ فِي حَاجَةِ أَخِيهِ كَانَ اللَّهُ فِي حَاجَتِهِ",
+                            translation: "Barangsiapa membantu kebutuhan saudaranya, maka Allah akan membantu kebutuhannya.",
+                            source: "HR. Bukhari"
                         }
-                    });
-                });
-
-                this.elements.backToQuranListBtn.addEventListener('click', () => this.showQuranList());
-                this.elements.getPrayerTimesBtn.addEventListener('click', () => this.handlePrayerTimeSearch());
-                this.elements.autoScrollBtn.addEventListener('click', () => this.toggleAutoScroll());
+                    ],
+                    lastAdhanPlayed: null,
+                    adhanNotificationTimeout: null
+                },
+                juzData: [ 
+                    { juz: 1, start: { surah: 1, ayat: 1 }, end: { surah: 2, ayat: 141 }, name: "Alif Lam Mim" }, 
+                    { juz: 2, start: { surah: 2, ayat: 142 }, end: { surah: 2, ayat: 252 }, name: "Sayaqulu" }, 
+                    { juz: 3, start: { surah: 2, ayat: 253 }, end: { surah: 3, ayat: 92 }, name: "Tilka Ar-Rusul" }, 
+                    { juz: 4, start: { surah: 3, ayat: 93 }, end: { surah: 4, ayat: 23 }, name: "Lan Tana Loo" }, 
+                    { juz: 5, start: { surah: 4, ayat: 24 }, end: { surah: 4, ayat: 147 }, name: "Wal-Muhsanat" }, 
+                    { juz: 6, start: { surah: 4, ayat: 148 }, end: { surah: 5, ayat: 81 }, name: "La Yuhibbullah" }, 
+                    { juz: 7, start: { surah: 5, ayat: 82 }, end: { surah: 6, ayat: 110 }, name: "Wa Iza Sami'u" }, 
+                    { juz: 8, start: { surah: 6, ayat: 111 }, end: { surah: 7, ayat: 87 }, name: "Wa Law Annana" }, 
+                    { juz: 9, start: { surah: 7, ayat: 88 }, end: { surah: 8, ayat: 40 }, name: "Qalal-Mala'u" }, 
+                    { juz: 10, start: { surah: 8, ayat: 41 }, end: { surah: 9, ayat: 92 }, name: "Wa'lamu" }, 
+                    { juz: 11, start: { surah: 9, ayat: 93 }, end: { surah: 11, ayat: 5 }, name: "Yatazirun" }, 
+                    { juz: 12, start: { surah: 11, ayat: 6 }, end: { surah: 12, ayat: 52 }, name: "Wa Mamin Dabba" }, 
+                    { juz: 13, start: { surah: 12, ayat: 53 }, end: { surah: 14, ayat: 52 }, name: "Wa Ma Ubri'u" }, 
+                    { juz: 14, start: { surah: 15, ayat: 1 }, end: { surah: 16, ayat: 128 }, name: "Rubama" }, 
+                    { juz: 15, start: { surah: 17, ayat: 1 }, end: { surah: 18, ayat: 74 }, name: "Subhanallazi" }, 
+                    { juz: 16, start: { surah: 18, ayat: 75 }, end: { surah: 20, ayat: 135 }, name: "Qal Alam" }, 
+                    { juz: 17, start: { surah: 21, ayat: 1 }, end: { surah: 22, ayat: 78 }, name: "Iqtaraba linnas" }, 
+                    { juz: 18, start: { surah: 23, ayat: 1 }, end: { surah: 25, ayat: 20 }, name: "Qadd Aflaha" }, 
+                    { juz: 19, start: { surah: 25, ayat: 21 }, end: { surah: 27, ayat: 55 }, name: "Wa Qalallazina" }, 
+                    { juz: 20, start: { surah: 27, ayat: 56 }, end: { surah: 29, ayat: 45 }, name: "A'man Khalaq" }, 
+                    { juz: 21, start: { surah: 29, ayat: 46 }, end: { surah: 33, ayat: 30 }, name: "Utlu Ma Oohi" }, 
+                    { juz: 22, start: { surah: 33, ayat: 31 }, end: { surah: 36, ayat: 27 }, name: "Wa Man Yaqnut" }, 
+                    { juz: 23, start: { surah: 36, ayat: 28 }, end: { surah: 39, ayat: 31 }, name: "Wa Mali" }, 
+                    { juz: 24, start: { surah: 39, ayat: 32 }, end: { surah: 41, ayat: 46 }, name: "Faman Azlam" }, 
+                    { juz: 25, start: { surah: 41, ayat: 47 }, end: { surah: 45, ayat: 37 }, name: "Ilayhi Yurad" }, 
+                    { juz: 26, start: { surah: 46, ayat: 1 }, end: { surah: 51, ayat: 30 }, name: "Ha'a Meem" }, 
+                    { juz: 27, start: { surah: 51, ayat: 31 }, end: { surah: 57, ayat: 29 }, name: "Qala Fama" }, 
+                    { juz: 28, start: { surah: 58, ayat: 1 }, end: { surah: 66, ayat: 12 }, name: "Qadd Sami Allah" }, 
+                    { juz: 29, start: { surah: 67, ayat: 1 }, end: { surah: 77, ayat: 50 }, name: "Tabarakallazi" }, 
+                    { juz: 30, start: { surah: 78, ayat: 1 }, end: { surah: 114, ayat: 6 }, name: "Amma" } 
+                ],
+                contentData: { 
+                    'tahlil': { title: 'Bacaan Tahlil', icon: '📖', content: `<h1>بَاعَة تَحْلِيْل</h1><h2>1. Pengantar Al-Fatihah</h2><p>إِلَى حَضْرَةِ النَّبِيِّ الْمُصْطَفَى مُحَمَّدٍ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ وَآلِهِ وَصَحْبِهِ شَيْءٌ لِلّهِ لَهُمُ الْفَاتِحَةُ</p><p class="latin">(Ilaa hadrotin nabiyyil musthofaa muhammadin shollallohu 'alaihi wa sallam, wa aalihii wa shohbihii syai'un lillaahi lahumul faatihah)</p><h2>2. Al-Fatihah</h2><p>بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ. اَلْحَمْدُ لِلهِ رَبِّ الْعَالَمِيْنَ. اَلرَّحْمَنِ الرَّحِيْمِ. مَالِكِ يَوْمِ الدِّيْنِ. اِيَّاكَ نَعْبُدُ وَاِيَّاكَ نَسْتَعِيْنُ. اِهْدِنَا الصِّرَاطَ الَّمُسْتَقِيْمَ. صِرَاطَ الَّذِيْنَ اَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوْبِ عَلَيْهِمْ وَلَا الضَّالِّيْنَ. اَمِينْ</p><h2>3. Surat Al-Ikhlas (3x)</h2><p>بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ. قُلْ هُوَ اللهُ اَحَدٌ. اَللهُ الصَّمَدُ. لَمْ يَلِدْ وَلَمْ يُوْلَدْ. وَلَمْ يَكُنْ لَهُ كُفُوًا اَحَدٌ</p><h2>4. Tahlil & Takbir</h2><p>لاَ اِلَهَ اِلاَّ اللهُ وَاللهُ اَكْبَرُ</p><h2>5. Surat Al-Falaq</h2><p>بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ. قُلْ اَعُوْذُ بِرَبِّ الْفَلَقِ. مِنْ شَرِّ مَا خَلَقَ. وَمِنْ شَرِّ غَاسِقٍ اِذَا وَقَبَ. وَمِنْ شَرِّ النَّفَّاثَاتِ فِى الْعُقَدِ. وَمِنْ شَرِّ حَاسِدٍ اِذَا حَسَدَ</p><h2>6. Tahlil & Takbir</h2><p>لاَ اِلَهَ اِلاَّ اللهُ وَاللهُ اَكْبَرُ</p><h2>7. Surat An-Nas</h2><p>بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ. قُلْ اَعُوْذُ بِرَبِّ النَّاسِ. مَلِكِ النَّاسِ. اِلَهِ النَّاسِ. مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ. الَّذِى يُوَسْوِسُ فِى صُدُوْرِ النَّاسِ. مِنَ الْجِنَّةِ وَالنَّاسِ</p><h2>8. Tahlil, Takbir & Tahmid</h2><p>لاَ اِلَهَ اِلاَّ اللهُ وَاللهُ اَكْبَرُ وَلِلهِ الْحَمْدُ</p><h2>9. Tahlil</h2><p>لاَ اِلَهَ اِلاَّ اللهُ</p><p class="latin">(dibaca 33x atau 100x)</p><h2>10. Penutup</h2><p>اللهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ وَعَلَى آلِ سَيِّدِنَا مُحَمَّdٍ</p>` }, 
+                    'barzanji': { title: 'Al-Barzanji (Rawi 1)', icon: '🌙', content: `<h1>اَلْبَرْزَنْجِي</h1><h2>Rawi Pertama</h2><p>أَبْتَدِئُ الْإِمْلَاءَ بِاسْمِ الذَّاتِ الْعَلِيَّةِ * مُسْتَدِرًّا فَيْضَ الْبَرَكَاتِ عَلَى مَا أَنَالَهُ وَأَوْلَاهُ</p><p class="latin">Abtadi-ul imlaa-a bismidz dzaatil 'aliyyati * Mustadirron faidlol barokaati 'alaa maa anaalahu wa auwlaahu.</p><p>وَأُثَنِّي بِحَمْدٍ مَوَارِدُهُ سَائِغَةٌ هَنِيَّةٌ * مُمْتَطِيًا مِنَ الشُّكْرِ الْجَمِيلِ مَطَايَاهُ</p><p class="latin">Wa utsannii bihamdin mawaariduhu saa-ighotun haniyyatun * Mumtathiyan minasy syukril jamiili mathooyaahu.</p><p>وَأُصَلِّي وَأُسَلِّمُ عَلَى النُّورِ الْمَوْصُوفِ بِالتَّقَدُّمِ وَالْأَوَّلِيَّةِ * الْقَائِمِ بِنِهَايَاتِ الْكَمَالِ مُنْتَهَاهُ</p><p class="latin">Wa usholli wa usallimu 'alan nuuril maushuufi bittaqodumi wal awwaliyyati * Al qoo-imi binihaayaatil kamaali muntahaahu.</p>` },
+                    'wirid_bada_sholat': { title: 'Wirid Ba\'da Sholat', icon: '📿', content: `<h1>وِرِد بَعْدَ الصَّلاَة</h1><h2>1. Istighfar (3x)</h2><p>أَسْتَغْفِرُ اللهَ الْعَظِيْمَ الَّذِي لَا إِلَهَ إِلَّا هُوَ الْحَيَّ الْقَيُّومَ وَأَتُوبُ إِلَيْهِ</p><p class="latin">Astaghfirullahal 'adziim alladzii laa ilaaha illaa huwal hayyul qoyyuum wa atuubu ilaih.</p><h2>2. Tahlil</h2><p>لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ يُحْيِي وَيُمِيتُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ</p><h2>3. Doa Selamat</h2><p>اللَّهُمَّ أَنْتَ السَّلَامُ وَمِنْكَ السَّلَامُ وَإِلَيْكَ يَعُودُ السَّلَامُ فَحَيِّنَا رَبَّنَا بِالسَّلَامِ وَأَدْخِلْنَا الْجَنَّةَ دَارَ السَّلَامِ تَبَارَكْتَ رَبَّنَا وَتَعَالَيْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ</p><h2>4. Tasbih (33x)</h2><p>سُبْحَانَ اللهِ</p><p class="latin">Subhanallah</p><h2>5. Tahmid (33x)</h2><p>الْحَمْدُ لِلهِ</p><p class="latin">Alhamdulillah</p><h2>6. Takbir (33x)</h2><p>اللهُ أَكْبَرُ</p><p class="latin">Allahu Akbar</p>` },
+                    'wirid_pagi': { title: 'Wirid Pagi', icon: '📿', content: `<h1>Wirid Pagi</h1><p>Konten untuk wirid pagi akan ditambahkan di sini...</p>`},
+                    'wirid_petang': { title: 'Wirid Petang', icon: '📿', content: `<h1>Wirid Petang</h1><p>Konten untuk wirid petang akan ditambahkan di sini...</p>`},
+                    'fasholatan_nariyah': { title: 'Shalawat Nariyah', icon: '🕌', content: `<h1>صَلَاةٌ نَارِيَةٌ</h1><h2>Shalawat Nariyah</h2><p>اَللّٰهُمَّ صَلِّ صَلَاةً كَامِلَةً وَسَلِّمْ سَلَامًا تَامًّا عَلَى سَيِّدِنَا مُحَمَّدٍ الَّذِيْ تَنْحَلُّ بِهِ الْعُقَدُ وَتَنْفَرِجُ بِهِ الْكُرَبُ وَتُقْضٰى بِهِ الْحَوَائِجُ وَتُنَالُ بِهِ الرَّغَائِبُ وَحُسْنُ الْخَوَاتِمِ وَيُسْتَسْقَى الْغَمَامُ بِوَجْهِهِ الْكَرِيْمِ وَعَلٰى آلِهِ وَصَحْبِهِ فِيْ كُلِّ لَمْحَةٍ وَنَفَسٍ بِعَدَدِ كُلِّ مَعْلُوْمٍ لَكَ</p><p class="latin">Allahumma sholli sholaatan kaamilatan wasallim salaaman taamman 'ala sayyidinaa Muhammadinil ladzii tanhallu bihil 'uqodu wa tanfariju bihil kurobu wa tuqdhoo bihil hawaa-iju wa tunaalu bihir-roghoo-ibu wa husnul khowaatimi wa yustasqol ghomaamu bi wajhihil kariimi wa'alaa aalihii wa shohbihii fii kulli lamhatin wa nafasin bi'adadi kulli ma'luumin laka.</p><h2>Artinya</h2><p class="translation" style="text-align: left; font-size: 1rem;">"Ya Allah, limpahkanlah shalawat yang sempurna dan curahkanlah salam kesejahteraan yang penuh kepada junjungan kami Nabi Muhammad, yang dengan sebab beliau semua kesulitan dapat terpecahkan, semua kesusahan dapat dilenyapkan, semua keperluan dapat terpenuhi, dan semua yang didambakan serta husnul khatimah dapat diraih, dan berkat dirinya yang mulia hujanpun turun, dan semoga terlimpahkan kepada keluarganya serta para sahabatnya, di setiap detik dan hembusan nafas sebanyak bilangan semua yang diketahui oleh Engkau."</p>` },
+                    'fasholatan_thibbil_qulub': { title: 'Shalawat Thibbil Qulub', icon: '🕌', content: `<h1>صَلَاةٌ طِبِّ الْقُلُوْبِ</h1><p>اللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ طِبِّ الْقُلُوبِ وَدَوَائِهَا، وَعَافِيَةِ الْأَبْدَانِ وَشِفَائِهَا، وَنُورِ الْأَبْصَارِ وَضِيَائِهَا، وَعَلٰى آلِهِ وَصَحْبِهِ وَسَلِّمْ</p><p class="latin">Allahumma sholli 'ala Sayyidina Muhammadin thibbil qulubi wa dawa-iha, wa 'afiyatil abdani wa syifa-iha, wa nuril abshori wa dliya-iha, wa 'ala alihi wa shohbihi wa sallim.</p>` }
+                },
                 
-                ['wheel', 'touchstart'].forEach(evt => {
-                    this.elements.pageContainer.addEventListener(evt, () => {
-                        if (this.state.isAutoScrolling) { this.stopAutoScroll(); }
-                    }, { passive: true });
-                });
-                
-                this.elements.toggleTranslationBtn.addEventListener('click', (e) => {
-                    const button = e.currentTarget;
-                    const isActive = button.classList.toggle('active');
-                    this.updateTranslationButtonState(isActive);
-                    this.handleToggleTranslation(isActive);
-                });
-                
-                this.elements.surahSearchInput.addEventListener('input', (e) => this.handleSurahSearch(e.target.value));
-                this.elements.pageContainer.addEventListener('touchstart', (e) => { this.state.touchStartX = e.changedTouches[0].screenX; this.state.touchStartY = e.changedTouches[0].screenY; }, { passive: true });
-                this.elements.pageContainer.addEventListener('touchend', (e) => { this.state.touchEndX = e.changedTouches[0].screenX; this.state.touchEndY = e.changedTouches[0].screenY; this.handleSwipe(); }, false);
-                this.elements.quranNavTabs.forEach(tab => { tab.addEventListener('click', () => this.handleQuranNav(tab.dataset.view)); });
-                
-                this.elements.readerBackButton.addEventListener('click', () => this.closeReader());
-                
-                this.elements.toggleAdhan.addEventListener('change', (e) => { this.state.isAdhanEnabled = e.target.checked; localStorage.setItem('isAdhanEnabled', e.target.checked); });
-                this.elements.toggleAdhanSubuh.addEventListener('change', (e) => { this.state.isAdhanSubuhEnabled = e.target.checked; localStorage.setItem('isAdhanSubuhEnabled', e.target.checked); });
-                this.elements.toggleImsak.addEventListener('change', (e) => { this.state.isImsakEnabled = e.target.checked; localStorage.setItem('isImsakEnabled', e.target.checked); });
-                
-                this.elements.refreshGpsBtn.addEventListener('click', () => {
-                    this.elements.cityInput.value = '';
-                    localStorage.removeItem('prayerCache');
-                    this.determineAndFetchPrayerTimes();
-                });
-                
-                [this.elements.testAdhanBtn, this.elements.testAdhanSubuhBtn, this.elements.testImsakBtn].forEach(btn => {
-                    btn.addEventListener('click', () => this.handleTestAudio(btn.dataset.audioType));
-                });
-
-                this.elements.muteNotificationBtn.addEventListener('click', () => {
-                    this.state.notificationsMuted = !this.state.notificationsMuted;
-                    this.updateMuteButtonState();
-                    localStorage.setItem('notificationsMuted', this.state.notificationsMuted);
-                });
-                
-                // Event listener untuk popup tafsir
-                this.elements.closeTafsirBtn.addEventListener('click', () => {
-                    this.elements.tafsirPopup.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                });
-            },
-            
-            async loadInitialSettings() { 
-                const isDarkMode = localStorage.getItem('darkMode') === 'true';
-                if(isDarkMode) document.body.classList.add('dark-mode');
-                this.updateModeToggleIcon();
-                
-                const showTranslation = localStorage.getItem('showTranslation') !== 'false';
-                this.updateTranslationButtonState(showTranslation);
-                this.handleToggleTranslation(showTranslation);
-                
-                this.state.isAdhanEnabled = localStorage.getItem('isAdhanEnabled') !== 'false';
-                this.elements.toggleAdhan.checked = this.state.isAdhanEnabled;
-                this.state.isAdhanSubuhEnabled = localStorage.getItem('isAdhanSubuhEnabled') !== 'false';
-                this.elements.toggleAdhanSubuh.checked = this.state.isAdhanSubuhEnabled;
-                this.state.isImsakEnabled = localStorage.getItem('isImsakEnabled') !== 'false';
-                this.elements.toggleImsak.checked = this.state.isImsakEnabled;
-
-                this.state.notificationsMuted = localStorage.getItem('notificationsMuted') === 'true';
-                this.updateMuteButtonState();
-
-                await this.determineAndFetchPrayerTimes(); 
-            },
-
-            updateMuteButtonState() {
-                const btn = this.elements.muteNotificationBtn;
-                if (this.state.notificationsMuted) {
-                    btn.classList.add('muted');
-                    btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
-                    </svg>`;
-                    btn.title = "Hidupkan notifikasi adzan";
-                } else {
-                    btn.classList.remove('muted');
-                    btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
-                    </svg>`;
-                    btn.title = "Matikan notifikasi adzan";
-                }
-            },
-
-            navigateToPage(targetPageId) {
-                const currentPageId = this.state.activePageId;
-                if (targetPageId === currentPageId || this.state.isNavigating) return;
-
-                const currentPage = document.getElementById(currentPageId);
-                const nextPage = document.getElementById(targetPageId);
-                if (!currentPage || !nextPage) return;
-
-                if (currentPageId === 'quranPage' && targetPageId !== 'quranPage') {
-                    this.showQuranList(); 
-                }
-
-                this.state.isNavigating = true; 
-                this.elements.homePrayerTimes.style.display = ['homePage', 'wiridMenuPage', 'fasholatanMenuPage'].includes(targetPageId) ? 'block' : 'none'; 
-                
-                const isNavMenu = ['homePage', 'quranPage', 'prayerPage', 'aboutPage'].includes(targetPageId);
-                if (isNavMenu) {
-                    this.elements.navItems.forEach(nav => nav.classList.remove('active'));
-                    const activeNavItem = document.querySelector(`.nav-item[data-page="${targetPageId}"]`);
-                    if(activeNavItem) activeNavItem.classList.add('active');
-                    this.updateNavIndicator(targetPageId); 
-                } else {
-                     this.elements.navIndicator.style.width = '0px';
-                }
-                
-                currentPage.classList.add('exiting'); 
-                currentPage.classList.remove('active'); 
-                nextPage.classList.add('active'); 
-                this.state.activePageId = targetPageId;
-                
-                setTimeout(() => { 
-                    currentPage.classList.remove('exiting'); 
-                    nextPage.scrollTo(0, 0); 
-                    this.state.isNavigating = false; 
+                init() { 
+                    this.state.currentDateString = new Date().toISOString().split('T')[0];
+                    this.buildMenuPages();
+                    this.setupEventListeners(); 
+                    this.loadInitialSettings(); 
+                    this.updateHeaderHeight(); 
+                    this.updateTimeBasedGreeting();
+                    this.loadDailyHadith(); 
+                    setInterval(() => {
+                        this.updateClock();
+                        this.updateTimeBasedGreeting();
+                    }, 1000); 
+                    this.loadQuranData(); 
+                    window.addEventListener('resize', () => { this.updateHeaderHeight(); this.updateNavIndicator(this.state.activePageId); }); 
+                    setTimeout(() => this.updateNavIndicator('homePage'), 100); 
+                    this.elements.homePrayerTimes.style.display = 'block'; 
+                    this.initGreetingScroller();
                     
-                    // Reload ads when page changes
-                    this.loadAds();
-                }, 400); 
-            },
-            
-            handleSwipe() { 
-                const currentPageId = this.state.activePageId;
-
-                // Nonaktifkan geser navigasi saat membaca Al-Qur'an (tampilan ayat) atau di halaman menu tertentu.
-                if ((currentPageId === 'quranPage' && this.elements.ayatContainer.style.display !== 'none') ||
-                    ['wiridMenuPage', 'fasholatanMenuPage'].includes(currentPageId)) {
-                    return; // Hentikan fungsi agar tidak menggeser halaman saat membaca.
-                }
-
-                if (this.state.isNavigating) return; 
-                const deltaX = this.state.touchEndX - this.state.touchStartX; 
-                const deltaY = this.state.touchEndY - this.state.touchStartY; 
-                const threshold = 50; 
-                if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > threshold) { 
-                    const navOrder = ['homePage', 'quranPage', 'prayerPage', 'aboutPage'];
-                    const currentIndex = navOrder.indexOf(currentPageId);
-                    if (currentIndex === -1) return;
-
-                    if (deltaX < 0) { // Geser ke kiri
-                        if(currentIndex < navOrder.length - 1) this.navigateToPage(navOrder[currentIndex + 1]);
-                    } else { // Geser ke kanan
-                        if(currentIndex > 0) this.navigateToPage(navOrder[currentIndex - 1]);
-                    }
-                } 
-            },
-
-            updateNavIndicator(targetPageId) { 
-                const activeItem = document.querySelector(`.nav-item[data-page="${targetPageId}"]`);
-                if (!activeItem) {
-                    this.elements.navIndicator.style.width = `0px`;
-                    return;
-                }
-                const indicator = this.elements.navIndicator; 
-                const itemRect = activeItem.getBoundingClientRect(); 
-                const navRect = activeItem.parentElement.getBoundingClientRect(); 
-                indicator.style.width = `${itemRect.width}px`; 
-                indicator.style.left = `${itemRect.left - navRect.left}px`; 
-            },
-            
-            openReader(contentKey) {
-                const data = this.contentData[contentKey];
-                if (!data) return;
+                    // Load ads after page is fully loaded
+                    setTimeout(() => {
+                        this.loadAds();
+                    }, 2000);
+                },
                 
-                document.getElementById('readerTitle').textContent = data.title;
-                document.getElementById('readerIcon').textContent = data.icon;
-                this.elements.readerContent.innerHTML = data.content;
-                this.elements.fullscreenReader.style.display = 'block';
-                document.body.style.overflow = 'hidden';
-            },
-            closeReader() { 
-                this.elements.fullscreenReader.style.display = 'none'; 
-                this.elements.readerContent.innerHTML = ''; 
-                document.body.style.overflow = 'auto';
-            },
-
-            parseTime(timeStr) {
-                 if (!timeStr) return null; 
-                 const [hours, minutes] = timeStr.split(':').map(Number); 
-                 const date = new Date(); date.setHours(hours, minutes, 0, 0); 
-                 return date; 
-            },
-            updateClock() {
-                const now = new Date();
-                this.elements.digitalClock.textContent = now.toLocaleTimeString('en-GB');
-
-                const newDateString = now.toISOString().split('T')[0];
-                if (this.state.currentDateString && newDateString !== this.state.currentDateString) {
-                    this.state.currentDateString = newDateString;
-                    if(this.state.prayerCountdownInterval) clearInterval(this.state.prayerCountdownInterval);
-                    this.determineAndFetchPrayerTimes();
-                    this.loadDailyHadith(); // Memuat ulang hadits harian saat tanggal berubah
-                }
-
-                if (now.getSeconds() === 0 && !this.state.notificationsMuted) {
-                    const now_HHMM = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-                    if (this.state.isImsakEnabled && this.state.prayerTimesToday['Imsak'] === now_HHMM) {
-                        this.playNotificationAudio('imsakTarhim');
+                loadAds() {
+                    // Reload ads when navigating between pages
+                    if (typeof adsbygoogle !== 'undefined') {
+                        try {
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        } catch (e) {
+                            console.error('Error loading ads:', e);
+                        }
                     }
-                    if (this.state.prayerTimesToday['Fajr'] === now_HHMM && this.state.isAdhanSubuhEnabled) {
-                        this.playNotificationAudio('adhanSubuh');
+                },
+                
+                updateTimeBasedGreeting() {
+                    const now = new Date();
+                    const hours = now.getHours();
+                    let greeting = "Assalamu'alaikum";
+                    
+                    if (hours >= 5 && hours < 11) {
+                        greeting = "Selamat Pagi";
+                    } else if (hours >= 11 && hours < 15) {
+                        greeting = "Selamat Siang";
+                    } else if (hours >= 15 && hours < 18) {
+                        greeting = "Selamat Sore";
+                    } else if (hours >= 18 || hours < 5) {
+                        greeting = "Selamat Malam";
                     }
-                    if (this.state.isAdhanEnabled) {
-                        const otherAdhans = { 'Dhuhr': 'adhan', 'Asr': 'adhan', 'Maghrib': 'adhan', 'Isha': 'adhan' };
-                        for (const prayerName in otherAdhans) {
-                            if (this.state.prayerTimesToday[prayerName] === now_HHMM) {
-                                this.playNotificationAudio(otherAdhans[prayerName]);
-                                break;
+                    
+                    this.elements.dynamicGreeting.textContent = greeting;
+                },
+                
+                initGreetingScroller() {
+                    this.elements.greetingScroller.innerHTML = this.state.greetings.map(g => `
+                        <div class="greeting-item">
+                            <span class="greeting-icon">${g.icon}</span>
+                            <span class="greeting-text">${g.text}</span>
+                            <span class="greeting-message">${g.message}</span>
+                        </div>
+                    `).join('');
+                    
+                    this.updateGreetingPosition();
+                    
+                    this.state.greetingInterval = setInterval(() => {
+                        this.state.currentGreetingIndex = 
+                            (this.state.currentGreetingIndex + 1) % this.state.greetings.length;
+                        this.updateGreetingPosition();
+                    }, 5000);
+                },
+                
+                updateGreetingPosition() {
+                    const containerWidth = this.elements.greetingContainer.offsetWidth;
+                    const scrollWidth = this.elements.greetingScroller.scrollWidth;
+                    const itemWidth = scrollWidth / this.state.greetings.length;
+                    
+                    // Calculate position to center the current item
+                    const scrollPosition = this.state.currentGreetingIndex * itemWidth - (containerWidth - itemWidth) / 2;
+                    
+                    this.elements.greetingScroller.style.transform = `translateX(-${scrollPosition}px)`;
+                },
+                
+                buildMenuPages() {
+                    const backButtonSvg = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>`;
+                    const backButton = `<button class="page-back-btn" onclick="app.navigateToPage('homePage')">${backButtonSvg}</button>`;
+                    
+                    const wiridMenuPage = document.getElementById('wiridMenuPage');
+                    wiridMenuPage.innerHTML = `
+                        <div class="page-header">
+                            <h2 class="page-title">Pilih Wirid</h2>
+                            ${backButton}
+                        </div>
+                        <div class="content-menu">
+                            <button class="menu-item" onclick="app.openReader('wirid_bada_sholat')"><span class="menu-icon">📿</span><span class="menu-text">Ba'da Sholat</span></button>
+                            <button class="menu-item" onclick="app.openReader('wirid_pagi')"><span class="menu-icon">☀️</span><span class="menu-text">Pagi</span></button>
+                            <button class="menu-item" onclick="app.openReader('wirid_petang')"><span class="menu-icon">🌇</span><span class="menu-text">Petang</span></button>
+                        </div>`;
+
+                    const fasholatanMenuPage = document.getElementById('fasholatanMenuPage');
+                    fasholatanMenuPage.innerHTML = `
+                        <div class="page-header">
+                            <h2 class="page-title">Pilih Fasholatan</h2>
+                            ${backButton}
+                        </div>
+                        <div class="content-menu">
+                            <button class="menu-item" onclick="app.openReader('fasholatan_nariyah')"><span class="menu-icon">🔥</span><span class="menu-text">Nariyah</span></button>
+                            <button class="menu-item" onclick="app.openReader('fasholatan_thibbil_qulub')"><span class="menu-icon">❤️</span><span class="menu-text">Thibbil Qulub</span></button>
+                        </div>`;
+                },
+                
+                setupEventListeners() { 
+                    this.elements.modeToggle.addEventListener('click', () => {
+                        this.state.manualMode = true; 
+                        this.toggleDarkMode();
+                    });
+                    
+                    this.elements.navItems.forEach(item => { 
+                        item.addEventListener('click', (e) => { 
+                            e.preventDefault(); 
+                            this.navigateToPage(item.dataset.page); 
+                        }); 
+                    });
+                    
+                    this.elements.contentMenuItems.forEach(item => {
+                        item.addEventListener('click', () => {
+                            const action = item.dataset.action;
+                            if (action === 'navigate') {
+                                this.navigateToPage(item.dataset.page);
+                            } else if (action === 'reader') {
+                                this.openReader(item.dataset.content);
+                            }
+                        });
+                    });
+
+                    this.elements.backToQuranListBtn.addEventListener('click', () => this.showQuranList());
+                    this.elements.getPrayerTimesBtn.addEventListener('click', () => this.handlePrayerTimeSearch());
+                    this.elements.autoScrollBtn.addEventListener('click', () => this.toggleAutoScroll());
+                    
+                    ['wheel', 'touchstart'].forEach(evt => {
+                        this.elements.pageContainer.addEventListener(evt, () => {
+                            if (this.state.isAutoScrolling) { this.stopAutoScroll(); }
+                        }, { passive: true });
+                    });
+                    
+                    this.elements.toggleTranslationBtn.addEventListener('click', (e) => {
+                        const button = e.currentTarget;
+                        const isActive = button.classList.toggle('active');
+                        this.updateTranslationButtonState(isActive);
+                        this.handleToggleTranslation(isActive);
+                    });
+                    
+                    this.elements.surahSearchInput.addEventListener('input', (e) => this.handleSurahSearch(e.target.value));
+                    this.elements.pageContainer.addEventListener('touchstart', (e) => { this.state.touchStartX = e.changedTouches[0].screenX; this.state.touchStartY = e.changedTouches[0].screenY; }, { passive: true });
+                    this.elements.pageContainer.addEventListener('touchend', (e) => { this.state.touchEndX = e.changedTouches[0].screenX; this.state.touchEndY = e.changedTouches[0].screenY; this.handleSwipe(); }, false);
+                    this.elements.quranNavTabs.forEach(tab => { tab.addEventListener('click', () => this.handleQuranNav(tab.dataset.view)); });
+                    
+                    this.elements.readerBackButton.addEventListener('click', () => this.closeReader());
+                    
+                    this.elements.toggleAdhan.addEventListener('change', (e) => { this.state.isAdhanEnabled = e.target.checked; localStorage.setItem('isAdhanEnabled', e.target.checked); });
+                    this.elements.toggleAdhanSubuh.addEventListener('change', (e) => { this.state.isAdhanSubuhEnabled = e.target.checked; localStorage.setItem('isAdhanSubuhEnabled', e.target.checked); });
+                    this.elements.toggleImsak.addEventListener('change', (e) => { this.state.isImsakEnabled = e.target.checked; localStorage.setItem('isImsakEnabled', e.target.checked); });
+                    
+                    this.elements.refreshGpsBtn.addEventListener('click', () => {
+                        this.elements.cityInput.value = '';
+                        localStorage.removeItem('prayerCache');
+                        this.determineAndFetchPrayerTimes();
+                    });
+                    
+                    [this.elements.testAdhanBtn, this.elements.testAdhanSubuhBtn, this.elements.testImsakBtn].forEach(btn => {
+                        btn.addEventListener('click', () => this.handleTestAudio(btn.dataset.audioType));
+                    });
+
+                    this.elements.muteNotificationBtn.addEventListener('click', () => {
+                        this.state.notificationsMuted = !this.state.notificationsMuted;
+                        this.updateMuteButtonState();
+                        localStorage.setItem('notificationsMuted', this.state.notificationsMuted);
+                    });
+                    
+                    // Event listener untuk popup tafsir
+                    this.elements.closeTafsirBtn.addEventListener('click', () => {
+                        this.elements.tafsirPopup.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    });
+                    
+                    // Event listener untuk notifikasi adzan
+                    this.elements.adhanNotificationClose.addEventListener('click', () => {
+                        this.hideAdhanNotification();
+                    });
+                },
+                
+                async loadInitialSettings() { 
+                    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+                    if(isDarkMode) document.body.classList.add('dark-mode');
+                    this.updateModeToggleIcon();
+                    
+                    const showTranslation = localStorage.getItem('showTranslation') !== 'false';
+                    this.updateTranslationButtonState(showTranslation);
+                    this.handleToggleTranslation(showTranslation);
+                    
+                    this.state.isAdhanEnabled = localStorage.getItem('isAdhanEnabled') !== 'false';
+                    this.elements.toggleAdhan.checked = this.state.isAdhanEnabled;
+                    this.state.isAdhanSubuhEnabled = localStorage.getItem('isAdhanSubuhEnabled') !== 'false';
+                    this.elements.toggleAdhanSubuh.checked = this.state.isAdhanSubuhEnabled;
+                    this.state.isImsakEnabled = localStorage.getItem('isImsakEnabled') !== 'false';
+                    this.elements.toggleImsak.checked = this.state.isImsakEnabled;
+
+                    this.state.notificationsMuted = localStorage.getItem('notificationsMuted') === 'true';
+                    this.updateMuteButtonState();
+
+                    await this.determineAndFetchPrayerTimes(); 
+                },
+
+                updateMuteButtonState() {
+                    const btn = this.elements.muteNotificationBtn;
+                    if (this.state.notificationsMuted) {
+                        btn.classList.add('muted');
+                        btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                        </svg>`;
+                        btn.title = "Hidupkan notifikasi adzan";
+                    } else {
+                        btn.classList.remove('muted');
+                        btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                        </svg>`;
+                        btn.title = "Matikan notifikasi adzan";
+                    }
+                },
+
+                navigateToPage(targetPageId) {
+                    const currentPageId = this.state.activePageId;
+                    if (targetPageId === currentPageId || this.state.isNavigating) return;
+
+                    const currentPage = document.getElementById(currentPageId);
+                    const nextPage = document.getElementById(targetPageId);
+                    if (!currentPage || !nextPage) return;
+
+                    if (currentPageId === 'quranPage' && targetPageId !== 'quranPage') {
+                        this.showQuranList(); 
+                    }
+
+                    this.state.isNavigating = true; 
+                    this.elements.homePrayerTimes.style.display = ['homePage', 'wiridMenuPage', 'fasholatanMenuPage'].includes(targetPageId) ? 'block' : 'none'; 
+                    
+                    const isNavMenu = ['homePage', 'quranPage', 'prayerPage', 'aboutPage'].includes(targetPageId);
+                    if (isNavMenu) {
+                        this.elements.navItems.forEach(nav => nav.classList.remove('active'));
+                        const activeNavItem = document.querySelector(`.nav-item[data-page="${targetPageId}"]`);
+                        if(activeNavItem) activeNavItem.classList.add('active');
+                        this.updateNavIndicator(targetPageId); 
+                    } else {
+                         this.elements.navIndicator.style.width = '0px';
+                    }
+                    
+                    currentPage.classList.add('exiting'); 
+                    currentPage.classList.remove('active'); 
+                    nextPage.classList.add('active'); 
+                    this.state.activePageId = targetPageId;
+                    
+                    setTimeout(() => { 
+                        currentPage.classList.remove('exiting'); 
+                        nextPage.scrollTo(0, 0); 
+                        this.state.isNavigating = false; 
+                        
+                        // Reload ads when page changes
+                        this.loadAds();
+                    }, 400); 
+                },
+                
+                handleSwipe() { 
+                    const currentPageId = this.state.activePageId;
+
+                    // Nonaktifkan geser navigasi saat membaca Al-Qur'an (tampilan ayat) atau di halaman menu tertentu.
+                    if ((currentPageId === 'quranPage' && this.elements.ayatContainer.style.display !== 'none') ||
+                        ['wiridMenuPage', 'fasholatanMenuPage'].includes(currentPageId)) {
+                        return; // Hentikan fungsi agar tidak menggeser halaman saat membaca.
+                    }
+
+                    if (this.state.isNavigating) return; 
+                    const deltaX = this.state.touchEndX - this.state.touchStartX; 
+                    const deltaY = this.state.touchEndY - this.state.touchStartY; 
+                    const threshold = 50; 
+                    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > threshold) { 
+                        const navOrder = ['homePage', 'quranPage', 'prayerPage', 'aboutPage'];
+                        const currentIndex = navOrder.indexOf(currentPageId);
+                        if (currentIndex === -1) return;
+
+                        if (deltaX < 0) { // Geser ke kiri
+                            if(currentIndex < navOrder.length - 1) this.navigateToPage(navOrder[currentIndex + 1]);
+                        } else { // Geser ke kanan
+                            if(currentIndex > 0) this.navigateToPage(navOrder[currentIndex - 1]);
+                        }
+                    } 
+                },
+
+                updateNavIndicator(targetPageId) { 
+                    const activeItem = document.querySelector(`.nav-item[data-page="${targetPageId}"]`);
+                    if (!activeItem) {
+                        this.elements.navIndicator.style.width = `0px`;
+                        return;
+                    }
+                    const indicator = this.elements.navIndicator; 
+                    const itemRect = activeItem.getBoundingClientRect(); 
+                    const navRect = activeItem.parentElement.getBoundingClientRect(); 
+                    indicator.style.width = `${itemRect.width}px`; 
+                    indicator.style.left = `${itemRect.left - navRect.left}px`; 
+                },
+                
+                openReader(contentKey) {
+                    const data = this.contentData[contentKey];
+                    if (!data) return;
+                    
+                    document.getElementById('readerTitle').textContent = data.title;
+                    document.getElementById('readerIcon').textContent = data.icon;
+                    this.elements.readerContent.innerHTML = data.content;
+                    this.elements.fullscreenReader.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                },
+                closeReader() { 
+                    this.elements.fullscreenReader.style.display = 'none'; 
+                    this.elements.readerContent.innerHTML = ''; 
+                    document.body.style.overflow = 'auto';
+                },
+
+                parseTime(timeStr) {
+                     if (!timeStr) return null; 
+                     const [hours, minutes] = timeStr.split(':').map(Number); 
+                     const date = new Date(); date.setHours(hours, minutes, 0, 0); 
+                     return date; 
+                },
+                updateClock() {
+                    const now = new Date();
+                    this.elements.digitalClock.textContent = now.toLocaleTimeString('en-GB');
+
+                    const newDateString = now.toISOString().split('T')[0];
+                    if (this.state.currentDateString && newDateString !== this.state.currentDateString) {
+                        this.state.currentDateString = newDateString;
+                        if(this.state.prayerCountdownInterval) clearInterval(this.state.prayerCountdownInterval);
+                        this.determineAndFetchPrayerTimes();
+                        this.loadDailyHadith(); // Memuat ulang hadits harian saat tanggal berubah
+                    }
+
+                    if (now.getSeconds() === 0 && !this.state.notificationsMuted) {
+                        const now_HHMM = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+                        
+                        // Cek apakah sudah pernah memainkan adzan untuk waktu ini
+                        if (this.state.lastAdhanPlayed === now_HHMM) return;
+                        
+                        if (this.state.isImsakEnabled && this.state.prayerTimesToday['Imsak'] === now_HHMM) {
+                            this.playNotificationAudio('imsakTarhim');
+                            this.showAdhanNotification('Waktu Imsak (Tarhim)');
+                            this.state.lastAdhanPlayed = now_HHMM;
+                        }
+                        if (this.state.prayerTimesToday['Fajr'] === now_HHMM && this.state.isAdhanSubuhEnabled) {
+                            this.playNotificationAudio('adhanSubuh');
+                            this.showAdhanNotification('Waktu Shubuh');
+                            this.state.lastAdhanPlayed = now_HHMM;
+                        }
+                        if (this.state.isAdhanEnabled) {
+                            const otherAdhans = { 
+                                'Dhuhr': 'adhan', 
+                                'Asr': 'adhan', 
+                                'Maghrib': 'adhan', 
+                                'Isha': 'adhan' 
+                            };
+                            
+                            for (const prayerName in otherAdhans) {
+                                if (this.state.prayerTimesToday[prayerName] === now_HHMM) {
+                                    this.playNotificationAudio(otherAdhans[prayerName]);
+                                    this.showAdhanNotification(`Waktu ${prayerName}`);
+                                    this.state.lastAdhanPlayed = now_HHMM;
+                                    break;
+                                }
                             }
                         }
                     }
-                }
-            },
-            startCountdown(timings) { 
-                if (this.state.prayerCountdownInterval) clearInterval(this.state.prayerCountdownInterval); 
-                const prayerNames = { Imsak: 'Imsak', Fajr: 'Subuh', Sunrise: 'Terbit', Dhuha: 'Dhuha', Istiwa: 'Istiwa\'', Dhuhr: 'Dzuhur', Asr: 'Ashar', Maghrib: 'Maghrib', Isha: 'Isya'}; 
-                const prayerOrder = ['Imsak', 'Fajr', 'Sunrise', 'Dhuha', 'Istiwa', 'Dhuhr', 'Asr', 'Maghrib', 'Isha']; 
-                this.state.prayerCountdownInterval = setInterval(() => { 
-                    this.updateDynamicUI(timings);
-                    const now = new Date(); 
-                    let nextPrayerTime = null; 
-                    let nextPrayerName = ''; 
-                    for (const prayer of prayerOrder) { 
-                        if (!timings[prayer]) continue; 
-                        const prayerTimeToday = this.parseTime(timings[prayer]); 
-                        if (prayerTimeToday > now) { nextPrayerTime = prayerTimeToday; nextPrayerName = prayer; break; } 
-                    } 
-                    if (!nextPrayerTime) { 
-                        const firstPrayerOfTheDay = prayerOrder[0];
-                        const prayerTimeTomorrow = this.parseTime(timings[firstPrayerOfTheDay]); 
-                        if (prayerTimeTomorrow) { nextPrayerTime = prayerTimeTomorrow; nextPrayerTime.setDate(nextPrayerTime.getDate() + 1); nextPrayerName = firstPrayerOfTheDay; } 
-                        else { return; } 
-                    } 
-                    if (!nextPrayerTime) return; 
-                    const diff = nextPrayerTime - now; 
-                    const h = Math.floor(diff / 3600000); 
-                    const m = Math.floor((diff % 3600000) / 60000); 
-                    const s = Math.floor((diff % 60000) / 1000); 
-                    const countdownText = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`; 
-                    const fullText = `Menuju Waktu <strong>${prayerNames[nextPrayerName]}</strong> dalam <strong>${countdownText}</strong>`; 
-                    
-                    this.elements.nextPrayerName.textContent = prayerNames[nextPrayerName];
-                    this.elements.nextPrayerTime.textContent = countdownText;
-                    
-                    this.elements.prayerCountdownDisplay.style.display = 'block'; 
-                    this.elements.homeCountdown.innerHTML = fullText; 
-                    
-                    document.querySelectorAll('.prayer-card').forEach(c => c.classList.remove('next-prayer')); 
-                    const nextPrayerCard = document.getElementById(`card-${nextPrayerName}`); 
-                    if (nextPrayerCard) nextPrayerCard.classList.add('next-prayer'); 
-                }, 1000); 
-            },
-            playNotificationAudio(type) {
-                if (this.state.notificationsMuted) return;
-                const url = this.audioSources[type];
-                if (!url) return;
-                const audio = new Audio(url);
-                audio.play().catch(e => console.error(`Gagal memutar notifikasi (${type}):`, e));
-            },
-            handleTestAudio(type) {
-                const button = document.querySelector(`.audio-test-button[data-audio-type="${type}"]`);
-                if (this.state.activeTestAudio && this.state.activeTestAudioType === type) {
-                    this.state.activeTestAudio.paused ? this.state.activeTestAudio.play() : this.state.activeTestAudio.pause();
-                    button.classList.toggle('playing', !this.state.activeTestAudio.paused);
-                    return;
-                }
-                if (this.state.activeTestAudio) {
-                    this.state.activeTestAudio.pause();
-                    const oldButton = document.querySelector(`.audio-test-button[data-audio-type="${this.state.activeTestAudioType}"]`);
-                    if(oldButton) oldButton.classList.remove('playing');
-                }
-                const url = this.audioSources[type];
-                if (!url) return;
-                this.state.activeTestAudio = new Audio(url);
-                this.state.activeTestAudioType = type;
-                button.classList.add('playing');
-                this.state.activeTestAudio.play().catch(e => {
-                    button.classList.remove('playing');
-                });
-                this.state.activeTestAudio.onended = () => {
-                    button.classList.remove('playing');
-                    this.state.activeTestAudio = null;
-                    this.state.activeTestAudioType = null;
-                };
-            },
-
-            updateDynamicUI(timings) {
-                if (!timings || !timings.Sunrise || !timings.Maghrib) return;
-
-                const now = new Date();
+                },
                 
-                if (!this.state.manualMode) {
-                    const sunriseTime = this.parseTime(timings.Sunrise);
-                    const maghribTime = this.parseTime(timings.Maghrib);
-                    if (sunriseTime && maghribTime) {
-                         const isNight = now >= maghribTime || now < sunriseTime;
-                         if (isNight) {
-                             document.body.classList.add('dark-mode');
-                         } else {
-                             document.body.classList.remove('dark-mode');
-                         }
-                         this.updateModeToggleIcon();
+                showAdhanNotification(text) {
+                    // Clear any existing notification timeout
+                    if (this.state.adhanNotificationTimeout) {
+                        clearTimeout(this.state.adhanNotificationTimeout);
                     }
-                }
-            },
-            toggleDarkMode() { document.body.classList.toggle('dark-mode'); localStorage.setItem('darkMode', document.body.classList.contains('dark-mode')); this.updateModeToggleIcon(); },
-            updateModeToggleIcon() { this.elements.modeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙'; },
-            
-            updateHeaderHeight() { const headerHeight = document.querySelector('header').offsetHeight; document.documentElement.style.setProperty('--header-height', `${headerHeight}px`); },
-            updateTranslationButtonState(isActive) { const button = this.elements.toggleTranslationBtn; const textSpan = button.querySelector('span'); if (isActive) { button.classList.add('active'); textSpan.textContent = 'Sembunyikan Arti'; } else { button.classList.remove('active'); textSpan.textContent = 'Tampilkan Arti'; } },
-            handleToggleTranslation(show) { this.elements.ayatContainer.classList.toggle('terjemahan-hidden', !show); localStorage.setItem('showTranslation', show); },
-            async getLocationNameFromCoords(lat, lon) { const response = await fetch(this.api.reverseGeocode(lat, lon)); if (!response.ok) throw new Error("API Reverse Geocode gagal."); const data = await response.json(); if (data && data.address) { const addr = data.address; const cityForAPI = addr.city || addr.county || addr.state; if (!cityForAPI) throw new Error("Nama kota tidak ditemukan."); const kecamatan = addr.suburb || addr.city_district || addr.town || addr.village; const kabupaten = addr.county || addr.city; const locationParts = [...new Set([kecamatan, kabupaten].filter(p => p))]; let formatted = locationParts.join(', '); if (!formatted) { const fallback = [addr.village, addr.suburb, addr.city_district, addr.county, addr.city, addr.state]; formatted = [...new Set(fallback.filter(p => p))].join(', '); } return { cityForAPI, formatted: formatted || 'Lokasi tidak diketahui' }; } throw new Error("Tidak ada hasil dari Reverse Geocode."); },
-            async loadSurahDetail(nomor) { 
-                this.stopAutoScroll(); 
-                const surahInfo = this.state.surahListCache.find(s => s.nomor == nomor); 
-                this.showAyatView(`${surahInfo.nomor}. ${surahInfo.namaLatin}`); 
-                this.elements.ayatSubtitle.textContent = `${surahInfo.jumlahAyat} Ayat • ${surahInfo.tempatTurun}`; 
-                this.elements.ayatList.innerHTML = '<div class="loading">Memuat ayat...</div>'; 
-                this.state.currentSurahNumber = nomor;
-                
-                try { 
-                    const response = await fetch(this.api.surahDetail(nomor)); 
-                    const json = await response.json(); 
-                    if (!json.data || !json.data.ayat) throw new Error(`Struktur API tidak sesuai.`); 
-                    let initialContent = (nomor != 1 && nomor != 9) ? '<div class="bismillah">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>' : ''; 
-                    this.elements.ayatList.innerHTML = initialContent; 
-                    this.displayAyat(json.data.ayat, false, true); 
-                } catch (error) { 
-                    this.elements.ayatList.innerHTML = '<div class="error-message">Gagal memuat data ayat.</div>'; 
-                } 
-            },
-            displayAyat(ayatArray, isJuzMode = false, append = false) { 
-                let currentSurah = 0; 
-                const newContent = ayatArray.map(ayat => { 
-                    let surahHeaderHtml = ''; 
-                    if (isJuzMode && ayat.surah.nomor !== currentSurah) { 
-                        currentSurah = ayat.surah.nomor; 
-                        surahHeaderHtml = `<div class="ayat-surah-header"><h3>${ayat.surah.nama}</h3><p>${ayat.surah.namaLatin}</p></div> ${(currentSurah != 1 && currentSurah != 9) ? '<div class="bismillah">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>' : ''}`; 
-                    } 
                     
-                    // Tambahkan tombol tafsir hanya jika bukan mode Juz
-                    const tafsirBtn = isJuzMode ? '' : `<button class="tafsir-btn" onclick="app.showTafsir(${ayat.nomorAyat})">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v-3"></path>
-                        </svg>
-                        Tafsir
-                    </button>`;
+                    this.elements.adhanNotificationText.textContent = text;
+                    this.elements.adhanNotification.style.display = 'flex';
+                    this.elements.adhanNotification.classList.remove('hide');
                     
-                    return surahHeaderHtml + `
-                        <div class="card ayat-item">
-                            <span class="ayat-number">${ayat.nomorAyat}</span>
-                            <div class="ayat-arabic">${ayat.teksArab}</div>
-                            <div class="ayat-translation">
-                                <strong>Artinya:</strong> ${ayat.teksIndonesia}
-                                ${tafsirBtn}
-                            </div>
-                        </div>
-                    `; 
-                }).join(''); 
+                    // Auto-hide after 5 minutes
+                    this.state.adhanNotificationTimeout = setTimeout(() => {
+                        this.hideAdhanNotification();
+                    }, 300000); // 5 minutes
+                },
                 
-                if (append) { 
-                    this.elements.ayatList.innerHTML += newContent; 
-                } else { 
-                    this.elements.ayatList.innerHTML = newContent; 
-                } 
-            },
-            async determineAndFetchPrayerTimes() { const today = new Date().toISOString().split('T')[0]; const cachedData = JSON.parse(localStorage.getItem('prayerCache')); if (cachedData && cachedData.date === today) { this.setLoadingMessage(`Memuat jadwal untuk ${cachedData.locationName}...`); setTimeout(() => { this.renderPrayerCards(cachedData.prayerData, cachedData.locationName); this.updateHijriDate(cachedData.prayerData); this.elements.cityInput.value = cachedData.locationName; }, 500); return; } this.setLoadingMessage('Mendapatkan lokasi GPS...'); try { const pos = await new Promise((resolve, reject) => navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 15000 })); await this.fetchAndCachePrayerTimesByCoords(pos.coords.latitude, pos.coords.longitude); } catch (error) { let reason = "kesalahan."; if(error.code === 1) reason = "izin ditolak."; if(error.code === 3) reason = "waktu habis."; this.setErrorMessage(`Gagal mendapat GPS (${reason}). Mencoba Jakarta...`); await this.fetchAndCachePrayerTimesByCity('Jakarta', 'Jakarta, Indonesia'); } },
-            async fetchAndCachePrayerTimesByCoords(lat, lon) { this.setLoadingMessage('Mengambil jadwal dari GPS...'); try { const prayerResponse = await fetch(this.api.prayerTimesByCoords(lat, lon)); const prayerJson = await prayerResponse.json(); if (prayerJson.code !== 200 || !prayerJson.data) throw new Error('Data jadwal tidak valid'); let locationName = `${lat.toFixed(2)}, ${lon.toFixed(2)}`; try { const locInfo = await this.getLocationNameFromCoords(lat, lon); locationName = locInfo.formatted; } catch (e) { console.warn("Gagal dapat nama lokasi."); } const today = new Date().toISOString().split('T')[0]; const cache = { date: today, locationName, prayerData: prayerJson.data }; localStorage.setItem('prayerCache', JSON.stringify(cache)); this.renderPrayerCards(prayerJson.data, locationName); this.updateHijriDate(prayerJson.data); this.elements.cityInput.value = locationName; } catch(error) { this.setErrorMessage(`Gagal mengambil jadwal.`); } },
-            async fetchAndCachePrayerTimesByCity(city, fullName) { if (!city) { this.setErrorMessage("Nama kota tidak valid."); return; } this.setLoadingMessage(`Mengambil jadwal untuk ${fullName}...`); try { const response = await fetch(this.api.prayerTimesByCity(city)); const json = await response.json(); if (json.code !== 200 || !json.data.timings) throw new Error("Data jadwal tidak sesuai."); const today = new Date().toISOString().split('T')[0]; const cache = { date: today, locationName: fullName, prayerData: json.data }; localStorage.setItem('prayerCache', JSON.stringify(cache)); this.renderPrayerCards(json.data, fullName); this.updateHijriDate(json.data); this.elements.cityInput.value = fullName.split(',')[0]; } catch(error) { this.setErrorMessage(`Gagal mengambil jadwal untuk ${fullName}.`); } },
-            handlePrayerTimeSearch() { const city = this.elements.cityInput.value.trim(); if (city) { localStorage.removeItem('prayerCache'); this.fetchAndCachePrayerTimesByCity(city, city); } },
-            setLoadingMessage(msg) { this.elements.prayerTimesContainer.innerHTML = `<div class="loading">${msg}</div>`; this.elements.prayerCountdownDisplay.style.display = 'none'; if(this.elements.homeCountdown) this.elements.homeCountdown.innerHTML = msg; },
-            setErrorMessage(msg) { this.elements.prayerTimesContainer.innerHTML = `<div class="error-message">${msg}</div>`; if(this.elements.homeCountdown) this.elements.homeCountdown.innerHTML = msg; },
-            updateHijriDate(data) { 
-                if (data && data.date && data.date.hijri) { 
-                    const h = data.date.hijri; 
-                    this.elements.hijriDate.textContent = `${h.day} ${h.month.en} ${h.year} H`; 
-                    this.elements.hijriDateCountdown.textContent = `${h.day} ${h.month.en} ${h.year} H`;
-                } else if (!localStorage.getItem('prayerCache')) { 
-                    this.elements.hijriDate.textContent = 'Atur lokasi'; 
-                } 
-            },
-            async loadQuranData() { try { const response = await fetch(app.api.surahList); const json = await response.json(); if (!json.data) throw new Error(`Struktur API tidak sesuai.`); this.state.surahListCache = json.data; this.displaySurahList(json.data); this.displayJuzList(); } catch (error) { this.elements.surahList.innerHTML = '<div class="error-message">Gagal memuat daftar surah.</div>'; this.elements.juzList.innerHTML = '<div class="error-message">Gagal memuat daftar juz.</div>'; } },
-            displaySurahList(surahs) { this.elements.surahList.innerHTML = surahs.map(surah => `<div class=" surah-card" data-nomor="${surah.nomor}"><h3>${surah.nomor}. ${surah.namaLatin} (${surah.nama})</h3><p style="opacity:0.8">${surah.arti}</p><div style="display: flex; justify-content: space-between; font-size: 0.85rem; opacity: 0.7; margin-top: 10px;"><span>${surah.jumlahAyat} ayat</span><span>${surah.tempatTurun}</span></div></div>`).join(''); this.elements.surahList.querySelectorAll('.surah-card').forEach(card => card.addEventListener('click', () => this.loadSurahDetail(card.dataset.nomor))); },
-            displayJuzList() { if(!this.state.surahListCache.length) return; this.elements.juzList.innerHTML = this.juzData.map(juz => { const startSurah = this.state.surahListCache.find(s => s.nomor === juz.start.surah); if (!startSurah) return ''; return `<div class="card juz-card" data-juz-number="${juz.juz}"><h3>Juz ${juz.juz} <span style="font-size: 1rem; opacity: 0.8;">(${juz.name})</span></h3><p style="opacity:0.8; margin-top: 5px;">Mulai dari Surah ${startSurah.namaLatin} Ayat ${juz.start.ayat}</p></div>`; }).join(''); this.elements.juzList.querySelectorAll('.juz-card').forEach(card => card.addEventListener('click', () => this.loadJuzContent(card.dataset.juzNumber))); },
-            handleSurahSearch(query) { const q = query.toLowerCase().trim(); this.elements.surahList.querySelectorAll('.surah-card').forEach(card => { card.style.display = card.textContent.toLowerCase().includes(q) ? 'block' : 'none'; }); },
-            async loadJuzContent(juzNumber) { this.stopAutoScroll(); const juzInfo = this.juzData.find(j => j.juz == juzNumber); if (!juzInfo) return; this.showAyatView(`Juz ${juzNumber}`); let allAyat = []; try { for (let surahNum = juzInfo.start.surah; surahNum <= juzInfo.end.surah; surahNum++) { this.elements.ayatList.innerHTML = `<div class="loading">Memuat Surah ke-${surahNum}...</div>`; const response = await fetch(app.api.surahDetail(surahNum)); const json = await response.json(); const data = json.data; const start = (surahNum === juzInfo.start.surah) ? juzInfo.start.ayat : 1; const end = (surahNum === juzInfo.end.surah) ? juzInfo.end.ayat : data.jumlahAyat; const ayatInSurah = data.ayat.filter(a => a.nomorAyat >= start && a.nomorAyat <= end); ayatInSurah.forEach(a => a.surah = { nomor: data.nomor, namaLatin: data.namaLatin, nama: data.nama }); allAyat.push(...ayatInSurah); } this.displayAyat(allAyat, true); } catch (e) { this.elements.ayatList.innerHTML = '<div class="error-message">Gagal memuat data Juz.</div>'; } },
-            showAyatView(title) { this.elements.quranNavTabsContainer.style.display = 'none'; this.elements.quranControls.style.display = 'flex'; this.elements.ayatTitle.textContent = title; this.elements.quranContent.style.display = 'none'; this.elements.ayatContainer.style.display = 'block'; document.querySelector('.page.active')?.scrollTo(0, 0); },
-            showQuranList() { this.stopAutoScroll(); this.elements.quranNavTabsContainer.style.display = 'flex'; this.elements.quranControls.style.display = 'none'; this.elements.quranContent.style.display = 'block'; this.elements.ayatContainer.style.display = 'none'; },
-            handleQuranNav(view) { this.elements.quranNavTabs.forEach(t => t.classList.remove('active')); document.querySelector(`.tab-link[data-view="${view}"]`).classList.add('active'); this.elements.quranViews.forEach(v => v.classList.remove('active')); document.getElementById(`${view}View`).classList.add('active'); },
-            renderPrayerCards(data, locationName) { const timings = data.timings; this.state.prayerTimesToday = timings; const addMins = (t, m) => { const [h, min] = t.split(':').map(Number); const date = new Date(); date.setHours(h, min + m); return `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`; }; const dhuhrMins = timings.Dhuhr.split(':').reduce((a, b) => a * 60 + +b, 0); timings.Istiwa = [Math.floor((dhuhrMins - 2) / 60), (dhuhrMins - 2) % 60].map(n => String(n).padStart(2, '0')).join(':'); timings.Dhuha = addMins(timings.Sunrise, 25); const names = { Imsak: 'Imsak', Fajr: 'Subuh', Sunrise: 'Terbit', Dhuha: 'Dhuha', Istiwa: 'Istiwa\'', Dhuhr: 'Dzuhur', Asr: 'Ashar', Maghrib: 'Maghrib', Isha: 'Isya'}; this.elements.prayerTimesContainer.innerHTML = `<h3>Jadwal untuk ${locationName}</h3><p>${data.date.readable}</p><div class="prayer-times">${Object.keys(names).map(p => timings[p] ? `<div class="card prayer-card" id="card-${p}"><div class="prayer-name">${names[p]}</div><div class="prayer-time">${timings[p]}</div></div>` : '').join('')}</div>`; this.startCountdown(timings); },
-            stopAutoScroll() { if (this.state.isAutoScrolling) { clearInterval(this.state.autoScrollInterval); this.state.isAutoScrolling = false; const btn = this.elements.autoScrollBtn; if(btn){btn.querySelector('.play-icon').style.display = 'block'; btn.querySelector('.pause-icon').style.display = 'none'; btn.title = "Mulai Gulir Otomatis";} } },
-            startAutoScroll() { if (this.state.isAutoScrolling) return; const activePage = document.querySelector('.page.active'); if (!activePage) return; this.state.isAutoScrolling = true; const btn = this.elements.autoScrollBtn; btn.querySelector('.play-icon').style.display = 'none'; btn.querySelector('.pause-icon').style.display = 'block'; btn.title = "Hentikan Gulir Otomatis"; this.state.autoScrollInterval = setInterval(() => { if (this.elements.ayatContainer.style.display === 'none' || !document.body.contains(activePage)) { this.stopAutoScroll(); return; } if (activePage.scrollTop + activePage.clientHeight >= activePage.scrollHeight - 2) { this.stopAutoScroll(); } else { activePage.scrollTop += 1; } }, 30); },
-            toggleAutoScroll() { this.state.isAutoScrolling ? this.stopAutoScroll() : this.startAutoScroll(); },
-            
-            // Fungsi untuk menampilkan popup tafsir
-            async showTafsir(ayatNumber) {
-                if (!this.state.currentSurahNumber) return;
-                
-                this.elements.tafsirContent.innerHTML = '<div class="loading">Memuat tafsir...</div>';
-                this.elements.tafsirPopup.classList.add('active');
-                document.body.style.overflow = 'hidden';
-                
-                try {
-                    const response = await fetch(this.api.tafsir(this.state.currentSurahNumber));
-                    const json = await response.json();
-                    
-                    if (json.data && json.data.tafsir) {
-                        const tafsir = json.data.tafsir.find(t => t.ayat == ayatNumber);
-                        if (tafsir) {
-                            this.elements.tafsirContent.innerHTML = `
-                                <h4>Tafsir Surah ${json.data.namaLatin} Ayat ${ayatNumber}</h4>
-                                <p>${tafsir.teks}</p>
-                            `;
-                        } else {
-                            this.elements.tafsirContent.innerHTML = '<div class="error-message">Tafsir untuk ayat ini tidak ditemukan.</div>';
+                hideAdhanNotification() {
+                    // Stop playing audio if it's currently adhan notification sound
+                    if (this.state.activeTestAudio && (this.state.activeTestAudioType === 'adhan' || this.state.activeTestAudioType === 'adhanSubuh' || this.state.activeTestAudioType === 'imsakTarhim')) {
+                        this.state.activeTestAudio.pause();
+                        this.state.activeTestAudio.currentTime = 0; // Reset audio to beginning
+                        // Also reset the test button if it was playing for adhan
+                        const adhanTestButton = document.querySelector(`.audio-test-button[data-audio-type="${this.state.activeTestAudioType}"]`);
+                        if (adhanTestButton) {
+                            adhanTestButton.classList.remove('playing');
                         }
-                    } else {
-                        throw new Error('Format data tafsir tidak valid');
+                        this.state.activeTestAudio = null;
+                        this.state.activeTestAudioType = null;
                     }
-                } catch (error) {
-                    this.elements.tafsirContent.innerHTML = '<div class="error-message">Gagal memuat tafsir.</div>';
-                }
-            },
-            
-            // Fungsi untuk memuat hadits harian yang berganti setiap hari
-            loadDailyHadith() {
-                try {
-                    // Dapatkan tanggal hari ini sebagai angka (1-31)
-                    const today = new Date().getDate();
-                    
-                    // Hitung indeks hadits berdasarkan tanggal (modulo jumlah hadits)
-                    // Menggunakan (today - 1) karena array berbasis 0
-                    const hadithIndex = (today - 1) % this.state.dailyHadiths.length;
-                    const dailyHadith = this.state.dailyHadiths[hadithIndex];
-                    
-                    // Tampilkan hadits harian
-                    this.elements.dailyHadithContainer.innerHTML = `
-                        <div class="daily-hadith-card">
-                            <div class="daily-hadith-title">Hadits Hari Ini</div>
-                            <div class="daily-hadith-arabic">${dailyHadith.arabic}</div>
-                            <div class="daily-hadith-translation">
-                                <strong>Terjemahan:</strong> ${dailyHadith.translation}
-                            </div>
-                            <div class="daily-hadith-source">${dailyHadith.source}</div>
-                        </div>
-                    `;
-                } catch (error) {
-                    console.error('Error loading daily hadith:', error);
-                    this.elements.dailyHadithContainer.innerHTML = '<div class="error-message">Gagal memuat hadits harian.</div>';
-                }
-            }
-        };
-        
-        window.app = {
-            navigateToPage: app.navigateToPage.bind(app),
-            openReader: app.openReader.bind(app),
-            showTafsir: app.showTafsir.bind(app)
-        };
 
-        app.init();
-    });
+                    this.elements.adhanNotification.classList.add('hide');
+                    setTimeout(() => {
+                        this.elements.adhanNotification.style.display = 'none';
+                    }, 300); // Match the animation duration
+                },
+                
+                startCountdown(timings) { 
+                    if (this.state.prayerCountdownInterval) clearInterval(this.state.prayerCountdownInterval); 
+                    const prayerNames = { Imsak: 'Imsak', Fajr: 'Subuh', Sunrise: 'Terbit', Dhuha: 'Dhuha', Istiwa: 'Istiwa\'', Dhuhr: 'Dzuhur', Asr: 'Ashar', Maghrib: 'Maghrib', Isha: 'Isya'}; 
+                    const prayerOrder = ['Imsak', 'Fajr', 'Sunrise', 'Dhuha', 'Istiwa', 'Dhuhr', 'Asr', 'Maghrib', 'Isha']; 
+                    this.state.prayerCountdownInterval = setInterval(() => { 
+                        this.updateDynamicUI(timings);
+                        const now = new Date(); 
+                        let nextPrayerTime = null; 
+                        let nextPrayerName = ''; 
+                        for (const prayer of prayerOrder) { 
+                            if (!timings[prayer]) continue; 
+                            const prayerTimeToday = this.parseTime(timings[prayer]); 
+                            if (prayerTimeToday > now) { nextPrayerTime = prayerTimeToday; nextPrayerName = prayer; break; } 
+                        } 
+                        if (!nextPrayerTime) { 
+                            const firstPrayerOfTheDay = prayerOrder[0];
+                            const prayerTimeTomorrow = this.parseTime(timings[firstPrayerOfTheDay]); 
+                            if (prayerTimeTomorrow) { nextPrayerTime = prayerTimeTomorrow; nextPrayerTime.setDate(nextPrayerTime.getDate() + 1); nextPrayerName = firstPrayerOfTheDay; } 
+                            else { return; } 
+                        } 
+                        if (!nextPrayerTime) return; 
+                        const diff = nextPrayerTime - now; 
+                        const h = Math.floor(diff / 3600000); 
+                        const m = Math.floor((diff % 3600000) / 60000); 
+                        const s = Math.floor((diff % 60000) / 1000); 
+                        const countdownText = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`; 
+                        const fullText = `Menuju Waktu <strong>${prayerNames[nextPrayerName]}</strong> dalam <strong>${countdownText}</strong>`; 
+                        
+                        this.elements.nextPrayerName.textContent = prayerNames[nextPrayerName];
+                        this.elements.nextPrayerTime.textContent = countdownText;
+                        
+                        this.elements.prayerCountdownDisplay.style.display = 'block'; 
+                        this.elements.homeCountdown.innerHTML = fullText; 
+                        
+                        document.querySelectorAll('.prayer-card').forEach(c => c.classList.remove('next-prayer')); 
+                        const nextPrayerCard = document.getElementById(`card-${nextPrayerName}`); 
+                        if (nextPrayerCard) nextPrayerCard.classList.add('next-prayer'); 
+                    }, 1000); 
+                },
+                playNotificationAudio(type) {
+                    if (this.state.notificationsMuted) return;
+                    // Stop any currently playing test audio before playing notification audio
+                    if (this.state.activeTestAudio) {
+                        this.state.activeTestAudio.pause();
+                        this.state.activeTestAudio.currentTime = 0; // Reset audio to beginning
+                        const oldButton = document.querySelector(`.audio-test-button[data-audio-type="${this.state.activeTestAudioType}"]`);
+                        if(oldButton) oldButton.classList.remove('playing');
+                        this.state.activeTestAudio = null;
+                        this.state.activeTestAudioType = null;
+                    }
+
+                    const url = this.audioSources[type];
+                    if (!url) return;
+                    const audio = new Audio(url);
+                    // This is a notification audio, not a test audio, so don't store it in activeTestAudio
+                    audio.play().catch(e => console.error(`Gagal memutar notifikasi (${type}):`, e));
+                },
+                handleTestAudio(type) {
+                    const button = document.querySelector(`.audio-test-button[data-audio-type="${type}"]`);
+                    
+                    // If the same audio is playing, toggle pause/play
+                    if (this.state.activeTestAudio && this.state.activeTestAudioType === type) {
+                        if (this.state.activeTestAudio.paused) {
+                            this.state.activeTestAudio.play();
+                            button.classList.add('playing');
+                        } else {
+                            this.state.activeTestAudio.pause();
+                            button.classList.remove('playing');
+                        }
+                        return;
+                    }
+                    
+                    // If a different audio is playing, stop it first
+                    if (this.state.activeTestAudio) {
+                        this.state.activeTestAudio.pause();
+                        this.state.activeTestAudio.currentTime = 0; // Reset audio to beginning
+                        const oldButton = document.querySelector(`.audio-test-button[data-audio-type="${this.state.activeTestAudioType}"]`);
+                        if(oldButton) oldButton.classList.remove('playing');
+                    }
+                    
+                    const url = this.audioSources[type];
+                    if (!url) return;
+                    
+                    this.state.activeTestAudio = new Audio(url);
+                    this.state.activeTestAudioType = type;
+                    
+                    button.classList.add('playing');
+                    this.state.activeTestAudio.play().catch(e => {
+                        console.error(`Gagal memutar audio tes (${type}):`, e);
+                        button.classList.remove('playing');
+                        this.state.activeTestAudio = null;
+                        this.state.activeTestAudioType = null;
+                    });
+                    
+                    this.state.activeTestAudio.onended = () => {
+                        button.classList.remove('playing');
+                        this.state.activeTestAudio = null;
+                        this.state.activeTestAudioType = null;
+                    };
+                },
+
+                updateDynamicUI(timings) {
+                    if (!timings || !timings.Sunrise || !timings.Maghrib) return;
+
+                    const now = new Date();
+                    
+                    if (!this.state.manualMode) {
+                        const sunriseTime = this.parseTime(timings.Sunrise);
+                        const maghribTime = this.parseTime(timings.Maghrib);
+                        if (sunriseTime && maghribTime) {
+                             const isNight = now >= maghribTime || now < sunriseTime;
+                             if (isNight) {
+                                 document.body.classList.add('dark-mode');
+                             } else {
+                                 document.body.classList.remove('dark-mode');
+                             }
+                             this.updateModeToggleIcon();
+                        }
+                    }
+                },
+                toggleDarkMode() { document.body.classList.toggle('dark-mode'); localStorage.setItem('darkMode', document.body.classList.contains('dark-mode')); this.updateModeToggleIcon(); },
+                updateModeToggleIcon() { this.elements.modeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙'; },
+                
+                updateHeaderHeight() { const headerHeight = document.querySelector('header').offsetHeight; document.documentElement.style.setProperty('--header-height', `${headerHeight}px`); },
+                updateTranslationButtonState(isActive) { const button = this.elements.toggleTranslationBtn; const textSpan = button.querySelector('span'); if (isActive) { button.classList.add('active'); textSpan.textContent = 'Sembunyikan Arti'; } else { button.classList.remove('active'); textSpan.textContent = 'Tampilkan Arti'; } },
+                handleToggleTranslation(show) { this.elements.ayatContainer.classList.toggle('terjemahan-hidden', !show); localStorage.setItem('showTranslation', show); },
+                async getLocationNameFromCoords(lat, lon) { const response = await fetch(this.api.reverseGeocode(lat, lon)); if (!response.ok) throw new Error("API Reverse Geocode gagal."); const data = await response.json(); if (data && data.address) { const addr = data.address; const cityForAPI = addr.city || addr.county || addr.state; if (!cityForAPI) throw new Error("Nama kota tidak ditemukan."); const kecamatan = addr.suburb || addr.city_district || addr.town || addr.village; const kabupaten = addr.county || addr.city; const locationParts = [...new Set([kecamatan, kabupaten].filter(p => p))]; let formatted = locationParts.join(', '); if (!formatted) { const fallback = [addr.village, addr.suburb, addr.city_district, addr.county, addr.city, addr.state]; formatted = [...new Set(fallback.filter(p => p))].join(', '); } return { cityForAPI, formatted: formatted || 'Lokasi tidak diketahui' }; } throw new Error("Tidak ada hasil dari Reverse Geocode."); },
+                async loadSurahDetail(nomor) { 
+                    this.stopAutoScroll(); 
+                    const surahInfo = this.state.surahListCache.find(s => s.nomor == nomor); 
+                    this.showAyatView(`${surahInfo.nomor}. ${surahInfo.namaLatin}`); 
+                    this.elements.ayatSubtitle.textContent = `${surahInfo.jumlahAyat} Ayat • ${surahInfo.tempatTurun}`; 
+                    this.elements.ayatList.innerHTML = '<div class="loading">Memuat ayat...</div>'; 
+                    this.state.currentSurahNumber = nomor;
+                    
+                    try { 
+                        const response = await fetch(this.api.surahDetail(nomor)); 
+                        const json = await response.json(); 
+                        if (!json.data || !json.data.ayat) throw new Error(`Struktur API tidak sesuai.`); 
+                        let initialContent = (nomor != 1 && nomor != 9) ? '<div class="bismillah">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>' : ''; 
+                        this.elements.ayatList.innerHTML = initialContent; 
+                        this.displayAyat(json.data.ayat, false, true); 
+                    } catch (error) { 
+                        this.elements.ayatList.innerHTML = '<div class="error-message">Gagal memuat data ayat.</div>'; 
+                    } 
+                },
+                displayAyat(ayatArray, isJuzMode = false, append = false) { 
+                    let currentSurah = 0; 
+                    const newContent = ayatArray.map(ayat => { 
+                        let surahHeaderHtml = ''; 
+                        if (isJuzMode && ayat.surah.nomor !== currentSurah) { 
+                            currentSurah = ayat.surah.nomor; 
+                            surahHeaderHtml = `<div class="ayat-surah-header"><h3>${ayat.surah.nama}</h3><p>${ayat.surah.namaLatin}</p></div> ${(currentSurah != 1 && currentSurah != 9) ? '<div class="bismillah">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>' : ''}`; 
+                        } 
+                        
+                        // Tambahkan tombol tafsir hanya jika bukan mode Juz
+                        const tafsirBtn = isJuzMode ? '' : `<button class="tafsir-btn" onclick="app.showTafsir(${ayat.nomorAyat})">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v-3"></path>
+                            </svg>
+                            Tafsir
+                        </button>`;
+                        
+                        return surahHeaderHtml + `
+                            <div class="card ayat-item">
+                                <span class="ayat-number">${ayat.nomorAyat}</span>
+                                <div class="ayat-arabic">${ayat.teksArab}</div>
+                                <div class="ayat-translation">
+                                    <strong>Artinya:</strong> ${ayat.teksIndonesia}
+                                    ${tafsirBtn}
+                                </div>
+                            </div>
+                        `; 
+                    }).join(''); 
+                    
+                    if (append) { 
+                        this.elements.ayatList.innerHTML += newContent; 
+                    } else { 
+                        this.elements.ayatList.innerHTML = newContent; 
+                    } 
+                },
+                async determineAndFetchPrayerTimes() { 
+                    const today = new Date().toISOString().split('T')[0]; 
+                    const cachedData = JSON.parse(localStorage.getItem('prayerCache')); 
+                    if (cachedData && cachedData.date === today) { 
+                        this.setLoadingMessage(`Memuat jadwal untuk ${cachedData.locationName}...`); 
+                        setTimeout(() => { 
+                            this.renderPrayerCards(cachedData.prayerData, cachedData.locationName); 
+                            this.updateHijriDate(cachedData.prayerData); 
+                            this.elements.cityInput.value = cachedData.locationName; 
+                        }, 500); 
+                        return; 
+                    } 
+                    this.setLoadingMessage('Mendapatkan lokasi GPS...'); 
+                    try { 
+                        const pos = await new Promise((resolve, reject) => navigator.geolocation.getCurrentPosition(resolve, reject, { 
+                            timeout: 15000, // Increased timeout to 15 seconds for better accuracy
+                            enableHighAccuracy: true // Request high accuracy
+                        })); 
+                        await this.fetchAndCachePrayerTimesByCoords(pos.coords.latitude, pos.coords.longitude); 
+                    } catch (error) { 
+                        let reason = "kesalahan."; 
+                        if(error.code === 1) reason = "izin ditolak."; 
+                        if(error.code === 3) reason = "waktu habis."; 
+                        this.setErrorMessage(`Gagal mendapat GPS (${reason}). Mencoba Jakarta...`); 
+                        await this.fetchAndCachePrayerTimesByCity('Jakarta', 'Jakarta, Indonesia'); 
+                    } 
+                },
+                async fetchAndCachePrayerTimesByCoords(lat, lon) { this.setLoadingMessage('Mengambil jadwal dari GPS...'); try { const prayerResponse = await fetch(this.api.prayerTimesByCoords(lat, lon)); const prayerJson = await prayerResponse.json(); if (prayerJson.code !== 200 || !prayerJson.data) throw new Error('Data jadwal tidak valid'); let locationName = `${lat.toFixed(2)}, ${lon.toFixed(2)}`; try { const locInfo = await this.getLocationNameFromCoords(lat, lon); locationName = locInfo.formatted; } catch (e) { console.warn("Gagal dapat nama lokasi."); } const today = new Date().toISOString().split('T')[0]; const cache = { date: today, locationName, prayerData: prayerJson.data }; localStorage.setItem('prayerCache', JSON.stringify(cache)); this.renderPrayerCards(prayerJson.data, locationName); this.updateHijriDate(prayerJson.data); this.elements.cityInput.value = locationName; } catch(error) { this.setErrorMessage(`Gagal mengambil jadwal.`); } },
+                async fetchAndCachePrayerTimesByCity(city, fullName) { if (!city) { this.setErrorMessage("Nama kota tidak valid."); return; } this.setLoadingMessage(`Mengambil jadwal untuk ${fullName}...`); try { const response = await fetch(this.api.prayerTimesByCity(city)); const json = await response.json(); if (json.code !== 200 || !json.data.timings) throw new Error("Data jadwal tidak sesuai."); const today = new Date().toISOString().split('T')[0]; const cache = { date: today, locationName: fullName, prayerData: json.data }; localStorage.setItem('prayerCache', JSON.stringify(cache)); this.renderPrayerCards(json.data, fullName); this.updateHijriDate(json.data); this.elements.cityInput.value = fullName.split(',')[0]; } catch(error) { this.setErrorMessage(`Gagal mengambil jadwal untuk ${fullName}.`); } },
+                handlePrayerTimeSearch() { const city = this.elements.cityInput.value.trim(); if (city) { localStorage.removeItem('prayerCache'); this.fetchAndCachePrayerTimesByCity(city, city); } },
+                setLoadingMessage(msg) { this.elements.prayerTimesContainer.innerHTML = `<div class="loading">${msg}</div>`; this.elements.prayerCountdownDisplay.style.display = 'none'; if(this.elements.homeCountdown) this.elements.homeCountdown.innerHTML = msg; },
+                setErrorMessage(msg) { this.elements.prayerTimesContainer.innerHTML = `<div class="error-message">${msg}</div>`; if(this.elements.homeCountdown) this.elements.homeCountdown.innerHTML = msg; },
+                updateHijriDate(data) { 
+                    if (data && data.date && data.date.hijri) { 
+                        const h = data.date.hijri; 
+                        this.elements.hijriDate.textContent = `${h.day} ${h.month.en} ${h.year} H`; 
+                        this.elements.hijriDateCountdown.textContent = `${h.day} ${h.month.en} ${h.year} H`;
+                    } else if (!localStorage.getItem('prayerCache')) { 
+                        this.elements.hijriDate.textContent = 'Atur lokasi'; 
+                    } 
+                },
+                async loadQuranData() { try { const response = await fetch(app.api.surahList); const json = await response.json(); if (!json.data) throw new Error(`Struktur API tidak sesuai.`); this.state.surahListCache = json.data; this.displaySurahList(json.data); this.displayJuzList(); } catch (error) { this.elements.surahList.innerHTML = '<div class="error-message">Gagal memuat daftar surah.</div>'; this.elements.juzList.innerHTML = '<div class="error-message">Gagal memuat daftar juz.</div>'; } },
+                displaySurahList(surahs) { 
+                    this.elements.surahList.innerHTML = surahs.map(surah => `
+                        <div class="surah-card" data-nomor="${surah.nomor}">
+                            <h3>${surah.nomor}. ${surah.namaLatin} <span>(${surah.nama})</span></h3>
+                            <p>${surah.arti}</p>
+                            <div class="surah-meta">
+                                <span>${surah.jumlahAyat} ayat</span>
+                                <span>${surah.tempatTurun}</span>
+                            </div>
+                        </div>
+                    `).join(''); 
+                    this.elements.surahList.querySelectorAll('.surah-card').forEach(card => 
+                        card.addEventListener('click', () => this.loadSurahDetail(card.dataset.nomor))
+                    ); 
+                },
+                displayJuzList() { if(!this.state.surahListCache.length) return; this.elements.juzList.innerHTML = this.juzData.map(juz => { const startSurah = this.state.surahListCache.find(s => s.nomor === juz.start.surah); if (!startSurah) return ''; return `
+                    <div class="juz-card" data-juz-number="${juz.juz}">
+                        <div class="juz-number">${juz.juz}</div>
+                        <h3>${juz.name}</h3>
+                        <p>Mulai dari Surah ${startSurah.namaLatin} Ayat ${juz.start.ayat}</p>
+                    </div>
+                `; }).join(''); this.elements.juzList.querySelectorAll('.juz-card').forEach(card => card.addEventListener('click', () => this.loadJuzContent(card.dataset.juzNumber))); },
+                handleSurahSearch(query) { const q = query.toLowerCase().trim(); this.elements.surahList.querySelectorAll('.surah-card').forEach(card => { card.style.display = card.textContent.toLowerCase().includes(q) ? 'block' : 'none'; }); },
+                async loadJuzContent(juzNumber) { this.stopAutoScroll(); const juzInfo = this.juzData.find(j => j.juz == juzNumber); if (!juzInfo) return; this.showAyatView(`Juz ${juzNumber}`); let allAyat = []; try { for (let surahNum = juzInfo.start.surah; surahNum <= juzInfo.end.surah; surahNum++) { this.elements.ayatList.innerHTML = `<div class="loading">Memuat Surah ke-${surahNum}...</div>`; const response = await fetch(app.api.surahDetail(surahNum)); const json = await response.json(); const data = json.data; const start = (surahNum === juzInfo.start.surah) ? juzInfo.start.ayat : 1; const end = (surahNum === juzInfo.end.surah) ? juzInfo.end.ayat : data.jumlahAyat; const ayatInSurah = data.ayat.filter(a => a.nomorAyat >= start && a.nomorAyat <= end); ayatInSurah.forEach(a => a.surah = { nomor: data.nomor, namaLatin: data.namaLatin, nama: data.nama }); allAyat.push(...ayatInSurah); } this.displayAyat(allAyat, true); } catch (e) { this.elements.ayatList.innerHTML = '<div class="error-message">Gagal memuat data Juz.</div>'; } },
+                showAyatView(title) { this.elements.quranNavTabsContainer.style.display = 'none'; this.elements.quranControls.style.display = 'flex'; this.elements.ayatTitle.textContent = title; this.elements.quranContent.style.display = 'none'; this.elements.ayatContainer.style.display = 'block'; document.querySelector('.page.active')?.scrollTo(0, 0); },
+                showQuranList() { this.stopAutoScroll(); this.elements.quranNavTabsContainer.style.display = 'flex'; this.elements.quranControls.style.display = 'none'; this.elements.quranContent.style.display = 'block'; this.elements.ayatContainer.style.display = 'none'; },
+                handleQuranNav(view) { this.elements.quranNavTabs.forEach(t => t.classList.remove('active')); document.querySelector(`.tab-link[data-view="${view}"]`).classList.add('active'); this.elements.quranViews.forEach(v => v.classList.remove('active')); document.getElementById(`${view}View`).classList.add('active'); },
+                renderPrayerCards(data, locationName) { const timings = data.timings; this.state.prayerTimesToday = timings; const addMins = (t, m) => { const [h, min] = t.split(':').map(Number); const date = new Date(); date.setHours(h, min + m); return `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`; }; const dhuhrMins = timings.Dhuhr.split(':').reduce((a, b) => a * 60 + +b, 0); timings.Istiwa = [Math.floor((dhuhrMins - 2) / 60), (dhuhrMins - 2) % 60].map(n => String(n).padStart(2, '0')).join(':'); timings.Dhuha = addMins(timings.Sunrise, 25); const names = { Imsak: 'Imsak', Fajr: 'Subuh', Sunrise: 'Terbit', Dhuha: 'Dhuha', Istiwa: 'Istiwa\'', Dhuhr: 'Dzuhur', Asr: 'Ashar', Maghrib: 'Maghrib', Isha: 'Isya'}; this.elements.prayerTimesContainer.innerHTML = `<h3>Jadwal untuk ${locationName}</h3><p>${data.date.readable}</p><div class="prayer-times">${Object.keys(names).map(p => timings[p] ? `<div class="card prayer-card" id="card-${p}"><div class="prayer-name">${names[p]}</div><div class="prayer-time">${timings[p]}</div></div>` : '').join('')}</div>`; this.startCountdown(timings); },
+                stopAutoScroll() { if (this.state.isAutoScrolling) { clearInterval(this.state.autoScrollInterval); this.state.isAutoScrolling = false; const btn = this.elements.autoScrollBtn; if(btn){btn.querySelector('.play-icon').style.display = 'block'; btn.querySelector('.pause-icon').style.display = 'none'; btn.title = "Mulai Gulir Otomatis";} } },
+                startAutoScroll() { if (this.state.isAutoScrolling) return; const activePage = document.querySelector('.page.active'); if (!activePage) return; this.state.isAutoScrolling = true; const btn = this.elements.autoScrollBtn; btn.querySelector('.play-icon').style.display = 'none'; btn.querySelector('.pause-icon').style.display = 'block'; btn.title = "Hentikan Gulir Otomatis"; this.state.autoScrollInterval = setInterval(() => { if (this.elements.ayatContainer.style.display === 'none' || !document.body.contains(activePage)) { this.stopAutoScroll(); return; } if (activePage.scrollTop + activePage.clientHeight >= activePage.scrollHeight - 2) { this.stopAutoScroll(); } else { activePage.scrollTop += 1; } }, 30); },
+                toggleAutoScroll() { this.state.isAutoScrolling ? this.stopAutoScroll() : this.startAutoScroll(); },
+                
+                // Fungsi untuk menampilkan popup tafsir
+                async showTafsir(ayatNumber) {
+                    if (!this.state.currentSurahNumber) return;
+                    
+                    this.elements.tafsirContent.innerHTML = '<div class="loading">Memuat tafsir...</div>';
+                    this.elements.tafsirPopup.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                    
+                    try {
+                        const response = await fetch(this.api.tafsir(this.state.currentSurahNumber));
+                        const json = await response.json();
+                        
+                        if (json.data && json.data.tafsir) {
+                            const tafsir = json.data.tafsir.find(t => t.ayat == ayatNumber);
+                            if (tafsir) {
+                                this.elements.tafsirContent.innerHTML = `
+                                    <h4>Tafsir Surah ${json.data.namaLatin} Ayat ${ayatNumber}</h4>
+                                    <p>${tafsir.teks}</p>
+                                `;
+                            } else {
+                                this.elements.tafsirContent.innerHTML = '<div class="error-message">Tafsir untuk ayat ini tidak ditemukan.</div>';
+                            }
+                        } else {
+                            throw new Error('Format data tafsir tidak valid');
+                        }
+                    } catch (error) {
+                        this.elements.tafsirContent.innerHTML = '<div class="error-message">Gagal memuat tafsir.</div>';
+                    }
+                },
+                
+                // Fungsi untuk memuat hadits harian yang berganti setiap hari
+                loadDailyHadith() {
+                    try {
+                        // Dapatkan tanggal hari ini sebagai angka (1-31)
+                        const today = new Date().getDate();
+                        
+                        // Hitung indeks hadits berdasarkan tanggal (modulo jumlah hadits)
+                        // Menggunakan (today - 1) karena array berbasis 0
+                        const hadithIndex = (today - 1) % this.state.dailyHadiths.length;
+                        const dailyHadith = this.state.dailyHadiths[hadithIndex];
+                        
+                        // Tampilkan hadits harian
+                        this.elements.dailyHadithContainer.innerHTML = `
+                            <div class="daily-hadith-card">
+                                <div class="daily-hadith-title">Hadits Hari Ini</div>
+                                <div class="daily-hadith-arabic">${dailyHadith.arabic}</div>
+                                <div class="daily-hadith-translation">
+                                    <strong>Terjemahan:</strong> ${dailyHadith.translation}
+                                </div>
+                                <div class="daily-hadith-source">${dailyHadith.source}</div>
+                            </div>
+                        `;
+                    } catch (error) {
+                        console.error('Error loading daily hadith:', error);
+                        this.elements.dailyHadithContainer.innerHTML = '<div class="error-message">Gagal memuat hadits harian.</div>';
+                    }
+                }
+            };
+            
+            window.app = {
+                navigateToPage: app.navigateToPage.bind(app),
+                openReader: app.openReader.bind(app),
+                showTafsir: app.showTafsir.bind(app)
+            };
+
+            app.init();
+        });
     </script>
 </body>
 </html>
