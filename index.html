@@ -1200,7 +1200,9 @@
                     // Pengaturan ihtiyat
                     ihtiyatEnabled: localStorage.getItem('ihtiyatEnabled') === 'true',
                     ihtiyatMinutes: parseInt(localStorage.getItem('ihtiyatMinutes')) || 4,
-                    sunriseAdjustment: parseInt(localStorage.getItem('sunriseAdjustment')) || -3
+                    sunriseAdjustment: parseInt(localStorage.getItem('sunriseAdjustment')) || -3,
+                    // State baru untuk menyimpan mode tampilan saat membaca ayat
+                    currentReadingMode: null // 'surah' atau 'juz'
                 },
                 juzData: [ 
                     { juz: 1, start: { surah: 1, ayat: 1 }, end: { surah: 2, ayat: 141 }, name: "Alif Lam Mim" }, 
@@ -1932,7 +1934,7 @@
                 async loadSurahDetail(nomor) { 
                     this.stopAutoScroll(); 
                     const surahInfo = this.state.surahListCache.find(s => s.nomor == nomor); 
-                    this.showAyatView(`${surahInfo.nomor}. ${surahInfo.namaLatin}`); 
+                    this.showAyatView(`${surahInfo.nomor}. ${surahInfo.namaLatin}`, 'surah'); 
                     this.elements.ayatSubtitle.textContent = `${surahInfo.jumlahAyat} Ayat • ${surahInfo.tempatTurun}`; 
                     this.elements.ayatList.innerHTML = '<div class="loading">Memuat ayat...</div>'; 
                     this.state.currentSurahNumber = nomor;
@@ -2048,14 +2050,39 @@
                     </div>
                 `; }).join(''); this.elements.juzList.querySelectorAll('.juz-card').forEach(card => card.addEventListener('click', () => this.loadJuzContent(card.dataset.juzNumber))); },
                 handleSurahSearch(query) { const q = query.toLowerCase().trim(); this.elements.surahList.querySelectorAll('.surah-card').forEach(card => { card.style.display = card.textContent.toLowerCase().includes(q) ? 'block' : 'none'; }); },
-                async loadJuzContent(juzNumber) { this.stopAutoScroll(); const juzInfo = this.juzData.find(j => j.juz == juzNumber); if (!juzInfo) return; this.showAyatView(`Juz ${juzNumber}`); let allAyat = []; try { for (let surahNum = juzInfo.start.surah; surahNum <= juzInfo.end.surah; surahNum++) { this.elements.ayatList.innerHTML = `<div class="loading">Memuat Surah ke-${surahNum}...</div>`; const response = await fetch(app.api.surahDetail(surahNum)); const json = await response.json(); const data = json.data; const start = (surahNum === juzInfo.start.surah) ? juzInfo.start.ayat : 1; const end = (surahNum === juzInfo.end.surah) ? juzInfo.end.ayat : data.jumlahAyat; const ayatInSurah = data.ayat.filter(a => a.nomorAyat >= start && a.nomorAyat <= end); ayatInSurah.forEach(a => a.surah = { nomor: data.nomor, namaLatin: data.namaLatin, nama: data.nama }); allAyat.push(...ayatInSurah); } this.displayAyat(allAyat, true); } catch (e) { this.elements.ayatList.innerHTML = '<div class="error-message">Gagal memuat data Juz.</div>'; } },
-                showAyatView(title) { 
+                async loadJuzContent(juzNumber) { 
+                    this.stopAutoScroll(); 
+                    const juzInfo = this.juzData.find(j => j.juz == juzNumber); 
+                    if (!juzInfo) return; 
+                    this.showAyatView(`Juz ${juzNumber}`, 'juz'); 
+                    let allAyat = []; 
+                    try { 
+                        for (let surahNum = juzInfo.start.surah; surahNum <= juzInfo.end.surah; surahNum++) { 
+                            this.elements.ayatList.innerHTML = `<div class="loading">Memuat Surah ke-${surahNum}...</div>`; 
+                            const response = await fetch(app.api.surahDetail(surahNum)); 
+                            const json = await response.json(); 
+                            const data = json.data; 
+                            const start = (surahNum === juzInfo.start.surah) ? juzInfo.start.ayat : 1; 
+                            const end = (surahNum === juzInfo.end.surah) ? juzInfo.end.ayat : data.jumlahAyat; 
+                            const ayatInSurah = data.ayat.filter(a => a.nomorAyat >= start && a.nomorAyat <= end); 
+                            ayatInSurah.forEach(a => a.surah = { nomor: data.nomor, namaLatin: data.namaLatin, nama: data.nama }); 
+                            allAyat.push(...ayatInSurah); 
+                        } 
+                        this.displayAyat(allAyat, true); 
+                    } catch (e) { 
+                        this.elements.ayatList.innerHTML = '<div class="error-message">Gagal memuat data Juz.</div>'; 
+                    } 
+                },
+                showAyatView(title, mode) { 
                     this.elements.quranNavTabsContainer.style.display = 'none'; 
                     this.elements.quranControls.style.display = 'flex'; 
                     this.elements.ayatTitle.textContent = title; 
                     this.elements.quranContent.style.display = 'none'; 
                     this.elements.ayatContainer.style.display = 'block'; 
                     document.querySelector('.page.active')?.scrollTo(0, 0); 
+                    
+                    // Simpan mode tampilan saat ini
+                    this.state.currentReadingMode = mode;
                 },
                 showQuranList() { 
                     this.stopAutoScroll(); 
@@ -2067,8 +2094,12 @@
                     // Reset scroll position to top when going back to Quran list
                     document.querySelector('.page.active').scrollTo(0, 0);
                     
-                    // Reset to surah view when back button is clicked
-                    this.handleQuranNav('surah');
+                    // Kembali ke tampilan yang sesuai berdasarkan mode membaca sebelumnya
+                    if (this.state.currentReadingMode === 'juz') {
+                        this.handleQuranNav('juz');
+                    } else {
+                        this.handleQuranNav('surah');
+                    }
                 },
                 handleQuranNav(view) { 
                     this.elements.quranNavTabs.forEach(t => t.classList.remove('active')); 
