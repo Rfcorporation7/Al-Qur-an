@@ -762,6 +762,11 @@
             margin-left: 10px;
             padding: 0;
         }
+
+        /* Pengaturan Ihtiyat */
+        .ihtiyat-settings {
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -862,6 +867,36 @@
                 </div>
                 <div id="prayerTimesContainer" style="margin-top: 20px;">
                     <div class="loading" id="prayerLoading">Memeriksa jadwal tersimpan...</div>
+                </div>
+
+                <!-- Pengaturan Waktu Ihtiyat -->
+                <div class="card ihtiyat-settings">
+                    <h4 style="margin-bottom: 10px; text-align: center;">Pengaturan Waktu Ihtiyat</h4>
+                    <div class="setting-item">
+                        <label for="toggleIhtiyat">Aktifkan Waktu Ihtiyat</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="toggleIhtiyat">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label for="ihtiyatMinutes">Tambahan Waktu Ihtiyat (menit)</label>
+                        <select id="ihtiyatMinutes" style="padding: 5px 10px; border-radius: 5px; border: 1px solid var(--border-color); background-color: var(--card-bg); color: var(--text-color);">
+                            <option value="2">2 menit</option>
+                            <option value="3">3 menit</option>
+                            <option value="4" selected>4 menit</option>
+                            <option value="5">5 menit</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <label for="sunriseAdjustment">Penyesuaian Waktu Terbit (menit)</label>
+                        <select id="sunriseAdjustment" style="padding: 5px 10px; border-radius: 5px; border: 1px solid var(--border-color); background-color: var(--card-bg); color: var(--text-color);">
+                            <option value="-1">-1 menit</option>
+                            <option value="-2">-2 menit</option>
+                            <option value="-3" selected>-3 menit</option>
+                            <option value="-4">-4 menit</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="card notification-settings-section">
@@ -1076,7 +1111,11 @@
                     dailyHadithContainer: document.getElementById('dailyHadithContainer'),
                     adhanNotification: document.getElementById('adhanNotification'),
                     adhanNotificationText: document.getElementById('adhanNotificationText'),
-                    adhanNotificationClose: document.getElementById('adhanNotificationClose')
+                    adhanNotificationClose: document.getElementById('adhanNotificationClose'),
+                    // Elemen baru untuk ihtiyat
+                    toggleIhtiyat: document.getElementById('toggleIhtiyat'),
+                    ihtiyatMinutes: document.getElementById('ihtiyatMinutes'),
+                    sunriseAdjustment: document.getElementById('sunriseAdjustment')
                 },
                 state: { 
                     surahListCache: [], 
@@ -1157,7 +1196,11 @@
                     lastAdhanPlayed: null,
                     adhanNotificationTimeout: null,
                     lastQuranView: 'surah', // Menyimpan tampilan terakhir di halaman Al-Qur'an
-                    lastScrollPosition: 0 // Menyimpan posisi scroll terakhir
+                    lastScrollPosition: 0, // Menyimpan posisi scroll terakhir
+                    // Pengaturan ihtiyat
+                    ihtiyatEnabled: localStorage.getItem('ihtiyatEnabled') === 'true',
+                    ihtiyatMinutes: parseInt(localStorage.getItem('ihtiyatMinutes')) || 4,
+                    sunriseAdjustment: parseInt(localStorage.getItem('sunriseAdjustment')) || -3
                 },
                 juzData: [ 
                     { juz: 1, start: { surah: 1, ayat: 1 }, end: { surah: 2, ayat: 141 }, name: "Alif Lam Mim" }, 
@@ -1195,7 +1238,7 @@
                     'tahlil': { title: 'Bacaan Tahlil', icon: '📖', content: `<h1>تَهْلِيل</h1><p>اِلٰى حَضْرَةِ النَّبِيِّ الْمُصْطَفٰى مُحَمَّدٍ صَلَّى اللّٰهُ عَلَيْهِ وَسَلَّمَ وَاٰلِهِ وَاَزْوَاجِهِ وَاَوْلَادِهِ وَذُرِّيَاتِهِ. اَلْفَاتِحَةْ</p>
                     
                     <p>ثُمَّ إِلَى حَضْرَةِ إِخْوَانِهِ مِنَ اْلأَنْبِيَاءِ وَالْمُرْسَلِيْنَ وَاْلأَوْلِيَاءِ وَالشُّهَدَاءِ وَالصَّالِحِيْنَ وَالصَّحَابَةِ وَالتَّابِعِيْنَ وَاْلعُلَمَاءِ وَالْمُصَنِّفِيْنَ وَجَمِيْعِ الْمَلٰٓئِكَةِ الْمُقَرَّبِيْنَ˛ خُصُوْصًاسَيِّدِنَا الشَّيْخَ عَبْدَ الْقَادِرِ الْجَيْلَانِيَّ˛ وَخُصُوْصًاإِلَى مُؤَسِّسِي جَمْعِيَّةِ نَهْضَةِ الْعُلَمَاءِ˛ لَهُمُ الْفَاتِحَةْ</p> 
-                    <p>ثُمَّ إليَ جَمِيْعِ أَهْلِ اْلقُبُوْرِ مِنَ الْمُسْلِمِيْنَ وَالْمُسْلِمَاتِ وَالْمُؤْمِنِيْنَ وَالْمُؤْمِنَاتِ مِنْ مَّشَارِقِ اْلاَرْضِ وَمَغَارِبِهَا بَرِّهَا وَبَحْرِهَا˛ خُصُوْصًا اَبَاءَنَا وَأُمَّهَاتِنَا وَأَجْدَادَنَا وَجَدَّاتِنَا وَمَشَايِخَنَا وَمَشَايِخَ مَشَايِخِنَا وَاَسَا تِذَةِ اَسَاتِذَ تِنَا. وَخُصُوْصًا اِلَى رُوْحِ ..... وَلِمَنِ اجْتَمَعْنَا هَهُنَا بِسَبَبِهِ،  لَهُمُ الْفَاتِحَةْ</p>
+                    <p>ثُمَّ إليَ جَمِيْعِ أَهْلِ اْلقُبُوْرِ مِنَ الْمُسْلِمِيْنَ وَالْمُسْلِمَاتِ وَالْمُؤْمِنِيْنَ وَالْمُؤْمِنَاتِ مِنْ مَّشَارِقِ اْلاَرْضِ وَمَغَارِبِهَا بَرِّهَا وَبَحْرِهَا˛ خُصُوْصًا اَبَاءَنَا وَأُمَّهَاتِنَا وَأَجْدَادَنَا وَجَدَّاتِنَا وَمَشَايِخَنَا وَمَشَايِخَ mَشَايِخِنَا وَاَسَا تِذَةِ اَسَاتِذَ تِنَا. وَخُصُوْصًا اِلَى رُوْحِ ..... وَلِمَنِ اجْتَمَعْنَا هَهُنَا بِسَبَبِهِ،  لَهُمُ الْفَاتِحَةْ</p>
                     
                     
                     <h2>Surat Al-Ikhlas (3x)</h2><p>بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ. قُلْ هُوَ اللهُ اَحَدٌ. اَللهُ الصَّمَدُ. لَمْ يَلِدْ وَلَمْ يُوْلَدْ. وَلَمْ يَكُنْ لَهُ كُفُوًا اَحَدٌ</p>
@@ -1214,9 +1257,9 @@
                     <p>وَاِلٰهُكُمْ اِلٰهٌ وَّاحِدٌۚ لَآاِلٰهَ اِلَّا هُوَ الرَّحْمٰنُ الرَّحِيْمُ
                     
                     <br>
-                    اَللّٰهُ لَآ اِلٰهَ اِلَّا هُوَۚ اَلْحَيُّ الْقَيُّوْمُ ەۚ لَا تَأْخُذُهٗ سِنَةٌ وَّلَا نَوْمٌۗ لَهٗ مَا فِى السَّمٰوٰتِ وَمَا فِى الْاَرْضِۗ مَنْ ذَا الَّذِيْ يَشْفَعُ عِنْدَهٗٓ اِلَّا بِاِذْنِهٖۗ يَعْلَمُ مَا بَيْنَ اَيْدِيْهِمْ وَمَا خَلْفَهُمْۚ وَلَا يُحِيْطُوْنَ بِشَيْءٍ مِّنْ عِلْمِهٖٓ اِلَّا بِمَا شَاۤءَۚ وَسِعَ كُرْسِيُّهُ السَّمٰوٰتِ وَالْاَرْضَۚ وَلَا يَـُٔوْدُهٗ حِفْظُهُمَاۚ وَهُوَ الْعَلِيُّ الْعَظِيْمُ
+                    اَللّٰهُ لَآ اِلٰهَ اِلَّا هُوَۚ اَلْحَيُّ الْقَيُّوْمُ ەۚ لَا تَأْخُذُهٗ سِنَةٌ وَّلَا نَوْمٌۗ لَهٗ mَا فِى السَّمٰوٰتِ وَمَا فِى الْاَرْضِۗ مَنْ ذَا الَّذِيْ يَشْفَعُ عِنْدَهٗٓ اِلَّا بِاِذْنِهٖۗ يَعْلَمُ مَا بَيْنَ اَيْدِيْهِمْ وَمَا خَلْفَهُمْۚ وَلَا يُحِيْطُوْنَ بِشَيْءٍ mِّنْ عِلْمِهٖٓ اِلَّا بِمَا شَاۤءَۚ وَسِعَ كُرْسِيُّهُ السَّمٰوٰتِ وَالْاَرْضَۚ وَلَا يَـُٔوْدُهٗ حِفْظُهُمَاۚ وَهُوَ الْعَلِيُّ الْعَظِيْمُ
                     <br>
-                    لِلّٰهِ مَا فِى السَّمٰوٰتِ وَمَا فِى الْاَرْضِ ۗ وَاِنْ تُبْدُوْا مَا فِيْٓ اَنْفُسِكُمْ اَوْ تُخْفُوْهُ يُحَاسِبْكُمْ بِهِ اللّٰهُ ۗ فَيَغْفِرُ لِمَنْ يَّشَاۤءُ وَيُعَذِّبُ مَنْ يَّشَاۤءُ ۗ وَاللّٰهُ عَلٰى كُلِّ شَيْءٍ قَدِيْرٌ
+                    لِلّٰهِ مَا فِى السَّمٰوٰتِ وَمَا فِى الْاَرْضِ ۗ وَاِنْ تُبْدُوْا مَا فِيْٓ اَنْفُسِكُمْ اَوْ تُخْفُوْهُ يُحَاسِبْكُمْ بِهِ اللّٰهُ ۗ فَيَغْفِرُ لِمَنْ يَّشَاۤءُ وَيُعَذِّبُ mَنْ يَّشَاۤءُ ۗ وَاللّٰهُ عَلٰى كُلِّ شَيْءٍ قَدِيْرٌ
                     <br>
                     اٰمَنَ الرَّسُوْلُ بِمَآ اُنْزِلَ اِلَيْهِ مِنْ رَّبِّهٖ وَالْمُؤْمِنُوْنَۗ كُلٌّ اٰمَنَ بِاللّٰهِ وَمَلٰۤىِٕكَتِهٖ وَكُتُبِهٖ وَرُسُلِهٖۗ لَا نُفَرِّقُ بَيْنَ اَحَدٍ mِّنْ رُّسُلِهٖ ۗ وَقَالُوْا سَمِعْنَا وَاَطَعْنَا غُفْرَانَكَ رَبَّنَا وَاِلَيْكَ الْمَصِيْرُ
                     <br>
@@ -1225,12 +1268,12 @@
 وَاعْفُ عَنَّاۗ وَاغْفِرْ لَنَاۗ وَارْحَمْنَا) 
 <br>اَنْتَ مَوْلٰىنَا فَانْصُرْنَا عَلَى الْقَوْمِ الْكٰفِرِيْنَ
 <br>إِرْحَمْنَا يَاأَرْحَمَ الرَّاحِمِيْنَ
-<br>رَحْمَةُ اللّٰهِ وَبَرَكَاتُهُ عَلَيْكُمْ أَهْلَ الْبَيْتِ إِنَّهُ حَمِيْدٌ مَجِيْدٌ
+<br>رَحْمَةُ اللّٰهِ وَبَرَكَاتُهُ عَلَيْكُمْ أَهْلَ الْبَيْتِ إِنَّهُ حَمِيْدٌ mَجِيْدٌ
 <br>إِنَّمَا يُرِيْدُ اللّٰهُ لِيُذْهِبَ عَنْكُمُ الرِّجْسَ أَهْلَ الْبَيْتِ وَيُطَهِّرَكُمْ تَطْهِيْرًا
 <br>إِنَّ اللّٰهَ وَمَلاَئِكَتَهُ يُصَلُّوْنَ عَلَى النَّبِي يَا أَيُّهَا الَّذِيْنَ أمَنُوْا صَلُّوْا عَلَيْهِ وَسَلِّمُوْا تَسْلِيْمَا
 <br>أَللّٰهُمَّ صَلِّ أَفْضَلَ الصَّلاَةِ عَلَى أَسْعَدِ مَخْلُوْقَاتِكَ نُوْرِ الْهُدَى سَيِّدِنَا وَمَوْلاَناَ مُحَمَّدٍ وَعَلَى أَلِ سَيِّدِنَا مُحَمَّدْ. عَدَدَ مَعْلُوْمَاتِكَ وَمِدَادَ كَلِمَاتِكَ كُلَّمَا ذَكَرَكَ الذَّاكِرُوْنَ. وَغَفَلَ عَنْ ذِكْرِكَ الْغَافِلُوْنَ
-<br>أَللّٰهُمَّ صَلِّ أَفْضَلَ الصَّلاَةِ عَلَى أَسْعَدِ mَخْلُوْقَاتِكَ شَمْسِ الضُّحَى سَيِّدِنَا وَمَوْلاَناَ مُحَمَّدٍ وَعَلَى أَلِ سَيِّدِنَا مُحَمَّدْ. عَدَدَ mَعْلُوْمَاتِكَ وَمِدَادَ كَلِمَاتِكَ كُلَّمَا ذَكَرَكَ الذَّاكِرُوْنَ وَغَفَلَ عَنْ ذِكْرِكَ الْغَافِلُوْنَ
-<br>أَللّٰهُمَّ صَلِّ أَفْضَلَ الصَّلاَةِ عَلَى أَسْعَدِ mَخْلُوْقَاتِكَ بَدْرِ الدُّجَى سَيِّدِنَا وَمَوْلاَناَ مُحَمَّدٍ وَعَلَى أَلِ سَيِّدِنَا مُحَمَّدْ. عَدَدَ mَعْلُوْمَاتِكَ وَmِدَادَ كَلِمَاتِكَ كُلَّمَا ذَكَرَكَ الذَّاكِرُوْنَ. وَغَفَلَ عَنْ ذِكْرِكَ الْغَافِلُوْنَ. وَسَلِّمْ وَرَضِيَ اللّٰهُ تَعَالَى عَنْ سَادَتِنَا أَصْحَابِ رَسُوْلِ اللّٰهِ أَجْمَعِيْنَ
+<br>أَللّٰهُمَّ صَلِّ أَفْضَلَ الصَّلاَةِ عَلَى أَسْعَدِ mَخْلُوْقَاتِكَ شَمْسِ الضُّحَى سَيِّدِنَا وَمَوْلاَناَ مُحَمَّدٍ وَعَلَى أَلِ سَيِّdِنَا مُحَمَّدْ. عَدَدَ mَعْلُوْمَاتِكَ وَمِدَادَ كَلِمَاتِكَ كُلَّمَا ذَكَرَكَ الذَّاكِرُوْنَ وَغَفَلَ عَنْ ذِكْرِكَ الْغَافِلُوْنَ
+<br>أَللّٰهُمَّ صَلِّ أَفْضَلَ الصَّلاَةِ عَلَى أَسْعَدِ mَخْلُوْقَاتِكَ بَدْرِ الدُّجَى سَيِّدِنَا وَمَوْلاَناَ مُحَمَّدٍ وَعَلَى أَلِ سَيِّدِنَا مُحَمَّدْ. عَدَدَ mَعْلُوْمَاتِكَ وَmِdَادَ كَلِمَاتِكَ كُلَّmَا ذَكَرَكَ الذَّاكِرُوْنَ. وَغَفَلَ عَنْ ذِكْرِكَ الْغَافِلُوْنَ. وَسَلِّmْ وَرَضِيَ اللّٰهُ تَعَالَى عَنْ سَادَتِنَا أَصْحَابِ رَسُوْلِ اللّٰهِ أَجْمَعِيْنَ
 <br>حَسْبُنَا اللّٰهُ وَنِعْمَ الْوَكِيْلُ˛ نِعْمَ الْمَوْلَى وَنِعْمَ النَّصِيْرُ˛ وَلاَحَوْلَ وَلاَقُوَّةَ إِلاَّ بِاللّٰهِ الْعَلِيِّ الْعَظِيْمِ
 <br>
   <span>(x٣)</span>أَسْتَغْفِرُ اللّٰهَ الْعَظِيْم  
@@ -1456,6 +1499,37 @@
                     this.elements.adhanNotificationClose.addEventListener('click', () => {
                         this.hideAdhanNotification();
                     });
+                    
+                    // Event listener untuk pengaturan ihtiyat
+                    this.elements.toggleIhtiyat.addEventListener('change', (e) => {
+                        this.state.ihtiyatEnabled = e.target.checked;
+                        localStorage.setItem('ihtiyatEnabled', e.target.checked);
+                        // Refresh tampilan jadwal sholat
+                        const cachedData = JSON.parse(localStorage.getItem('prayerCache'));
+                        if (cachedData) {
+                            this.renderPrayerCards(cachedData.prayerData, cachedData.locationName);
+                        }
+                    });
+                    
+                    this.elements.ihtiyatMinutes.addEventListener('change', (e) => {
+                        this.state.ihtiyatMinutes = parseInt(e.target.value);
+                        localStorage.setItem('ihtiyatMinutes', e.target.value);
+                        // Refresh tampilan jadwal sholat
+                        const cachedData = JSON.parse(localStorage.getItem('prayerCache'));
+                        if (cachedData) {
+                            this.renderPrayerCards(cachedData.prayerData, cachedData.locationName);
+                        }
+                    });
+                    
+                    this.elements.sunriseAdjustment.addEventListener('change', (e) => {
+                        this.state.sunriseAdjustment = parseInt(e.target.value);
+                        localStorage.setItem('sunriseAdjustment', e.target.value);
+                        // Refresh tampilan jadwal sholat
+                        const cachedData = JSON.parse(localStorage.getItem('prayerCache'));
+                        if (cachedData) {
+                            this.renderPrayerCards(cachedData.prayerData, cachedData.locationName);
+                        }
+                    });
                 },
                 
                 async loadInitialSettings() { 
@@ -1476,6 +1550,11 @@
 
                     this.state.notificationsMuted = localStorage.getItem('notificationsMuted') === 'true';
                     this.updateMuteButtonState();
+
+                    // Load pengaturan ihtiyat
+                    this.elements.toggleIhtiyat.checked = this.state.ihtiyatEnabled;
+                    this.elements.ihtiyatMinutes.value = this.state.ihtiyatMinutes;
+                    this.elements.sunriseAdjustment.value = this.state.sunriseAdjustment;
 
                     await this.determineAndFetchPrayerTimes(); 
                 },
@@ -1601,6 +1680,37 @@
                      const date = new Date(); date.setHours(hours, minutes, 0, 0); 
                      return date; 
                 },
+                
+                // Fungsi untuk menambahkan waktu ihtiyat
+                applyIhtiyat(timings) {
+                    if (!this.state.ihtiyatEnabled) return timings;
+                    
+                    const adjustedTimings = {...timings};
+                    
+                    // Tambahkan menit untuk semua waktu sholat kecuali terbit
+                    Object.keys(adjustedTimings).forEach(prayer => {
+                        if (prayer !== 'Sunrise') {
+                            adjustedTimings[prayer] = this.addMinutes(adjustedTimings[prayer], this.state.ihtiyatMinutes);
+                        }
+                    });
+                    
+                    // Kurangi menit untuk waktu terbit
+                    if (adjustedTimings.Sunrise) {
+                        adjustedTimings.Sunrise = this.addMinutes(adjustedTimings.Sunrise, this.state.sunriseAdjustment);
+                    }
+                    
+                    return adjustedTimings;
+                },
+                
+                // Fungsi untuk menambah/mengurangi menit dari waktu
+                addMinutes(timeStr, minutes) {
+                    const [hours, mins] = timeStr.split(':').map(Number);
+                    const date = new Date();
+                    date.setHours(hours, mins + minutes, 0, 0);
+                    
+                    return `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+                },
+                
                 updateClock() {
                     const now = new Date();
                     this.elements.digitalClock.textContent = now.toLocaleTimeString('en-GB');
@@ -1619,12 +1729,15 @@
                         // Cek apakah sudah pernah memainkan adzan untuk waktu ini
                         if (this.state.lastAdhanPlayed === now_HHMM) return;
                         
-                        if (this.state.isImsakEnabled && this.state.prayerTimesToday['Imsak'] === now_HHMM) {
+                        // Apply ihtiyat to prayer times for notification checking
+                        const adjustedTimings = this.applyIhtiyat(this.state.prayerTimesToday);
+                        
+                        if (this.state.isImsakEnabled && adjustedTimings['Imsak'] === now_HHMM) {
                             this.playNotificationAudio('imsakTarhim');
                             this.showAdhanNotification('Waktu Imsak (Tarhim)');
                             this.state.lastAdhanPlayed = now_HHMM;
                         }
-                        if (this.state.prayerTimesToday['Fajr'] === now_HHMM && this.state.isAdhanSubuhEnabled) {
+                        if (adjustedTimings['Fajr'] === now_HHMM && this.state.isAdhanSubuhEnabled) {
                             this.playNotificationAudio('adhanSubuh');
                             this.showAdhanNotification('Waktu Shubuh');
                             this.state.lastAdhanPlayed = now_HHMM;
@@ -1638,7 +1751,7 @@
                             };
                             
                             for (const prayerName in otherAdhans) {
-                                if (this.state.prayerTimesToday[prayerName] === now_HHMM) {
+                                if (adjustedTimings[prayerName] === now_HHMM) {
                                     this.playNotificationAudio(otherAdhans[prayerName]);
                                     this.showAdhanNotification(`Waktu ${prayerName}`);
                                     this.state.lastAdhanPlayed = now_HHMM;
@@ -1694,14 +1807,18 @@
                         const now = new Date(); 
                         let nextPrayerTime = null; 
                         let nextPrayerName = ''; 
+                        
+                        // Apply ihtiyat to timings for countdown
+                        const adjustedTimings = this.applyIhtiyat(timings);
+                        
                         for (const prayer of prayerOrder) { 
-                            if (!timings[prayer]) continue; 
-                            const prayerTimeToday = this.parseTime(timings[prayer]); 
+                            if (!adjustedTimings[prayer]) continue; 
+                            const prayerTimeToday = this.parseTime(adjustedTimings[prayer]); 
                             if (prayerTimeToday > now) { nextPrayerTime = prayerTimeToday; nextPrayerName = prayer; break; } 
                         } 
                         if (!nextPrayerTime) { 
                             const firstPrayerOfTheDay = prayerOrder[0];
-                            const prayerTimeTomorrow = this.parseTime(timings[firstPrayerOfTheDay]); 
+                            const prayerTimeTomorrow = this.parseTime(adjustedTimings[firstPrayerOfTheDay]); 
                             if (prayerTimeTomorrow) { nextPrayerTime = prayerTimeTomorrow; nextPrayerTime.setDate(nextPrayerTime.getDate() + 1); nextPrayerName = firstPrayerOfTheDay; } 
                             else { return; } 
                         } 
@@ -1963,7 +2080,25 @@
                     this.state.lastQuranView = view;
                     localStorage.setItem('lastQuranView', view);
                 },
-                renderPrayerCards(data, locationName) { const timings = data.timings; this.state.prayerTimesToday = timings; const addMins = (t, m) => { const [h, min] = t.split(':').map(Number); const date = new Date(); date.setHours(h, min + m); return `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`; }; const dhuhrMins = timings.Dhuhr.split(':').reduce((a, b) => a * 60 + +b, 0); timings.Istiwa = [Math.floor((dhuhrMins - 2) / 60), (dhuhrMins - 2) % 60].map(n => String(n).padStart(2, '0')).join(':'); timings.Dhuha = addMins(timings.Sunrise, 25); const names = { Imsak: 'Imsak', Fajr: 'Subuh', Sunrise: 'Terbit', Dhuha: 'Dhuha', Istiwa: 'Istiwa\'', Dhuhr: 'Dzuhur', Asr: 'Ashar', Maghrib: 'Maghrib', Isha: 'Isya'}; this.elements.prayerTimesContainer.innerHTML = `<h3>Jadwal untuk ${locationName}</h3><p>${data.date.readable}</p><div class="prayer-times">${Object.keys(names).map(p => timings[p] ? `<div class="card prayer-card" id="card-${p}"><div class="prayer-name">${names[p]}</div><div class="prayer-time">${timings[p]}</div></div>` : '').join('')}</div>`; this.startCountdown(timings); },
+                renderPrayerCards(data, locationName) { 
+                    const timings = data.timings; 
+                    this.state.prayerTimesToday = timings;
+                    
+                    // Apply ihtiyat to timings for display
+                    const displayTimings = this.applyIhtiyat(timings);
+                    
+                    const addMins = (t, m) => { const [h, min] = t.split(':').map(Number); const date = new Date(); date.setHours(h, min + m); return `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`; }; 
+                    const dhuhrMins = displayTimings.Dhuhr.split(':').reduce((a, b) => a * 60 + +b, 0); 
+                    displayTimings.Istiwa = [Math.floor((dhuhrMins - 2) / 60), (dhuhrMins - 2) % 60].map(n => String(n).padStart(2, '0')).join(':'); 
+                    displayTimings.Dhuha = addMins(displayTimings.Sunrise, 25); 
+                    const names = { Imsak: 'Imsak', Fajr: 'Subuh', Sunrise: 'Terbit', Dhuha: 'Dhuha', Istiwa: 'Istiwa\'', Dhuhr: 'Dzuhur', Asr: 'Ashar', Maghrib: 'Maghrib', Isha: 'Isya'}; 
+                    
+                    // Add ihtiyat indicator to location name if enabled
+                    const locationDisplay = this.state.ihtiyatEnabled ? `${locationName} (Ihtiyat)` : locationName;
+                    
+                    this.elements.prayerTimesContainer.innerHTML = `<h3>Jadwal untuk ${locationDisplay}</h3><p>${data.date.readable}</p><div class="prayer-times">${Object.keys(names).map(p => displayTimings[p] ? `<div class="card prayer-card" id="card-${p}"><div class="prayer-name">${names[p]}</div><div class="prayer-time">${displayTimings[p]}</div></div>` : '').join('')}</div>`; 
+                    this.startCountdown(timings); 
+                },
                 stopAutoScroll() { if (this.state.isAutoScrolling) { clearInterval(this.state.autoScrollInterval); this.state.isAutoScrolling = false; const btn = this.elements.autoScrollBtn; if(btn){btn.querySelector('.play-icon').style.display = 'block'; btn.querySelector('.pause-icon').style.display = 'none'; btn.title = "Mulai Gulir Otomatis";} } },
                 startAutoScroll() { if (this.state.isAutoScrolling) return; const activePage = document.querySelector('.page.active'); if (!activePage) return; this.state.isAutoScrolling = true; const btn = this.elements.autoScrollBtn; btn.querySelector('.play-icon').style.display = 'none'; btn.querySelector('.pause-icon').style.display = 'block'; btn.title = "Hentikan Gulir Otomatis"; this.state.autoScrollInterval = setInterval(() => { if (this.elements.ayatContainer.style.display === 'none' || !document.body.contains(activePage)) { this.stopAutoScroll(); return; } if (activePage.scrollTop + activePage.clientHeight >= activePage.scrollHeight - 2) { this.stopAutoScroll(); } else { activePage.scrollTop += 1; } }, 30); },
                 toggleAutoScroll() { this.state.isAutoScrolling ? this.stopAutoScroll() : this.startAutoScroll(); },
